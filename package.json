@@ -1,13 +1,15 @@
 {
   "name": "nuxt-app",
   "private": true,
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "version": "echo Skipping npm commit"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
