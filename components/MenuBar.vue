@@ -1,54 +1,64 @@
 <template>
-  <Menubar :model="items" />
+  <Menubar :model="items">
+    <template #item="{ item, props, hasSubmenu }">
+      <router-link
+        v-if="item.route"
+        v-slot="{ href, navigate }"
+        :to="item.route"
+        custom
+      >
+        <a v-ripple :href="href" v-bind="props.action" @click="navigate">
+          <span :class="item.icon" />
+          <span class="ml-2">{{ item.label }}</span>
+        </a>
+      </router-link>
+      <a
+        v-else
+        v-ripple
+        :href="item.url"
+        :target="item.target"
+        v-bind="props.action"
+      >
+        <span :class="item.icon" />
+        <span class="ml-2">{{ item.label }}</span>
+        <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
+      </a>
+    </template>
+  </Menubar>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const items = ref([
   {
     label: "Home",
     icon: "pi pi-home",
+    route: "/",
   },
   {
-    label: "Features",
-    icon: "pi pi-star",
+    label: "Persons",
+    icon: "pi pi-person",
+    route: "/persons",
   },
   {
-    label: "Projects",
+    label: "Positions",
+    icon: "pi pi-users",
+    route: "/positions",
+  },
+
+  {
+    label: "Search",
     icon: "pi pi-search",
-    items: [
-      {
-        label: "Components",
-        icon: "pi pi-bolt",
-      },
-      {
-        label: "Blocks",
-        icon: "pi pi-server",
-      },
-      {
-        label: "UI Kit",
-        icon: "pi pi-pencil",
-      },
-      {
-        label: "Templates",
-        icon: "pi pi-palette",
-        items: [
-          {
-            label: "Apollo",
-            icon: "pi pi-palette",
-          },
-          {
-            label: "Ultima",
-            icon: "pi pi-palette",
-          },
-        ],
-      },
-    ],
+    route: "/search",
   },
   {
-    label: "Contact",
-    icon: "pi pi-envelope",
+    label: "Places",
+    icon: "pi pi-map",
+    route: "/places",
   },
 ]);
 </script>
