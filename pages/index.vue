@@ -25,19 +25,10 @@ const loaded = ref(false);
 
 const options = { responsive: true };
 
-// important! data, pending etc. coming from useFetch are refs()!!!
-const loadData = async () => {
-  try {
-    const { data } = await useFetch(
-      "http://127.0.0.1:8008/general/generalstats"
-    );
-
-    stats.value = data.value;
-    loaded.value = true;
-  } catch (err) {
-    console.log("we get this error in loadData():", err);
-  }
-};
-
-loadData();
+const { data } = await useFetch("http://127.0.0.1:8008/general/generalstats");
+console.log("data", data.value);
+if (data.value) {
+  stats.value = data.value;
+  loaded.value = true;
+}
 </script>
