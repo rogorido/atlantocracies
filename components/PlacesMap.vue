@@ -3,6 +3,7 @@
     :loadTilesWhileAnimating="true"
     :loadTilesWhileInteracting="true"
     style="height: 600px"
+    v-if="loaded"
   >
     <ol-view
       ref="view"
@@ -18,7 +19,11 @@
     <ol-vector-layer>
       <ol-source-vector>
         <ol-feature>
-          <ol-geom-multi-point :coordinates="coordinates"></ol-geom-multi-point>
+          <ol-geom-multi-point
+            v-if="multipoint"
+            :coordinates="coordinates"
+          ></ol-geom-multi-point>
+          <ol-geom-point v-else :coordinates="coordinates"></ol-geom-point>
           <ol-style>
             <ol-style-circle :radius="radius">
               <ol-style-fill :color="fill"></ol-style-fill>
@@ -40,7 +45,7 @@ import { boundingExtent, getCenter } from "ol/extent";
 
 const center = ref();
 const projection = ref("EPSG:4326");
-const zoom = ref(3);
+const zoom = ref(4);
 const radius = ref(10);
 const strokeWidth = ref(10);
 const stroke = ref("#ff0000");
@@ -48,17 +53,36 @@ const fill = ref("#ffffff");
 const view = ref();
 
 const coordinates = ref();
+const loaded = ref(false);
 
-const props = defineProps({ coordenadas: Array });
+const props = defineProps({
+  coordenadas: { type: Array, required: true },
+  multipoint: { type: Boolean, required: true },
+});
 
-// we have to reverse the coordinates...
-coordinates.value = props.coordenadas.map((coord) => coord.reverse());
+// console.log(
+//   "las coordendas que llegan son: ",
+//   JSON.stringify(props.coordenadas, null, 2)
+// );
 
-// Calcular el bounding box
-const boundingBox = boundingExtent(coordinates.value);
+// console.log(loaded.value);
 
-// Calcular el centro del bounding box
-center.value = getCenter(boundingBox);
+const calculateData = () => {
+  if (props.multipoint) {
+    coordinates.value = props.coordenadas;
 
-//view.fit(boundingBox, { duration: 2000 });
+    // Calcular the bounding box and its center
+    const boundingBox = boundingExtent(coordinates.value);
+    center.value = getCenter(boundingBox);
+
+    loaded.value = true;
+  } else {
+    coordinates.value = props.coordenadas[0];
+    center.value = props.coordenadas[0];
+
+    loaded.value = true;
+  }
+};
+
+calculateData();
 </script>
