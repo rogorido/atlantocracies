@@ -12,7 +12,10 @@ const props = defineProps({
   },
   chartOptions: {
     type: Object,
-    default: () => {},
+    default: () => {
+      responsive: true;
+      maintainAspectRatio: false;
+    },
   },
 });
 </script>
