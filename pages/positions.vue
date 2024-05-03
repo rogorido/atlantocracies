@@ -1,9 +1,7 @@
-<script lang="ts" setup></script>
-
 <template>
   <div>
-    Page: positions
+    <h1 class="text-center">Positions</h1>
   </div>
 </template>
 
-<style scoped></style>
+<script setup></script>
