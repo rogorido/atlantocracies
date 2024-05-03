@@ -28,20 +28,25 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const items = ref([
+const items = reactive([
   {
     label: "Home",
     icon: "pi pi-home",
     route: "/",
   },
   {
+    label: "Search",
+    icon: "pi pi-search",
+    route: "/search",
+  },
+  {
     label: "Persons",
-    icon: "pi pi-person",
+    icon: "pi pi-user",
     route: "/persons",
   },
   {
@@ -49,16 +54,57 @@ const items = ref([
     icon: "pi pi-users",
     route: "/positions",
   },
-
   {
-    label: "Search",
-    icon: "pi pi-search",
-    route: "/search",
+    label: "Events",
+    icon: "pi pi-map",
+    route: "/events",
   },
+
   {
     label: "Places",
     icon: "pi pi-map",
     route: "/places",
   },
+  {
+    label: "Relations",
+    icon: "pi pi-users",
+    route: "/relations",
+  },
+  {
+    label: "Titles",
+    icon: "pi pi-users",
+    route: "/titles",
+  },
+  {
+    label: "About",
+    icon: "pi pi-bullseye",
+    items: [
+      {
+        label: "About",
+        icon: "pi pi-bullseye",
+        route: "/about",
+        fin: true,
+      },
+      {
+        label: "Docs",
+        icon: "pi pi-wallet",
+        route: "/docs",
+      },
+      {
+        label: "Management",
+        icon: "pi pi-th-large",
+        route: "/management",
+      },
+    ],
+  },
 ]);
 </script>
+
+<style scoped>
+.p-menubar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  justify-content: center;
+}
+</style>
