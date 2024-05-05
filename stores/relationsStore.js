@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
+
 export const useRelationsStore = defineStore("relations", {
   state: () => ({
     relations: [],
@@ -12,13 +15,10 @@ export const useRelationsStore = defineStore("relations", {
       this.hostias = relation;
     },
 
-    // NOTE atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!
     async fetchRelations() {
       if (!this.initialized) {
-        const { data } = await useFetch(
-          "http://127.0.0.1:8008/general/relationstypes"
-        );
-        this.relations = data.value;
+        const data = await $fetch(`${api}/general/relationstypes`);
+        this.relations = data;
         this.initialized = true;
       }
     },

@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
+
 export const usePositionsStore = defineStore("positions", {
   state: () => ({
     positions: [],
@@ -15,10 +18,8 @@ export const usePositionsStore = defineStore("positions", {
     // NOTE atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!
     async fetchPositions() {
       if (!this.initialized) {
-        const { data } = await useFetch(
-          "http://127.0.0.1:8008/general/positionstypes"
-        );
-        this.positions = data.value;
+        const data = await $fetch(`${api}/general/positionstypes`);
+        this.positions = data;
         this.initialized = true;
       }
     },
