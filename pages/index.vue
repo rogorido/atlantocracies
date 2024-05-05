@@ -16,6 +16,9 @@
 import { ref, onMounted } from "vue";
 import { useStatsStore } from "../stores/statsStore";
 
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
+
 const stats = ref({});
 const store = useStatsStore();
 
@@ -25,7 +28,7 @@ const loaded = ref(false);
 
 const options = { responsive: true };
 
-const { data } = await useFetch("http://127.0.0.1:8008/general/generalstats");
+const { data } = await useFetch(`${api}/general/generalstats`);
 console.log("data", data.value);
 if (data.value) {
   stats.value = data.value;

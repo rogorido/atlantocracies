@@ -261,9 +261,13 @@
               <Column key="percent" field="percent" header="%"></Column>
             </DataTable>
           </div>
-          <div class="col-6">
+          <div class="col-3">
             <h2>Gender</h2>
             <GendersChart v-if="loaded" :chartData="gendersChartData" />
+          </div>
+          <div class="col-3">
+            <h2>Gender</h2>
+            <Knob v-if="loaded" v-model="gendersData[0].percent" />
           </div>
         </div>
       </TabPanel>
@@ -326,6 +330,7 @@ import { usePositionsStore } from "../stores/positionsStore";
 import { useRelationsStore } from "../stores/relationsStore";
 import { useTitlesStore } from "../stores/titlesStore";
 import { useFilterStore } from "../stores/filterStore";
+import Knob from "primevue/knob";
 
 const persons = ref([]);
 const places = ref([]);
@@ -644,20 +649,20 @@ watch(selectedTitle, () => {
 });
 
 async function updateData() {
-  const { data } = await useFetch("http://127.0.0.1:8008/search/", {
+  const data = await $fetch("http://127.0.0.1:8008/search/", {
     method: "POST",
     body: filter.value,
   });
 
   storefilter.setFilter(filter.value);
 
-  persons.value = data.value.result;
-  gendersData.value = data.value.gendersData;
-  gendersChartData.value = data.value.gendersChartData;
-  histBirthsChartData.value = data.value.histBirthsChartData;
-  histBirthsData.value = data.value.histBirthsData;
-  hasTitlesData.value = data.value.hasTitlesChartData;
-  decadesBirthData.value = data.value.decadesBirthsChartData;
+  persons.value = data.result;
+  gendersData.value = data.gendersData;
+  gendersChartData.value = data.gendersChartData;
+  histBirthsChartData.value = data.histBirthsChartData;
+  histBirthsData.value = data.histBirthsData;
+  hasTitlesData.value = data.hasTitlesChartData;
+  decadesBirthData.value = data.decadesBirthsChartData;
 
   calculatePercentages();
 }
