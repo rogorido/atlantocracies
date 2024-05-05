@@ -93,12 +93,13 @@ console.log("el valor de ciudad es: ", JSON.stringify(ciudad.value, null, 2));
 // pq es lo que tengo definidio en PlacesMap
 const coordenadas = [ciudad.value.coords];
 
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
+
 const loadPlaceData = async () => {
   try {
-    const { data } = await useFetch(
-      `http://127.0.0.1:8008/places/${useRoute().params.placebyid}`
-    );
-    places.value = data.value;
+    const data = await $fetch(`${api}/places/${useRoute().params.placebyid}`);
+    places.value = data;
 
     loaded.value = true;
   } catch (err) {
@@ -108,13 +109,11 @@ const loadPlaceData = async () => {
 
 const loadPersonsData = async () => {
   try {
-    const { data } = await useFetch(
-      `http://127.0.0.1:8008/persons/personsbyplace/${
-        useRoute().params.placebyid
-      }`
+    const data = await $fetch(
+      `${api}/persons/personsbyplace/${useRoute().params.placebyid}`
     );
 
-    persons.value = data.value;
+    persons.value = data;
     personsloaded.value = true;
   } catch (err) {
     console.log("error en mymap5", err);
@@ -123,11 +122,11 @@ const loadPersonsData = async () => {
 
 const loadRelatedPlacesData = async () => {
   try {
-    const { data } = await useFetch(
-      `http://127.0.0.1:8008/places/related/${useRoute().params.placebyid}`
+    const { data } = await $fetch(
+      `${api}/places/related/${useRoute().params.placebyid}`
     );
 
-    placesrelated.value = data.value;
+    placesrelated.value = data;
 
     // console.log(
     //   "el valor de placesrelated es: ",
@@ -141,13 +140,11 @@ const loadRelatedPlacesData = async () => {
 
 const loadRelatedEventsData = async () => {
   try {
-    const { data } = await useFetch(
-      `http://127.0.0.1:8008/events/eventsbyplace/${
-        useRoute().params.placebyid
-      }`
+    const data = await $fetch(
+      `${api}/events/eventsbyplace/${useRoute().params.placebyid}`
     );
 
-    eventsrelated.value = data.value;
+    eventsrelated.value = data;
 
     // console.log(
     //   "el valor de eventsrelated es: ",

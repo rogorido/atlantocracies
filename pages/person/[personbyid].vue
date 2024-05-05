@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div v-if="pending">Loading data</div>
+  <div v-else-if="error">{{ error }}</div>
+  <div v-else>
     <h1 class="text-center">{{ personData ? personData.name : "" }}</h1>
     <div class="grid">
       <div class="col-6">
@@ -22,6 +24,7 @@
       </div>
     </div>
     <PersonsEventsTimeLine :eventstimeline="eventstimeline" v-if="loaded" />
+    <PersonsRelationsGraph :personsrelated="relationsnetwork" v-if="loaded" />
   </div>
 </template>
 
@@ -41,6 +44,10 @@ const events = ref([]);
 const positions = ref([]);
 const titles = ref([]);
 const eventstimeline = ref({});
+const relationsnetwork = ref({});
+
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
 
 // we get a array with only one obje
 //ciudad.value = store.nuevo;
@@ -51,20 +58,19 @@ const eventstimeline = ref({});
 
 const loadPersonsData = async () => {
   try {
-    const { data } = await useFetch(
-      `http://127.0.0.1:8008/persons/personsbyid/${
-        useRoute().params.personbyid
-      }`
+    const data = await $fetch(
+      `${api}/persons/personsbyid/${useRoute().params.personbyid}`
     );
 
-    personData.value = data.value.persondetails;
+    personData.value = data.persondetails;
 
     // console.log("la presona es: ", JSON.stringify(personData.value, null, 2));
     relations.value = personData.value.relations;
     events.value = personData.value.events;
     positions.value = personData.value.positions;
     titles.value = personData.value.titles;
-    eventstimeline.value = data.value.personeventstimeline;
+    eventstimeline.value = data.personeventstimeline;
+    relationsnetwork.value = data.personnetwork;
 
     loaded.value = true;
   } catch (err) {

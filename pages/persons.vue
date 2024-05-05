@@ -52,15 +52,14 @@ const optionshistbirths = {
   plugins: { legend: { display: true, position: "right" } },
 };
 
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
+
 const loadPersonsData = async () => {
   try {
-    const { data: cojones } = await useFetch("http://127.0.0.1:8008/persons/");
-    const { data: leches } = await useFetch(
-      "http://127.0.0.1:8008/persons/histbirths"
-    );
-    const { data: puta } = await useFetch(
-      "http://127.0.0.1:8008/persons/birthyears"
-    );
+    const { data: cojones } = await useFetch(`${api}/persons/`);
+    const { data: leches } = await useFetch(`${api}/persons/histbirths`);
+    const { data: puta } = await useFetch(`${api}/persons/birthyears`);
 
     persons.value = cojones.value;
     histbirths.value = leches.value.chartData;
