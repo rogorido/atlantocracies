@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div v-if="pending">Loading data</div>
+  <div v-else-if="error">{{ error }}</div>
+  <div v-else>
     <h1 class="text-center">Management</h1>
     <TabView>
       <TabPanel header="Relations">
@@ -80,27 +82,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
 
-const management = ref({});
-const loaded = ref(false);
-
-const loadData = async () => {
-  try {
-    const { data } = await useFetch("http://127.0.0.1:8008/management");
-
-    management.value = data.value;
-
-    loaded.value = true;
-  } catch (err) {
-    console.log("error en mymap5", err);
-  }
-};
+const {
+  data: management,
+  pending,
+  error,
+} = await useFetch(`${api}/management`);
 
 const columns = [
   { field: "_id", header: "Field" },
   { field: "count", header: "Count" },
 ];
-
-loadData();
 </script>
