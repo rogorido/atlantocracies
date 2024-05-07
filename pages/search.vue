@@ -255,6 +255,7 @@
               selectionMode="single"
               dataKey="_id"
               tableStyle="min-width: 50rem"
+              v-if="loaded"
             >
               <Column key="gender" field="gender" header="Gender"></Column>
               <Column key="country" field="count" header="Total"></Column>
@@ -264,10 +265,6 @@
           <div class="col-3">
             <h2>Gender</h2>
             <GendersChart v-if="loaded" :chartData="gendersChartData" />
-          </div>
-          <div class="col-3">
-            <h2>Gender</h2>
-            <Knob v-if="loaded" v-model="gendersData[0].percent" />
           </div>
         </div>
       </TabPanel>
@@ -330,7 +327,7 @@ import { usePositionsStore } from "../stores/positionsStore";
 import { useRelationsStore } from "../stores/relationsStore";
 import { useTitlesStore } from "../stores/titlesStore";
 import { useFilterStore } from "../stores/filterStore";
-import Knob from "primevue/knob";
+// import Knob from "primevue/knob";
 
 const persons = ref([]);
 const places = ref([]);
@@ -664,27 +661,35 @@ async function updateData() {
   hasTitlesData.value = data.hasTitlesChartData;
   decadesBirthData.value = data.decadesBirthsChartData;
 
+  console.log(JSON.stringify(gendersData.value, null, 2));
   calculatePercentages();
 }
 
 function calculatePercentages() {
-  const total = gendersData.value.reduce((total, obj) => total + obj.count, 0);
-  gendersData.value.forEach((obj) => {
-    let porcentaje = (obj.count / total) * 100;
-    obj.percent = porcentaje.toFixed(2);
-  });
+  if (Array.isArray(gendersData.value)) {
+    const total = gendersData.value.reduce(
+      (total, obj) => total + obj.count,
+      0
+    );
+    gendersData.value.forEach((obj) => {
+      let porcentaje = (obj.count / total) * 100;
+      obj.percent = porcentaje.toFixed(2);
+    });
+  }
 
   // Calcular la suma total de todos los valores
-  const sumaTotal = histBirthsData.value.reduce(
-    (total, obj) => total + obj.count,
-    0
-  );
+  if (Array.isArray(histBirthsData.value)) {
+    const sumaTotal = histBirthsData.value.reduce(
+      (total, obj) => total + obj.count,
+      0
+    );
 
-  // Calcular el porcentaje para cada objeto en el array
-  histBirthsData.value.forEach((obj) => {
-    let porcentaje = (obj.count / sumaTotal) * 100;
-    obj.percent = porcentaje.toFixed(2);
-  });
+    // Calcular el porcentaje para cada objeto en el array
+    histBirthsData.value.forEach((obj) => {
+      let porcentaje = (obj.count / sumaTotal) * 100;
+      obj.percent = porcentaje.toFixed(2);
+    });
+  }
 }
 
 function onReset() {
