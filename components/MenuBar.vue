@@ -50,6 +50,11 @@ const items = reactive([
     route: "/persons",
   },
   {
+    label: "Places",
+    icon: "pi pi-map",
+    route: "/places",
+  },
+  {
     label: "Positions",
     icon: "pi pi-users",
     route: "/positions",
@@ -58,12 +63,6 @@ const items = reactive([
     label: "Events",
     icon: "pi pi-map",
     route: "/events",
-  },
-
-  {
-    label: "Places",
-    icon: "pi pi-map",
-    route: "/places",
   },
   {
     label: "Relations",
