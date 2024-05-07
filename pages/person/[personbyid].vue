@@ -2,29 +2,31 @@
   <div v-if="pending">Loading data</div>
   <div v-else-if="error">{{ error }}</div>
   <div v-else>
-    <h1 class="text-center">{{ personData ? personData.name : "" }}</h1>
+    <h1 class="text-center">
+      {{ data.persondetails ? data.persondetails.name : "" }}
+    </h1>
     <div class="grid">
       <div class="col-6">
         <h2>Relations</h2>
-        <PersonsRelationsTable :relations="relations" />
+        <PersonsRelationsTable :relations="data.persondetails.relations" />
       </div>
       <div class="col-6">
         <h2>Titles</h2>
-        <PersonsTitlesTable :titles="titles" />
+        <PersonsTitlesTable :titles="data.persondetails.titles" />
       </div>
     </div>
     <div class="grid">
       <div class="col-6">
         <h2>Events</h2>
-        <PersonsEventsTable :events="events" />
+        <PersonsEventsTable :events="data.persondetails.events" />
       </div>
       <div class="col-6">
         <h2>Positions</h2>
-        <PersonsPositionsTable :positions="positions" />
+        <PersonsPositionsTable :positions="data.persondetails.positions" />
       </div>
     </div>
-    <PersonsEventsTimeLine :eventstimeline="eventstimeline" v-if="loaded" />
-    <PersonsRelationsGraph :personsrelated="relationsnetwork" v-if="loaded" />
+    <PersonsEventsTimeLine :eventstimeline="data.personeventstimeline" />
+    <PersonsRelationsGraph :personsrelated="data.personnetwork" />
   </div>
 </template>
 
@@ -38,37 +40,18 @@ import { usePersonsStore } from "../../stores/personsStore";
 const loaded = ref(false);
 const store = usePersonsStore();
 
-const personData = ref(null);
-const relations = ref([]);
-const events = ref([]);
-const positions = ref([]);
-const titles = ref([]);
 const eventstimeline = ref({});
 const relationsnetwork = ref({});
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
-// we get a array with only one obje
-//ciudad.value = store.nuevo;
-//console.log("el valor de ciudad es: ", JSON.stringify(ciudad.value, null, 2));
-// tenemos que poner las coordenadas en un array creando un array de arrays
-// pq es lo que tengo definidio en PlacesMap
-//const coordenadas = [ciudad.value.coords];
-
+// with useLazyFetch the page is loaded while the data is being fetched
+const { data, pending, error } = await useLazyFetch(
+  `${api}/persons/personsbyid/${useRoute().params.personbyid}`
+);
 const loadPersonsData = async () => {
   try {
-    const data = await $fetch(
-      `${api}/persons/personsbyid/${useRoute().params.personbyid}`
-    );
-
-    personData.value = data.persondetails;
-
-    // console.log("la presona es: ", JSON.stringify(personData.value, null, 2));
-    relations.value = personData.value.relations;
-    events.value = personData.value.events;
-    positions.value = personData.value.positions;
-    titles.value = personData.value.titles;
     eventstimeline.value = data.personeventstimeline;
     relationsnetwork.value = data.personnetwork;
 
@@ -87,8 +70,6 @@ const columns = [
   { field: "hasMother", header: "Has mother" },
   { field: "tiposEventos", header: "Eventos" },
 ];
-
-loadPersonsData();
 
 const getName = computed(() => {
   personData.value.name;
