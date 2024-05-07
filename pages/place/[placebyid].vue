@@ -66,9 +66,10 @@ const ciudad = ref();
 
 // we get a array with only one obje
 ciudad.value = store.nuevo;
-console.log("el valor de ciudad es: ", JSON.stringify(ciudad.value, null, 2));
+// console.log("el valor de ciudad es: ", JSON.stringify(ciudad.value, null, 2));
+
 // tenemos que poner las coordenadas en un array creando un array de arrays
-// pq es lo que tengo definidio en PlacesMap
+// pq es lo que tengo definido en PlacesMap
 const coordenadas = [ciudad.value.coords];
 
 if (coordenadas) {
@@ -78,7 +79,8 @@ if (coordenadas) {
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
-const { data, pending, error } = useFetch(
+// with useLazyFetch the page is loaded while the data is being fetched
+const { data, pending, error } = await useLazyFetch(
   `${api}/places/placeid/${useRoute().params.placebyid}`
 );
 </script>
