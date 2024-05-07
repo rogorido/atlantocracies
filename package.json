@@ -1,12 +1,13 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "version": "0.1.9",
+  "version": "0.1.10",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "generate:dev": "API_BASE_URL=http://localhost:8008 nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
