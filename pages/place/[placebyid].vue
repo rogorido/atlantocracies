@@ -71,8 +71,8 @@ import CardDataPlace from "~/components/CardDataPlace.vue";
 
 const places = ref([]);
 const persons = ref([]);
-const placesrelated = ref();
-const eventsrelated = ref();
+const placesrelated = ref([]);
+const eventsrelated = ref([]);
 
 const toast = useToast();
 
@@ -122,16 +122,11 @@ const loadPersonsData = async () => {
 
 const loadRelatedPlacesData = async () => {
   try {
-    const { data } = await $fetch(
+    const data = await $fetch(
       `${api}/places/related/${useRoute().params.placebyid}`
     );
 
     placesrelated.value = data;
-
-    // console.log(
-    //   "el valor de placesrelated es: ",
-    //   JSON.stringify(placesrelated.value, null, 2)
-    // );
     placesrelatedloaded.value = true;
   } catch (err) {
     console.log("error en loadRelatedPlaces", err);

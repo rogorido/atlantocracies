@@ -4,8 +4,6 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
-
 import { Network } from "vis-network/esnext";
 import { DataSet } from "vis-data/esnext";
 import "vis-network/styles/vis-network.css";
