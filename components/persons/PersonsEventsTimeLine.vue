@@ -8,7 +8,7 @@ import { DataSet } from "vis-data/esnext";
 import "vis-timeline/styles/vis-timeline-graph2d.css";
 
 const props = defineProps({
-  eventstimeline: { type: Object, required: true },
+  eventstimeline: { type: Object, required: true, default: () => {} },
 });
 
 const nodes = ref();

@@ -22,7 +22,7 @@
 
 <script setup>
 const props = defineProps({
-  positions: { type: Array, required: true },
+  positions: { type: Array, required: true, default: () => [] },
 });
 
 const columns = [

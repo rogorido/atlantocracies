@@ -12,7 +12,7 @@ import "vis-network/styles/vis-network.css";
 import { layouts } from "chart.js";
 
 const props = defineProps({
-  personsrelated: { type: Object, required: true, default: {} },
+  personsrelated: { type: Object, required: true, default: () => {} },
 });
 
 let network = null;
@@ -20,7 +20,7 @@ let network = null;
 const cyto = ref(null);
 
 onMounted(() => {
-  console.log("the props are: ", JSON.stringify(props, null, 2));
+  // console.log("the props are: ", JSON.stringify(props, null, 2));
   var data = {
     nodes: props.personsrelated.nodes,
     edges: props.personsrelated.edges,

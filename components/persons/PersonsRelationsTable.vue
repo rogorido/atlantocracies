@@ -38,7 +38,7 @@
 
 <script setup>
 const props = defineProps({
-  relations: { type: Array, required: true },
+  relations: { type: Array, required: true, default: () => [] },
 });
 
 const columns = [
