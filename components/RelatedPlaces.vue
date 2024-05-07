@@ -18,10 +18,7 @@ let network = null;
 const cyto = ref(null);
 
 onMounted(() => {
-  // create people.
-  // value corresponds with the age of the person
-
-  console.log("the props are: ", JSON.stringify(props, null, 2));
+  // console.log("the props are: ", JSON.stringify(props, null, 2));
   var data = {
     nodes: props.placesrelated.placesnetwork.nodes,
     edges: props.placesrelated.placesnetwork.edges,
