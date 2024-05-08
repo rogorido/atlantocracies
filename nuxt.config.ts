@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       apiBaseUrl: isProdEnv
         ? process.env.API_BASE_URL
         : "http://localhost:8008",
+      uiVersion: process.env.npm_package_version,
     },
   },
   modules: ["nuxt-primevue", "@nuxt/content", "@pinia/nuxt"],

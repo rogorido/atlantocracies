@@ -1,6 +1,11 @@
 <template>
-  <footer>Component: FooterGeneral</footer>
+  <footer>Component: FooterGeneral: {{ uiversion }}</footer>
 </template>
+
+<script setup>
+const config = useRuntimeConfig();
+const uiversion = config.public.uiVersion;
+</script>
 
 <style scoped>
 footer {
