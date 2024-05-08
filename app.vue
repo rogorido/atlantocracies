@@ -7,7 +7,7 @@
 </template>
 
 <script>
-//import "~/assets/normalize.css";
+import "~/assets/normalize.css";
 import "primevue/resources/themes/aura-light-green/theme.css";
 
 import "primeicons/primeicons.css";
