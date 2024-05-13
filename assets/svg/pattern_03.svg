@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="patternId" width="100%" height="100%">
+  <defs>
+    <pattern id="a" patternUnits="userSpaceOnUse" width="40" height="40" patternTransform="scale(2) rotate(60)">
+      <rect x="0" y="0" width="100%" height="100%" fill="hsla(0, 0%, 100%, 1)"/>
+      <path d="M0 10v20m40-20v20M10 40h20M10 0h20m10 50c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zM10 40c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10m30-30c-5.523 0-10-4.477-10-10s4.477-10 10-10S50-5.523 50 0s-4.477 10-10 10zM10 0c0 5.523-4.477 10-10 10S-10 5.523-10 0s4.477-10 10-10S10-5.523 10 0" stroke-width="1" stroke="hsla(109, 100%, 23.5%,1)" fill="none"/>
+      <path d="M20-10v20m0 20v20m-30-30h20m20 0h20m-20 0c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10" stroke-width="1" stroke="hsla(358, 88%, 43%, 1)" fill="none"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" transform="translate(0,0)" fill="url(#a)"/>
+</svg>
