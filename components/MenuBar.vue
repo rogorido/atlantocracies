@@ -45,11 +45,6 @@ const items = reactive([
     route: "/search",
   },
   {
-    label: "Persons",
-    icon: "pi pi-user",
-    route: "/persons",
-  },
-  {
     label: "Places",
     icon: "pi pi-map",
     route: "/places",

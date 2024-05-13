@@ -1,14 +1,8 @@
 <template>
-  <div>
-    <h1>Atlantocracies</h1>
-    <p>Esto es una prueba para ver si funciona...</p>
-    <p>{{ stats }}</p>
+  <div class="p-container">
+    <BlocksDataMain :stats="stats" class="mt-5" />
 
-    <GendersChart
-      v-if="loaded"
-      :chartData="stats.gendersChartData"
-      :chartOptions="options"
-    />
+    <MainPageDescriptions />
   </div>
 </template>
 
@@ -29,7 +23,7 @@ const loaded = ref(false);
 const options = { responsive: true };
 
 const { data } = await useFetch(`${api}/general/generalstats`);
-console.log("data", data.value);
+//console.log("data", data.value);
 if (data.value) {
   stats.value = data.value;
   loaded.value = true;
