@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "version": "0.1.18",
+  "version": "0.1.30",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -14,6 +14,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@nuxt/content": "^2.12.1",
+    "@nuxtjs/robots": "^3.0.0",
     "@pinia/nuxt": "^0.5.1",
     "chart.js": "^4.4.2",
     "cytoscape": "^3.29.2",
@@ -29,9 +30,10 @@
     "vis-timeline": "^7.7.3",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2",
-    "vue3-openlayers": "^8.1.0"
+    "vue3-openlayers": "^9.0.0"
   },
   "devDependencies": {
-    "nuxt-primevue": "^0.3.1"
+    "nuxt-primevue": "^0.3.1",
+    "sass": "^1.77.1"
   }
 }

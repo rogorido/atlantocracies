@@ -53,7 +53,7 @@
         </DataTable>
       </div>
       <div class="col-6">
-        <h2 class="text-center">Probando</h2>
+        <h2 class="text-center">Some information</h2>
         <p>Places are important etc.</p>
         <p>You can click on a place to see the details.</p>
         <p>You can search by place with the filter option.</p>

@@ -19,7 +19,7 @@ let timeline = null;
 onMounted(() => {
   nodes.value = props.eventstimeline;
 
-  console.log("el timeline", JSON.stringify(nodes.value, null, 2));
+  // console.log("el timeline", JSON.stringify(nodes.value, null, 2));
   var items = new DataSet(nodes.value);
 
   //console.log("the props are: ", JSON.stringify(items, null, 2));

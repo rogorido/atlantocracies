@@ -1,5 +1,5 @@
 <template>
-  <footer>Component: FooterGeneral: {{ uiversion }}</footer>
+  <footer>AtlantoUI version: {{ uiversion }}</footer>
 </template>
 
 <script setup>
@@ -9,8 +9,8 @@ const uiversion = config.public.uiVersion;
 
 <style scoped>
 footer {
-  grid-row-start: 3;
-  grid-row-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 5;
   background-color: #f5f5f5;
 }
 </style>

@@ -5,28 +5,67 @@
     <h1 class="text-center">
       {{ data.persondetails ? data.persondetails.name : "" }}
     </h1>
-    <div class="grid">
-      <div class="col-6">
-        <h2>Relations</h2>
-        <PersonsRelationsTable :relations="data.persondetails.relations" />
-      </div>
-      <div class="col-6">
-        <h2>Titles</h2>
-        <PersonsTitlesTable :titles="data.persondetails.titles" />
-      </div>
-    </div>
-    <div class="grid">
-      <div class="col-6">
-        <h2>Events</h2>
-        <PersonsEventsTable :events="data.persondetails.events" />
-      </div>
-      <div class="col-6">
-        <h2>Positions</h2>
-        <PersonsPositionsTable :positions="data.persondetails.positions" />
-      </div>
-    </div>
-    <PersonsEventsTimeLine :eventstimeline="data.personeventstimeline" />
-    <PersonsRelationsGraph :personsrelated="data.personnetwork" />
+    <TabView>
+      <TabPanel header="Relations">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Relations</h2>
+            <PersonsRelationsTable :relations="data.persondetails.relations" />
+          </div>
+          <div class="col-6">
+            <PersonsRelationsGraph :personsrelated="data.personnetwork" />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel header="Events">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Events</h2>
+            <PersonsEventsTable :events="data.persondetails.events" />
+          </div>
+          <div>
+            <PersonsEventsTimeLine
+              :eventstimeline="data.personeventstimeline"
+            />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel header="Positions">
+        <div class="col-6">
+          <h2>Positions</h2>
+          <PersonsPositionsTable :positions="data.persondetails.positions" />
+        </div>
+      </TabPanel>
+      <TabPanel header="Titles">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Titles</h2>
+            <PersonsTitlesTable :titles="data.persondetails.titles" />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel header="Places">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Places</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
+              aspernatur maiores id quo corporis in molestiae magni dignissimos
+              porro vel eos nemo quas, doloremque asperiores quod repudiandae
+              aperiam possimus sed! Fugiat ea dolorum deleniti suscipit maiores,
+              labore quisquam praesentium eius assumenda sapiente optio nisi
+              tenetur officiis. Explicabo fuga, esse delectus officiis
+              perspiciatis odit sunt asperiores architecto laudantium,
+              reiciendis deleniti ad? Distinctio dolorem officia vel voluptates
+              adipisci repudiandae consequuntur maxime vitae quisquam a veniam
+              non quam ex perferendis reprehenderit, voluptatem natus.
+              Quibusdam, voluptate! Expedita enim harum consequatur beatae id
+              sint deserunt?
+            </p>
+          </div>
+        </div>
+      </TabPanel>
+    </TabView>
   </div>
 </template>
 

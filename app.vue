@@ -1,9 +1,12 @@
 <template>
-  <div class="general">
-    <MenuBar />
-    <NuxtPage />
-    <FooterGeneral />
-  </div>
+  <NuxtLayout>
+    <div class="general">
+      <MenuBar />
+      <Hero />
+      <NuxtPage />
+      <FooterGeneral />
+    </div>
+  </NuxtLayout>
 </template>
 
 <script>
@@ -14,12 +17,13 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 // import "bootstrap/dist/css/bootstrap-grid.css";
 import "@/assets/owncontainers.css";
+import Hero from "./components/Hero.vue";
 </script>
 
 <style>
 .general {
   display: grid;
-  grid-template-rows: 60px 1fr 60px;
+  grid-template-rows: 60px auto 1fr 60px;
   min-height: 100vh;
 }
 </style>
