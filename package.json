@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "version": "0.1.28",
+  "version": "0.1.29",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -30,10 +30,10 @@
     "vis-timeline": "^7.7.3",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2",
-    "vue3-openlayers": "^8.1.0"
+    "vue3-openlayers": "^9.0.0"
   },
   "devDependencies": {
     "nuxt-primevue": "^0.3.1",
-    "sass": "^1.77.0"
+    "sass": "^1.77.1"
   }
 }
