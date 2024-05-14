@@ -23,7 +23,7 @@
             <h2>Events</h2>
             <PersonsEventsTable :events="data.persondetails.events" />
           </div>
-          <div>
+          <div class="col-6">
             <PersonsEventsTimeLine
               :eventstimeline="data.personeventstimeline"
             />

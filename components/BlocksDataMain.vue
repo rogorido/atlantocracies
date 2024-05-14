@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <div class="col-12 md:col-6 lg:col-3">
+    <div class="col-12 md:col-6 lg:col-4">
       <Card>
         <template #title>Total persons</template>
         <template #content>
@@ -10,7 +10,17 @@
         </template>
       </Card>
     </div>
-    <div class="col-12 md:col-6 lg:col-3">
+    <div class="col-12 md:col-6 lg:col-4">
+      <Card>
+        <template #title>Total places</template>
+        <template #content>
+          <p class="numero">
+            {{ stats.totalPlaces != null ? stats.totalPlaces : 0 }}
+          </p>
+        </template>
+      </Card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4">
       <Card>
         <template #title>Total positions</template>
         <template #content>
@@ -20,7 +30,7 @@
         </template>
       </Card>
     </div>
-    <div class="col-12 md:col-6 lg:col-3">
+    <div class="col-12 md:col-6 lg:col-4">
       <Card>
         <template #title>Total events</template>
         <template #content>
@@ -30,12 +40,22 @@
         </template>
       </Card>
     </div>
-    <div class="col-12 md:col-6 lg:col-3">
+    <div class="col-12 md:col-6 lg:col-4">
       <Card>
         <template #title>Total relations</template>
         <template #content>
           <p>
             {{ stats.totalRelations != null ? stats.totalRelations : 0 }}
+          </p>
+        </template>
+      </Card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4">
+      <Card>
+        <template #title>Total titles</template>
+        <template #content>
+          <p>
+            {{ stats.totalTitles != null ? stats.totalTitles : 0 }}
           </p>
         </template>
       </Card>

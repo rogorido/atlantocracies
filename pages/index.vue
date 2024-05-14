@@ -9,11 +9,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useStatsStore } from "../stores/statsStore";
+import { usePlacesStore } from "../stores/placesStore";
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
 const stats = ref({});
+const places = ref([]);
+const placesstore = usePlacesStore();
 const store = useStatsStore();
 
 // Variable to check whether data are loaded or not
@@ -27,5 +30,11 @@ const { data } = await useFetch(`${api}/general/generalstats`);
 if (data.value) {
   stats.value = data.value;
   loaded.value = true;
+}
+
+if (!placesstore.initialized) {
+  await placesstore.fetchPlaces();
+  places.value = placesstore.places;
+  stats.value.totalPlaces = places.value.length;
 }
 </script>
