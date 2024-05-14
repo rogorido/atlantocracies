@@ -181,18 +181,24 @@
       </div>
     </div>
     <div class="flex gap-3">
-      <div>
-        <Button label="Reset filters" @click="onReset" />
-        <Button label="Save filter" disabled />
-        <Button label="Load filter" disabled />
-      </div>
-      <div>
-        <Button label="Save results" disabled />
-      </div>
+      <Button label="Reset filters" @click="onReset" />
+      <Button label="Save filter" disabled />
+      <Button label="Load filter" disabled />
+      <Button label="Save results" disabled />
     </div>
 
-    <div v-if="persons.length > 0">
-      <h2 class="mt-5 text-center">Selected Persons</h2>
+    <div class="flex gap-3 mt-4">
+      <NuxtLink to="#selectedpersons">
+        <Button label="View Persons" rounded />
+      </NuxtLink>
+
+      <NuxtLink to="#insights">
+        <Button label="View insights" rounded />
+      </NuxtLink>
+    </div>
+
+    <div id="selectedpersons" v-if="persons.length > 0">
+      <h2 class="mt-5 text-center uppercase">Selected Persons</h2>
       <!-- Este código está repetido en compenente! -->
       <DataTable
         :value="persons"
@@ -351,100 +357,104 @@
           sortable
         />
       </DataTable>
-      <TabView>
-        <TabPanel header="Birth years in decades">
-          <div class="grid">
-            <div class="col-6">
-              <h2>Birth years</h2>
-              <Chart v-if="loaded" type="bar" :data="decadesBirthData" />
+      <section>
+        <h2 id="insights" class="mt-5 text-center uppercase">Insights</h2>
+        <TabView>
+          <TabPanel header="Birth years in decades">
+            <div class="grid">
+              <div class="col-6">
+                <h2>Birth years</h2>
+                <Chart v-if="loaded" type="bar" :data="decadesBirthData" />
+              </div>
+              <div class="col-5">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+                  reiciendis exercitationem! Illo sunt, natus adipisci quo rem
+                  eveniet optio! Esse nobis necessitatibus nihil temporibus
+                  laborum! Voluptas neque optio veritatis incidunt.
+                </p>
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Fugiat voluptates voluptatem reiciendis in asperiores quo quia
+                  quam blanditiis, temporibus assumenda corrupti omnis maiores
+                  enim. Ipsum accusamus aliquam aperiam rerum doloremque?
+                </p>
+              </div>
             </div>
-            <div class="col-5">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-                reiciendis exercitationem! Illo sunt, natus adipisci quo rem
-                eveniet optio! Esse nobis necessitatibus nihil temporibus
-                laborum! Voluptas neque optio veritatis incidunt.
-              </p>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat
-                voluptates voluptatem reiciendis in asperiores quo quia quam
-                blanditiis, temporibus assumenda corrupti omnis maiores enim.
-                Ipsum accusamus aliquam aperiam rerum doloremque?
-              </p>
+          </TabPanel>
+          <TabPanel header="Gender">
+            <div class="grid">
+              <div class="col-6">
+                <h2>Table</h2>
+                <DataTable
+                  :value="gendersData"
+                  stripedRows
+                  :rows="10"
+                  selectionMode="single"
+                  dataKey="_id"
+                  tableStyle="min-width: 50rem"
+                  v-if="loaded"
+                >
+                  <Column key="gender" field="gender" header="Gender"></Column>
+                  <Column key="country" field="count" header="Total"></Column>
+                  <Column key="percent" field="percent" header="%"></Column>
+                </DataTable>
+              </div>
+              <div class="col-3">
+                <h2>Gender</h2>
+                <GendersChart v-if="loaded" :chartData="gendersChartData" />
+              </div>
             </div>
-          </div>
-        </TabPanel>
-        <TabPanel header="Gender">
-          <div class="grid">
-            <div class="col-6">
-              <h2>Table</h2>
-              <DataTable
-                :value="gendersData"
-                stripedRows
-                :rows="10"
-                selectionMode="single"
-                dataKey="_id"
-                tableStyle="min-width: 50rem"
-                v-if="loaded"
-              >
-                <Column key="gender" field="gender" header="Gender"></Column>
-                <Column key="country" field="count" header="Total"></Column>
-                <Column key="percent" field="percent" header="%"></Column>
-              </DataTable>
-            </div>
-            <div class="col-3">
-              <h2>Gender</h2>
-              <GendersChart v-if="loaded" :chartData="gendersChartData" />
-            </div>
-          </div>
-        </TabPanel>
-        <TabPanel header="Birth places (historical)">
-          <div class="grid">
-            <div class="col-6">
-              <h2>Birth places (historical)</h2>
+          </TabPanel>
+          <TabPanel header="Birth places (historical)">
+            <div class="grid">
+              <div class="col-6">
+                <h2>Birth places (historical)</h2>
 
-              <Chart
-                v-if="loaded"
-                type="pie"
-                :data="histBirthsChartData"
-                :options="options"
-              />
+                <Chart
+                  v-if="loaded"
+                  type="pie"
+                  :data="histBirthsChartData"
+                  :options="options"
+                />
+              </div>
+              <div class="col-6">
+                <h2>Table</h2>
+                <DataTable
+                  :value="histBirthsData"
+                  paginator
+                  stripedRows
+                  :rows="10"
+                  :rowsPerPageOptions="[5, 10, 20, 50]"
+                  selectionMode="single"
+                  dataKey="_id"
+                  tableStyle="min-width: 50rem"
+                >
+                  <Column key="_id" field="_id" header="Country"></Column>
+                  <Column key="country" field="count" header="Total"></Column>
+                  <Column key="percent" field="percent" header="%"></Column>
+                </DataTable>
+              </div>
             </div>
-            <div class="col-6">
-              <h2>Table</h2>
-              <DataTable
-                :value="histBirthsData"
-                paginator
-                stripedRows
-                :rows="10"
-                :rowsPerPageOptions="[5, 10, 20, 50]"
-                selectionMode="single"
-                dataKey="_id"
-                tableStyle="min-width: 50rem"
-              >
-                <Column key="_id" field="_id" header="Country"></Column>
-                <Column key="country" field="count" header="Total"></Column>
-                <Column key="percent" field="percent" header="%"></Column>
-              </DataTable>
-            </div>
-          </div>
-        </TabPanel>
-        <TabPanel header="Titles">
-          <div class="grid">
-            <div class="col-6">
-              <h2>Has titles</h2>
+          </TabPanel>
+          <TabPanel header="Titles">
+            <div class="grid">
+              <div class="col-6">
+                <h2>Has titles</h2>
 
-              <Chart
-                v-if="loaded"
-                type="pie"
-                :data="hasTitlesData"
-                :options="options"
-              />
+                <Chart
+                  v-if="loaded"
+                  type="pie"
+                  :data="hasTitlesData"
+                  :options="options"
+                />
+              </div>
             </div>
-          </div>
-        </TabPanel>
-      </TabView>
+          </TabPanel>
+        </TabView>
+      </section>
     </div>
+    <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
   </div>
 </template>
 
@@ -460,6 +470,9 @@ import { useTitlesStore } from "../stores/titlesStore";
 import { useFilterStore } from "../stores/filterStore";
 // import Knob from "primevue/knob";
 import { FilterMatchMode } from "primevue/api";
+
+const config = useRuntimeConfig();
+const api = config.public.apiBaseUrl;
 
 const dt = ref(); // reference to the datatable to export!
 
@@ -654,7 +667,7 @@ const onHistbirthChange = () => {
 
 const loadHistBirths = async () => {
   try {
-    const data = await $fetch("http://127.0.0.1:8008/persons/histbirths");
+    const data = await $fetch(`${api}/persons/histbirths`);
 
     histbirths.value = data.result;
   } catch (err) {
@@ -780,7 +793,7 @@ watch(selectedTitle, () => {
 });
 
 async function updateData() {
-  const data = await $fetch("http://127.0.0.1:8008/search/", {
+  const data = await $fetch(`${api}/search/`, {
     method: "POST",
     body: filter.value,
   });
