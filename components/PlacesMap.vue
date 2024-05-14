@@ -45,7 +45,7 @@ import { boundingExtent, getCenter } from "ol/extent";
 
 const center = ref();
 const projection = ref("EPSG:4326");
-const zoom = ref(4);
+const zoom = ref(3);
 const radius = ref(10);
 const strokeWidth = ref(10);
 const stroke = ref("#ff0000");
