@@ -1,0 +1,127 @@
+<template>
+  <div>
+    <h2 id="insights" class="mt-5 text-center uppercase">Insights</h2>
+    <TabView>
+      <TabPanel header="Birth years in decades">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Birth years</h2>
+            <Chart
+              v-if="loaded"
+              type="bar"
+              :data="insightsData.decadesBirthData"
+            />
+          </div>
+          <div class="col-5">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              reiciendis exercitationem! Illo sunt, natus adipisci quo rem
+              eveniet optio! Esse nobis necessitatibus nihil temporibus laborum!
+              Voluptas neque optio veritatis incidunt.
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat
+              voluptates voluptatem reiciendis in asperiores quo quia quam
+              blanditiis, temporibus assumenda corrupti omnis maiores enim.
+              Ipsum accusamus aliquam aperiam rerum doloremque?
+            </p>
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel header="Gender">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Table</h2>
+            <DataTable
+              :value="insightsData.gendersData"
+              stripedRows
+              :rows="10"
+              selectionMode="single"
+              dataKey="_id"
+              tableStyle="min-width: 50rem"
+              v-if="loaded"
+            >
+              <Column key="gender" field="gender" header="Gender"></Column>
+              <Column key="country" field="count" header="Total"></Column>
+              <Column key="percent" field="percent" header="%"></Column>
+            </DataTable>
+          </div>
+          <div class="col-3">
+            <h2>Gender</h2>
+            <GendersChart
+              v-if="loaded"
+              :chartData="insightsData.gendersChartData"
+            />
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel header="Birth places (historical)">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Birth places (historical)</h2>
+
+            <Chart
+              v-if="loaded"
+              type="pie"
+              :data="insightsData.histBirthsChartData"
+              :options="options"
+            />
+          </div>
+          <div class="col-6">
+            <h2>Table</h2>
+            <DataTable
+              :value="insightsData.histBirthsData"
+              paginator
+              stripedRows
+              :rows="10"
+              :rowsPerPageOptions="[5, 10, 20, 50]"
+              selectionMode="single"
+              dataKey="_id"
+              tableStyle="min-width: 50rem"
+            >
+              <Column key="_id" field="_id" header="Country"></Column>
+              <Column key="country" field="count" header="Total"></Column>
+              <Column key="percent" field="percent" header="%"></Column>
+            </DataTable>
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel header="Titles">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Has titles</h2>
+
+            <Chart
+              v-if="loaded"
+              type="pie"
+              :data="insightsData.hasTitlesData"
+              :options="options"
+            />
+          </div>
+        </div>
+      </TabPanel>
+    </TabView>
+  </div>
+</template>
+
+<script setup>
+import Chart from "primevue/chart";
+
+// TODO: esto no funciona tal vez porque el Chart modifica el objeto
+// y no lo hace o no lo puede hacer...
+const insightsData = inject("insightsData");
+
+// const props = defineProps({
+//   insightsData: { type: Object, required: true, default: null },
+// });
+
+// TODO: probablemente no se necesita esto...
+const loaded = ref(false);
+
+const options = { responsive: true };
+
+if (insightsData) {
+  console.log("insightsData", insightsData);
+  loaded.value = true;
+}
+</script>

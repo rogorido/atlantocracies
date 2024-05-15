@@ -198,283 +198,27 @@
     </div>
 
     <div id="selectedpersons" v-if="persons.length > 0">
-      <h2 class="mt-5 text-center uppercase">Selected Persons</h2>
-      <!-- Este código está repetido en compenente! -->
-      <DataTable
-        :value="persons"
-        ref="dt"
-        paginator
-        stripedRows
-        :rows="10"
-        :rowsPerPageOptions="[5, 10, 20, 50]"
-        selectionMode="single"
-        dataKey="_id"
-        :selection="selectedPerson"
-        @rowSelect="onRowSelect"
-        v-model:filters="filters"
-        filterDisplay="row"
-        tableStyle="min-width: 25rem"
-      >
-        <template #header>
-          <div style="text-align: right">
-            <Button
-              icon="pi pi-external-link"
-              label="Export"
-              @click="exportCSV($event)"
-            />
-          </div>
-        </template>
-
-        <Column field="name" header="Name" sortable>
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              v-model="filterModel.value"
-              type="text"
-              @input="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by name"
-            />
-          </template>
-        </Column>
-        <Column
-          field="birthyear"
-          header="Birth Year"
-          dataType="numeric"
-          style="min-width: 3rem"
-          sortable
-        />
-        <Column
-          field="placebirth"
-          header="Birth Place"
-          dataType="string"
-          style="min-width: 6rem"
-          sortable
-        />
-        <Column
-          field="datedeath"
-          header="Death date"
-          dataType="string"
-          style="min-width: 6rem"
-          sortable
-        />
-        <Column
-          field="placeDeath"
-          header="Death Place"
-          dataType="string"
-          style="min-width: 6rem"
-          sortable
-        />
-        <Column
-          field="gender"
-          header="Gender"
-          dataType="boolean"
-          style="min-width: 3rem"
-        >
-          <template #body="{ data }">
-            <i
-              class="pi"
-              :class="{
-                'pi-mars text-green-500': data.gender === 'H',
-                'pi-venus text-green-500': data.gender === 'M',
-              }"
-            ></i>
-          </template>
-        </Column>
-        <Column
-          field="wasMarried"
-          header="Married"
-          dataType="boolean"
-          style="min-width: 3rem"
-        >
-          <template #body="{ data }">
-            <i
-              class="pi"
-              :class="{
-                'pi-check-circle text-green-500': data.wasMarried,
-                'pi-times-circle text-red-400': !data.wasMarried,
-              }"
-            ></i>
-          </template>
-        </Column>
-        <Column
-          field="hasFather"
-          header="Has Father"
-          dataType="boolean"
-          style="min-width: 6rem"
-        >
-          <template #body="{ data }">
-            <i
-              class="pi"
-              :class="{
-                'pi-check-circle text-green-500': data.hasFather,
-                'pi-times-circle text-red-400': !data.hasFather,
-              }"
-            ></i>
-          </template>
-        </Column>
-        <Column
-          field="hizoTestamento"
-          header="Made will"
-          dataType="boolean"
-          style="min-width: 3rem"
-        >
-          <template #body="{ data }">
-            <i
-              class="pi"
-              :class="{
-                'pi-check-circle text-green-500': data.hizoTestamento,
-                'pi-times-circle text-red-400': !data.hizoTestamento,
-              }"
-            ></i>
-          </template>
-        </Column>
-        <Column
-          field="numberOfEvents"
-          header="# Events"
-          dataType="numeric"
-          style="min-width: 3rem"
-          sortable
-        />
-        <Column
-          field="numberofRelations"
-          header="# Relations"
-          dataType="numeric"
-          style="min-width: 3rem"
-          sortable
-        />
-        <Column
-          field="numberofPositions"
-          header="# Positions"
-          dataType="numeric"
-          style="min-width: 3rem"
-          sortable
-        />
-        <Column
-          field="numberofTitles"
-          header="# Titles"
-          dataType="numeric"
-          style="min-width: 3rem"
-          sortable
-        />
-      </DataTable>
       <section>
-        <h2 id="insights" class="mt-5 text-center uppercase">Insights</h2>
-        <TabView>
-          <TabPanel header="Birth years in decades">
-            <div class="grid">
-              <div class="col-6">
-                <h2>Birth years</h2>
-                <Chart v-if="loaded" type="bar" :data="decadesBirthData" />
-              </div>
-              <div class="col-5">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-                  reiciendis exercitationem! Illo sunt, natus adipisci quo rem
-                  eveniet optio! Esse nobis necessitatibus nihil temporibus
-                  laborum! Voluptas neque optio veritatis incidunt.
-                </p>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Fugiat voluptates voluptatem reiciendis in asperiores quo quia
-                  quam blanditiis, temporibus assumenda corrupti omnis maiores
-                  enim. Ipsum accusamus aliquam aperiam rerum doloremque?
-                </p>
-              </div>
-            </div>
-          </TabPanel>
-          <TabPanel header="Gender">
-            <div class="grid">
-              <div class="col-6">
-                <h2>Table</h2>
-                <DataTable
-                  :value="gendersData"
-                  stripedRows
-                  :rows="10"
-                  selectionMode="single"
-                  dataKey="_id"
-                  tableStyle="min-width: 50rem"
-                  v-if="loaded"
-                >
-                  <Column key="gender" field="gender" header="Gender"></Column>
-                  <Column key="country" field="count" header="Total"></Column>
-                  <Column key="percent" field="percent" header="%"></Column>
-                </DataTable>
-              </div>
-              <div class="col-3">
-                <h2>Gender</h2>
-                <GendersChart v-if="loaded" :chartData="gendersChartData" />
-              </div>
-            </div>
-          </TabPanel>
-          <TabPanel header="Birth places (historical)">
-            <div class="grid">
-              <div class="col-6">
-                <h2>Birth places (historical)</h2>
-
-                <Chart
-                  v-if="loaded"
-                  type="pie"
-                  :data="histBirthsChartData"
-                  :options="options"
-                />
-              </div>
-              <div class="col-6">
-                <h2>Table</h2>
-                <DataTable
-                  :value="histBirthsData"
-                  paginator
-                  stripedRows
-                  :rows="10"
-                  :rowsPerPageOptions="[5, 10, 20, 50]"
-                  selectionMode="single"
-                  dataKey="_id"
-                  tableStyle="min-width: 50rem"
-                >
-                  <Column key="_id" field="_id" header="Country"></Column>
-                  <Column key="country" field="count" header="Total"></Column>
-                  <Column key="percent" field="percent" header="%"></Column>
-                </DataTable>
-              </div>
-            </div>
-          </TabPanel>
-          <TabPanel header="Titles">
-            <div class="grid">
-              <div class="col-6">
-                <h2>Has titles</h2>
-
-                <Chart
-                  v-if="loaded"
-                  type="pie"
-                  :data="hasTitlesData"
-                  :options="options"
-                />
-              </div>
-            </div>
-          </TabPanel>
-        </TabView>
+        <SearchMacroTablePersons />
       </section>
+      <section><SearchInsights /></section>
     </div>
     <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
   </div>
 </template>
 
 <script setup>
-import Chart from "primevue/chart";
-
 import { ref, onMounted, watch } from "vue";
-import { usePersonsStore } from "../stores/personsStore";
+
 import { usePlacesStore } from "../stores/placesStore";
 import { usePositionsStore } from "../stores/positionsStore";
 import { useRelationsStore } from "../stores/relationsStore";
 import { useTitlesStore } from "../stores/titlesStore";
 import { useFilterStore } from "../stores/filterStore";
 // import Knob from "primevue/knob";
-import { FilterMatchMode } from "primevue/api";
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
-
-const dt = ref(); // reference to the datatable to export!
 
 const persons = ref([]);
 const places = ref([]);
@@ -483,61 +227,36 @@ const relations = ref([]);
 const titles = ref([]);
 const histbirths = ref([]);
 
-const options = { responsive: true };
-
-const gendersData = ref(null);
-const gendersChartData = ref(null);
-const histBirthsChartData = ref(null);
-const histBirthsData = ref(null);
-const hasTitlesData = ref(null);
-const decadesBirthData = ref(null);
+const insightsData = reactive({
+  gendersData: null,
+  gendersChartData: null,
+  histBirthsChartData: null,
+  histBirthsData: null,
+  hasTitlesData: null,
+  decadesBirthData: null,
+});
 
 const loaded = ref(false);
 
 const filter = ref({});
 
-const storepersons = usePersonsStore();
 const storeplaces = usePlacesStore();
 const storepositions = usePositionsStore();
 const storerelations = useRelationsStore();
 const storetitles = useTitlesStore();
 const storefilter = useFilterStore();
 
-const selectedPerson = ref();
 const selectedPlace = ref();
 const selectedPosition = ref();
 const selectedRelation = ref();
 const selectedTitle = ref();
 const selectedHistBirth = ref();
 
-// TODO: la cuestioón es qué hacer con el slug. Tengo una función de chatgpt
-// pero si lo paso así luego en la página [placebyid] no puedo acceder al nombre
-// con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
-// veo cómo es posible... es posible con query, pero eso es otra cosa...
-function probar() {
-  // return navigateTo(`/place/${selectedPlace.value}`, {
-  //   open: { target: "_blank" },
-  // });
+provide("persons", readonly(persons));
 
-  return navigateTo(`/person/${selectedPerson.value}`);
-}
-
-const onRowSelect = (event) => {
-  selectedPerson.value = event.data._id;
-  storepersons.selectPerson(selectedPerson.value);
-  probar();
-};
-
-const columns = [
-  // { field: "name", header: "Name" },
-  // { field: "gender", header: "Gender" },
-  { field: "histBirth", header: "Birth territory" },
-  // { field: "wasMarried", header: "Was married" },
-  //  { field: "hasFather", header: "Has father" },
-  //  { field: "hasMother", header: "Has mother" },
-  { field: "birthyear", header: "Birth year" },
-  //  { field: "tiposEventos", header: "Eventos" },
-];
+// Importnate: esto no puede ser readonly porque hay los datos
+// de los gráficos los modifica chartjs (añade pej los colores)
+provide("insightsData", insightsData);
 
 const selectedGender = ref("All");
 const genders = ref([
@@ -574,17 +293,6 @@ const haspositions = ref([
   { name: "Does not have positions", key: "N" },
 ]);
 
-// const loadPersonsData = async () => {
-//   try {
-//     const { data } = await useFetch("http://127.0.0.1:8008/persons/");
-
-//     persons.value = data.value;
-//     loaded.value = true;
-//   } catch (err) {
-//     console.log("error en mymap5", err);
-//   }
-// };
-
 const onGenderChange = () => {
   // console.log("onCategoryChange", selectedGender.value);
 
@@ -599,8 +307,6 @@ const onGenderChange = () => {
 };
 
 const onMarriedChange = () => {
-  // console.log("onmarriedChange", selectedMarried.value);
-
   if (selectedMarried.value === "Married") {
     filter.value.wasMarried = true;
   } else if (selectedMarried.value === "Not married") {
@@ -614,8 +320,6 @@ const onMarriedChange = () => {
 
 // TODO: esto realmente no lo estoy operando como array???
 const onPlaceChange = () => {
-  // console.log("onPlaceChange", selectedPlace.value);
-
   if (selectedPlace.value != null && Array.isArray(selectedPlace.value)) {
     filter.value.place = selectedPlace.value.map((place) => place.place);
   }
@@ -690,8 +394,6 @@ const onHasEventChange = () => {
 };
 
 const onHasTitleChange = () => {
-  //console.log("onhaseventChange", selectedHasEvent.value);
-
   if (selectedHasTitle.value === "Has titles") {
     filter.value.hasTitles = true;
   } else if (selectedHasTitle.value === "Does not have titles") {
@@ -704,8 +406,6 @@ const onHasTitleChange = () => {
 };
 
 const onHasPositionChange = () => {
-  //console.log("onhaseventChange", selectedHasEvent.value);
-
   if (selectedHasPosition.value === "Has positions") {
     filter.value.hasPositions = true;
   } else if (selectedHasPosition.value === "Does not have positions") {
@@ -801,38 +501,39 @@ async function updateData() {
   storefilter.setFilter(filter.value);
 
   persons.value = data.result;
-  gendersData.value = data.gendersData;
-  gendersChartData.value = data.gendersChartData;
-  histBirthsChartData.value = data.histBirthsChartData;
-  histBirthsData.value = data.histBirthsData;
-  hasTitlesData.value = data.hasTitlesChartData;
-  decadesBirthData.value = data.decadesBirthsChartData;
+
+  insightsData.gendersData = data.gendersData;
+  insightsData.gendersChartData = data.gendersChartData;
+  insightsData.histBirthsChartData = data.histBirthsChartData;
+  insightsData.histBirthsData = data.histBirthsData;
+  insightsData.hasTitlesData = data.hasTitlesChartData;
+  insightsData.decadesBirthData = data.decadesBirthsChartData;
 
   //console.log(JSON.stringify(gendersData.value, null, 2));
   calculatePercentages();
 }
 
 function calculatePercentages() {
-  if (Array.isArray(gendersData.value)) {
-    const total = gendersData.value.reduce(
+  if (Array.isArray(insightsData.gendersData)) {
+    const total = insightsData.gendersData.reduce(
       (total, obj) => total + obj.count,
       0
     );
-    gendersData.value.forEach((obj) => {
+    insightsData.gendersData.forEach((obj) => {
       let porcentaje = (obj.count / total) * 100;
       obj.percent = porcentaje.toFixed(2);
     });
   }
 
   // Calcular la suma total de todos los valores
-  if (Array.isArray(histBirthsData.value)) {
-    const sumaTotal = histBirthsData.value.reduce(
+  if (Array.isArray(insightsData.histBirthsData)) {
+    const sumaTotal = insightsData.histBirthsData.reduce(
       (total, obj) => total + obj.count,
       0
     );
 
     // Calcular el porcentaje para cada objeto en el array
-    histBirthsData.value.forEach((obj) => {
+    insightsData.histBirthsData.forEach((obj) => {
       let porcentaje = (obj.count / sumaTotal) * 100;
       obj.percent = porcentaje.toFixed(2);
     });
@@ -855,15 +556,6 @@ function onReset() {
   filter.value = {};
   storefilter.setFilter(filter.value);
 }
-
-// I dont really understand how this works...
-const filters = ref({
-  name: { value: null, matchMode: FilterMatchMode.CONTAINS },
-});
-
-const exportCSV = () => {
-  dt.value.exportCSV();
-};
 </script>
 
 <style>
