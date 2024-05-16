@@ -27,7 +27,7 @@ if (!storetitles.initialized === true) {
   await storetitles.fetchTitles();
 }
 
-titles.value = storetitles.titles;
+titles.value = storetitles.titlesList;
 
 watch(selectedTitle, () => {
   if (selectedTitle.value != null && Array.isArray(selectedTitle.value)) {

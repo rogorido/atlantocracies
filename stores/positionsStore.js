@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 
+import { getComboLists } from "~/utils/comboLists";
+
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
@@ -9,6 +11,11 @@ export const usePositionsStore = defineStore("positions", {
     initialized: false,
     hostias: "",
   }),
+
+  getters: {
+    // Positions ordered alphabetically for multiselect
+    positionsList: (state) => getComboLists(state.positions),
+  },
 
   actions: {
     positionSelected(position) {

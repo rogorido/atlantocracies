@@ -27,7 +27,9 @@ if (!storerelations.initialized === true) {
   await storerelations.fetchRelations();
 }
 
-relations.value = storerelations.relations;
+relations.value = storerelations.relationsList;
+
+console.log("the relations are: ", JSON.stringify(relations.value, null, 2));
 
 watch(selectedRelation, () => {
   if (selectedRelation.value != null && Array.isArray(selectedRelation.value)) {

@@ -9,6 +9,11 @@ export const useHistBirthsStore = defineStore("histBirths", {
     initialized: false,
   }),
 
+  getters: {
+    // Positions ordered alphabetically for multiselect
+    histbirthsList: (state) => getComboLists(state.histBirths),
+  },
+
   actions: {
     async fetchHistBirths() {
       if (!this.initialized) {

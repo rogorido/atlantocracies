@@ -27,7 +27,7 @@ if (!storepositions.initialized === true) {
   await storepositions.fetchPositions();
 }
 
-positions.value = storepositions.positions;
+positions.value = storepositions.positionsList;
 
 watch(selectedPosition, () => {
   if (selectedPosition.value != null && Array.isArray(selectedPosition.value)) {

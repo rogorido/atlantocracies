@@ -28,7 +28,7 @@ if (!storehistbirths.initialized === true) {
   await storehistbirths.fetchHistBirths();
 }
 
-histbirths.value = storehistbirths.histBirths;
+histbirths.value = storehistbirths.histbirthsList;
 
 // TODO este if es un lío pq al principio está en undefined o en null creo
 // y luego si borramos todos queda como [ ]
