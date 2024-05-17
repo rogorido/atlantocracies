@@ -16,7 +16,7 @@ import { useRelationsStore } from "../stores/relationsStore";
 import { useSelectManagement } from "~/composables/SelectManagement";
 
 const storerelations = useRelationsStore();
-const { filter, selectedItems, items } = useSelectManagement();
+const { filter, selectedItems, items } = useSelectManagement(true);
 
 if (!storerelations.initialized === true) {
   await storerelations.fetchRelations();

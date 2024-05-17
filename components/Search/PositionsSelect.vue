@@ -17,7 +17,7 @@ import { useSelectManagement } from "~/composables/SelectManagement";
 
 const storepositions = usePositionsStore();
 
-const { filter, selectedItems, items } = useSelectManagement();
+const { filter, selectedItems, items } = useSelectManagement(true);
 
 if (!storepositions.initialized === true) {
   await storepositions.fetchPositions();

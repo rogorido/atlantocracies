@@ -16,7 +16,7 @@ import { useTitlesStore } from "../stores/titlesStore";
 import { useSelectManagement } from "~/composables/SelectManagement";
 
 const storetitles = useTitlesStore();
-const { filter, selectedItems, items } = useSelectManagement();
+const { filter, selectedItems, items } = useSelectManagement(true);
 
 if (!storetitles.initialized === true) {
   await storetitles.fetchTitles();

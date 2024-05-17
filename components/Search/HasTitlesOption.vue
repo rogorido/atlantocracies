@@ -6,7 +6,7 @@
       class="flex align-items-center"
     >
       <RadioButton
-        v-model="selectedHasTitle"
+        v-model="selectedItems"
         :inputId="hastitle.key"
         name="dynamic"
         :value="hastitle.name"
@@ -17,35 +17,25 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "../stores/filterStore";
+import { useSelectManagement } from "~/composables/SelectManagement";
 
-const storefilter = useFilterStore();
-const { filter } = storeToRefs(storefilter);
+const { filter, selectedItems } = useSelectManagement(false);
 
-const selectedHasTitle = ref("All");
+selectedItems.value = "All";
+
 const hastitles = ref([
   { name: "All", key: "A" },
   { name: "Has titles", key: "Y" },
   { name: "Does not have titles", key: "N" },
 ]);
 
-watch(selectedHasTitle, () => {
-  if (selectedHasTitle.value === "Has titles") {
+watch(selectedItems, () => {
+  if (selectedItems.value === "Has titles") {
     filter.value.hasTitles = true;
-  } else if (selectedHasTitle.value === "Does not have titles") {
+  } else if (selectedItems.value === "Does not have titles") {
     filter.value.hasTitles = false;
   } else {
     delete filter.value.hasTitles;
   }
 });
-
-// es mejor que watch(filter)
-// https://pinia.vuejs.org/core-concepts/state.html
-storefilter.$subscribe((mutation, state) => {
-  if (Object.keys(storefilter.filter).length === 0) {
-    selectedHasTitle.value = "All";
-  }
-});
 </script>
-
-<style></style>

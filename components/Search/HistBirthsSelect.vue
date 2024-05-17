@@ -17,7 +17,7 @@ import { useHistBirthsStore } from "@/stores/histBirthsStore";
 import { useSelectManagement } from "~/composables/SelectManagement";
 
 const storehistbirths = useHistBirthsStore();
-const { filter, selectedItems, items } = useSelectManagement();
+const { filter, selectedItems, items } = useSelectManagement(true);
 
 if (!storehistbirths.initialized === true) {
   await storehistbirths.fetchHistBirths();

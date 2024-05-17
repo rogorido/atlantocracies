@@ -1,6 +1,12 @@
 import { useFilterStore } from "@/stores/filterStore";
 
-export const useSelectManagement = () => {
+/**
+ * Function for managing selection based on multiselect option.
+ *
+ * @param {boolean} multiselect - Flag indicating if multiselect is enabled or not
+ * @return {Object} Object containing items, selectedItems, and filter.
+ */
+export const useSelectManagement = (multiselect) => {
   const storefilter = useFilterStore();
   const { filter } = storeToRefs(storefilter);
 
@@ -11,7 +17,11 @@ export const useSelectManagement = () => {
   // https://pinia.vuejs.org/core-concepts/state.html
   storefilter.$subscribe((mutation, state) => {
     if (Object.keys(storefilter.filter).length === 0) {
-      selectedItems.value = [];
+      if (multiselect) {
+        selectedItems.value = [];
+      } else {
+        selectedItems.value = "All";
+      }
     }
   });
 
