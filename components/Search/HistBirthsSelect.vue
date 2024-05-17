@@ -3,6 +3,7 @@
     v-model="selectedItems"
     display="chip"
     filter
+    :loading="loading"
     :options="items"
     optionLabel="_id"
     placeholder="Select historical birth
@@ -16,6 +17,7 @@
 import { useHistBirthsStore } from "@/stores/histBirthsStore";
 import { useSelectManagement } from "~/composables/SelectManagement";
 
+const loading = ref(true);
 const storehistbirths = useHistBirthsStore();
 const { filter, selectedItems, items } = useSelectManagement(true);
 
@@ -24,6 +26,7 @@ if (!storehistbirths.initialized === true) {
 }
 
 items.value = storehistbirths.histbirthsList;
+loading.value = false;
 
 // TODO este if es un lío pq al principio está en undefined o en null creo
 // y luego si borramos todos queda como [ ]
@@ -33,7 +36,7 @@ watch(selectedItems, () => {
       delete filter.value.histBirths;
     } else {
       filter.value.histBirths = selectedItems.value.map(
-        (histBirth) => histBirth._id
+        (histBirth) => histBirth._id,
       );
     }
   }

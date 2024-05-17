@@ -3,6 +3,7 @@
     v-model="selectedItems"
     display="chip"
     filter
+    :loading="loading"
     :options="items"
     optionLabel="_id"
     placeholder="Select positions"
@@ -15,6 +16,7 @@
 import { usePositionsStore } from "@/stores/positionsStore";
 import { useSelectManagement } from "~/composables/SelectManagement";
 
+const loading = ref(true);
 const storepositions = usePositionsStore();
 
 const { filter, selectedItems, items } = useSelectManagement(true);
@@ -25,13 +27,15 @@ if (!storepositions.initialized === true) {
 
 items.value = storepositions.positionsList;
 
+loading.value = false;
+
 watch(selectedItems, () => {
   if (selectedItems.value != null && Array.isArray(selectedItems.value)) {
     if (selectedItems.value.length === 0) {
       delete filter.value.tiposPositions;
     } else {
       filter.value.tiposPositions = selectedItems.value.map(
-        (position) => position._id
+        (position) => position._id,
       );
     }
   }
