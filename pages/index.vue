@@ -1,7 +1,9 @@
 <template>
   <div class="p-container">
-    <BlocksDataMain :stats="stats" class="mt-5" />
-
+    <div v-if="loading">Loading...</div>
+    <div v-else>
+      <BlocksDataMain :stats="stats" class="mt-5" />
+    </div>
     <MainPageDescriptions />
   </div>
 </template>
@@ -19,22 +21,19 @@ const places = ref([]);
 const placesstore = usePlacesStore();
 const store = useStatsStore();
 
-// Variable to check whether data are loaded or not
-// https://vue-chartjs.org/guide/#chart-with-api-data
-const loaded = ref(false);
+const loading = ref(true);
 
 const options = { responsive: true };
 
 const { data } = await useFetch(`${api}/general/generalstats`);
-//console.log("data", data.value);
 if (data.value) {
   stats.value = data.value;
-  loaded.value = true;
 }
 
 if (!placesstore.initialized) {
   await placesstore.fetchPlaces();
   places.value = placesstore.places;
   stats.value.totalPlaces = places.value.length;
+  loading.value = false;
 }
 </script>

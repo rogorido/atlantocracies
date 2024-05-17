@@ -15,7 +15,7 @@ export const useEventsStore = defineStore("events", {
       this.hostias = position;
     },
 
-    // NOTE atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!
+    // NOTE: atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!
     async fetchEvents() {
       if (!this.initialized) {
         const data = await $fetch(`${api}/general/eventstypes`);
