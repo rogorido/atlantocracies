@@ -85,12 +85,6 @@ const storefilter = useFilterStore();
 // https://stackoverflow.com/questions/71676111/vue-component-doesnt-update-after-state-changes-in-pinia-store?noredirect=1&lq=1
 const { filter } = storeToRefs(storefilter);
 
-// if (isReactive(filter.value)) {
-//   console.log("es ref");
-// } else {
-//   console.log("no es ref");
-// }
-
 provide("persons", readonly(persons));
 
 // Importnate: esto no puede ser readonly porque luego los datos
@@ -106,10 +100,6 @@ onMounted(async () => {
 // es mejor que watch(filter)
 // https://pinia.vuejs.org/core-concepts/state.html
 storefilter.$subscribe((mutation, state) => {
-  // console.log(
-  //   "storefilter changed, el filstro es",
-  //   JSON.stringify(filter.value, null, 2)
-  // );
   updateData();
 });
 
@@ -128,7 +118,6 @@ async function updateData() {
   insightsData.hasTitlesData = data.hasTitlesChartData;
   insightsData.decadesBirthData = data.decadesBirthsChartData;
 
-  //console.log(JSON.stringify(gendersData.value, null, 2));
   calculatePercentages();
 }
 
@@ -136,7 +125,7 @@ function calculatePercentages() {
   if (Array.isArray(insightsData.gendersData)) {
     const total = insightsData.gendersData.reduce(
       (total, obj) => total + obj.count,
-      0
+      0,
     );
     insightsData.gendersData.forEach((obj) => {
       let porcentaje = (obj.count / total) * 100;
@@ -148,7 +137,7 @@ function calculatePercentages() {
   if (Array.isArray(insightsData.histBirthsData)) {
     const sumaTotal = insightsData.histBirthsData.reduce(
       (total, obj) => total + obj.count,
-      0
+      0,
     );
 
     // Calcular el porcentaje para cada objeto en el array

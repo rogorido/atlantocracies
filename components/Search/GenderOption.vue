@@ -38,4 +38,15 @@ watch(selectedItems, () => {
     delete filter.value.gender;
   }
 });
+
+onMounted(() => {
+  // TODO: esto tiene que haber otra forma de hacerlo...
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.gender == "H") {
+      selectedItems.value = "Man";
+    } else if (filter.value.gender == "M") {
+      selectedItems.value = "Woman";
+    }
+  }
+});
 </script>

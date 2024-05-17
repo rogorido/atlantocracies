@@ -30,6 +30,7 @@ items.value = storepositions.positionsList;
 loading.value = false;
 
 watch(selectedItems, () => {
+  console.log("selectedItems", JSON.stringify(selectedItems.value, null, 2));
   if (selectedItems.value != null && Array.isArray(selectedItems.value)) {
     if (selectedItems.value.length === 0) {
       delete filter.value.tiposPositions;
@@ -38,6 +39,15 @@ watch(selectedItems, () => {
         (position) => position._id,
       );
     }
+  }
+});
+
+onMounted(() => {
+  console.log("onMounted y ", filter.value.tiposPositions);
+  if (Object.keys(filter.value).length != 0) {
+    selectedItems.value = filter.value.tiposPositions.map((position) => {
+      return { _id: position };
+    });
   }
 });
 </script>
