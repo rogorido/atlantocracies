@@ -1,9 +1,9 @@
 <template>
   <MultiSelect
-    v-model="selectedPosition"
+    v-model="selectedItems"
     display="chip"
     filter
-    :options="positions"
+    :options="items"
     optionLabel="_id"
     placeholder="Select positions"
     :maxSelectedLabels="3"
@@ -13,40 +13,27 @@
 
 <script setup>
 import { usePositionsStore } from "@/stores/positionsStore";
-import { useFilterStore } from "@/stores/filterStore";
+import { useSelectManagement } from "~/composables/SelectManagement";
 
-const storefilter = useFilterStore();
-const { filter } = storeToRefs(storefilter);
-
-const positions = ref([]);
 const storepositions = usePositionsStore();
 
-const selectedPosition = ref();
+const { filter, selectedItems, items } = useSelectManagement();
 
 if (!storepositions.initialized === true) {
   await storepositions.fetchPositions();
 }
 
-positions.value = storepositions.positionsList;
+items.value = storepositions.positionsList;
 
-watch(selectedPosition, () => {
-  if (selectedPosition.value != null && Array.isArray(selectedPosition.value)) {
-    if (selectedPosition.value.length === 0) {
+watch(selectedItems, () => {
+  if (selectedItems.value != null && Array.isArray(selectedItems.value)) {
+    if (selectedItems.value.length === 0) {
       delete filter.value.tiposPositions;
     } else {
-      filter.value.tiposPositions = selectedPosition.value.map(
+      filter.value.tiposPositions = selectedItems.value.map(
         (position) => position._id
       );
     }
   }
 });
-// es mejor que watch(filter)
-// https://pinia.vuejs.org/core-concepts/state.html
-storefilter.$subscribe((mutation, state) => {
-  if (Object.keys(storefilter.filter).length === 0) {
-    selectedPosition.value = [];
-  }
-});
 </script>
-
-<style></style>

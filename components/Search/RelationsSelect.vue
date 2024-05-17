@@ -1,9 +1,9 @@
 <template>
   <MultiSelect
-    v-model="selectedRelation"
+    v-model="selectedItems"
     display="chip"
     filter
-    :options="relations"
+    :options="items"
     optionLabel="_id"
     placeholder="Select relations"
     :maxSelectedLabels="3"
@@ -13,43 +13,26 @@
 
 <script setup>
 import { useRelationsStore } from "../stores/relationsStore";
-import { useFilterStore } from "@/stores/filterStore";
-
-const storefilter = useFilterStore();
-const { filter } = storeToRefs(storefilter);
-
-const relations = ref([]);
+import { useSelectManagement } from "~/composables/SelectManagement";
 
 const storerelations = useRelationsStore();
-const selectedRelation = ref();
+const { filter, selectedItems, items } = useSelectManagement();
 
 if (!storerelations.initialized === true) {
   await storerelations.fetchRelations();
 }
 
-relations.value = storerelations.relationsList;
+items.value = storerelations.relationsList;
 
-console.log("the relations are: ", JSON.stringify(relations.value, null, 2));
-
-watch(selectedRelation, () => {
-  if (selectedRelation.value != null && Array.isArray(selectedRelation.value)) {
-    if (selectedRelation.value.length === 0) {
+watch(selectedItems, () => {
+  if (selectedItems.value != null && Array.isArray(selectedItems.value)) {
+    if (selectedItems.value.length === 0) {
       delete filter.value.tiposRelations;
     } else {
-      filter.value.tiposRelations = selectedRelation.value.map(
+      filter.value.tiposRelations = selectedItems.value.map(
         (position) => position._id
       );
     }
   }
 });
-
-// es mejor que watch(filter)
-// https://pinia.vuejs.org/core-concepts/state.html
-storefilter.$subscribe((mutation, state) => {
-  if (Object.keys(storefilter.filter).length === 0) {
-    selectedRelation.value = [];
-  }
-});
 </script>
-
-<style></style>
