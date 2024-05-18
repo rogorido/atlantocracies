@@ -38,4 +38,15 @@ watch(selectedItems, () => {
     delete filter.value.hasTitles;
   }
 });
+
+onMounted(() => {
+  // TODO: esto tiene que haber otra forma de hacerlo...
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.hasTitles === true) {
+      selectedItems.value = "Has titles";
+    } else if (filter.value.hasTitles === false) {
+      selectedItems.value = "Does not have titles";
+    }
+  }
+});
 </script>

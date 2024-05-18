@@ -45,9 +45,11 @@ watch(selectedItems, () => {
 onMounted(() => {
   console.log("onMounted y ", filter.value.tiposPositions);
   if (Object.keys(filter.value).length != 0) {
-    selectedItems.value = filter.value.tiposPositions.map((position) => {
-      return { _id: position };
-    });
+    if (filter.value.tiposPositions != undefined) {
+      selectedItems.value = filter.value.tiposPositions.map((position) => {
+        return { _id: position };
+      });
+    }
   }
 });
 </script>

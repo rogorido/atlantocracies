@@ -36,4 +36,14 @@ watch(selectedItems, () => {
     }
   }
 });
+
+onMounted(() => {
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.tiposTitles != undefined) {
+      selectedItems.value = filter.value.tiposTitles.map((title) => {
+        return { _id: title };
+      });
+    }
+  }
+});
 </script>

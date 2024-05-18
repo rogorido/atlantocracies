@@ -38,4 +38,15 @@ watch(selectedItems, () => {
     delete filter.value.hasPositions;
   }
 });
+
+onMounted(() => {
+  // TODO: esto tiene que haber otra forma de hacerlo...
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.hasPositions === true) {
+      selectedItems.value = "Has positions";
+    } else if (filter.value.hasPositions === false) {
+      selectedItems.value = "Does not have positions";
+    }
+  }
+});
 </script>

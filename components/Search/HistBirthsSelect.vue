@@ -41,4 +41,14 @@ watch(selectedItems, () => {
     }
   }
 });
+
+onMounted(() => {
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.histBirths != undefined) {
+      selectedItems.value = filter.value.histBirths.map((histbirth) => {
+        return { _id: histbirth };
+      });
+    }
+  }
+});
 </script>

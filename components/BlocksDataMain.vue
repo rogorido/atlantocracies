@@ -73,7 +73,6 @@ const props = defineProps({ stats: { type: Object, required: true } });
 }
 
 .p-card {
-  /* border: 3px dashed #d12f0d; */
   border: 3px dashed var(--primary-color);
 }
 

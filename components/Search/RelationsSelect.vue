@@ -38,4 +38,14 @@ watch(selectedItems, () => {
     }
   }
 });
+
+onMounted(() => {
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.tiposRelations != undefined) {
+      selectedItems.value = filter.value.tiposRelations.map((relation) => {
+        return { _id: relation };
+      });
+    }
+  }
+});
 </script>

@@ -38,4 +38,14 @@ watch(selectedItems, () => {
     delete filter.value.wasMarried;
   }
 });
+onMounted(() => {
+  // TODO: esto tiene que haber otra forma de hacerlo...
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.wasMarried === true) {
+      selectedItems.value = "Married";
+    } else if (filter.value.wasMarried === false) {
+      selectedItems.value = "Not married";
+    }
+  }
+});
 </script>

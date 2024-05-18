@@ -37,4 +37,15 @@ watch(selectedItems, () => {
     delete filter.value.hasEvents;
   }
 });
+
+onMounted(() => {
+  // TODO: esto tiene que haber otra forma de hacerlo...
+  if (Object.keys(filter.value).length != 0) {
+    if (filter.value.hasEvents === true) {
+      selectedItems.value = "Has events";
+    } else if (filter.value.hasEvents === false) {
+      selectedItems.value = "Does not have events";
+    }
+  }
+});
 </script>
