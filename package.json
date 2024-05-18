@@ -1,7 +1,8 @@
 {
-  "name": "nuxt-app",
+  "name": "AtlantoUI",
   "private": true,
-  "version": "0.3.5",
+  "author": "Igor Sosa Mayor <joseleopoldo1792@gmail.com>",
+  "version": "0.3.6",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
