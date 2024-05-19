@@ -40,6 +40,8 @@ if (!placesstore.initialized) {
   loading.value = false;
 }
 
+// TODO: en teoría habría que hacerlo con el callOnce de <nuxt>
+// pero no sé si es posible con el async?
 onMounted(() => {
   if (process.client) {
     if (localStorage.getItem("filter")) {
