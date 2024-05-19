@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
 import { useStatsStore } from "../stores/statsStore";
 import { usePlacesStore } from "../stores/placesStore";
 
@@ -23,7 +22,7 @@ const store = useStatsStore();
 
 const loading = ref(true);
 
-const options = { responsive: true };
+// const options = { responsive: true };
 
 const { data } = await useFetch(`${api}/general/generalstats`);
 if (data.value) {
