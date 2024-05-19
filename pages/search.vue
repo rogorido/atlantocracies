@@ -101,6 +101,7 @@ onMounted(async () => {
 // https://pinia.vuejs.org/core-concepts/state.html
 storefilter.$subscribe((mutation, state) => {
   updateData();
+  localStorage.setItem("filter", JSON.stringify(filter.value));
 });
 
 async function updateData() {

@@ -11,6 +11,7 @@
 <script setup>
 import { useStatsStore } from "../stores/statsStore";
 import { usePlacesStore } from "../stores/placesStore";
+import { useFilterStore } from "../stores/filterStore";
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
@@ -19,6 +20,9 @@ const stats = ref({});
 const places = ref([]);
 const placesstore = usePlacesStore();
 const store = useStatsStore();
+const filterstore = useFilterStore();
+
+const { filter } = storeToRefs(filterstore);
 
 const loading = ref(true);
 
@@ -35,4 +39,16 @@ if (!placesstore.initialized) {
   stats.value.totalPlaces = places.value.length;
   loading.value = false;
 }
+
+onMounted(() => {
+  if (process.client) {
+    if (localStorage.getItem("filter")) {
+      const filterstring = localStorage.getItem("filter");
+
+      if (filterstring) {
+        filter.value = JSON.parse(filterstring);
+      }
+    }
+  }
+});
 </script>
