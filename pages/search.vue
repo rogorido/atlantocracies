@@ -51,7 +51,9 @@
       <section>
         <SearchMacroTablePersons />
       </section>
-      <section><SearchInsights /></section>
+      <section>
+        <SearchInsights />
+      </section>
     </div>
     <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
   </div>
@@ -164,11 +166,10 @@ ul.p-tabview-nav {
 }
 
 .p-card {
-  /* border: 3px dashed #d12f0d; */
   border: 3px dashed var(--primary-color);
 }
 
-.p-card-content > p {
+.p-card-content>p {
   font-size: 2.4rem;
   color: #af2f14;
   text-align: center;
