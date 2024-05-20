@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1 class="text-center">Analyzing groups</h1>
-    <h2 class="text-center uppercase">Persons analyzed</h2>
     <SearchMacroTablePersons :persons="persons" />
 
     <h2 class="text-center uppercase">Global insights</h2>
+    <SearchInsights />
   </div>
 </template>
 

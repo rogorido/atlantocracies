@@ -6,11 +6,7 @@
         <div class="grid">
           <div class="col-6">
             <h2>Birth years</h2>
-            <Chart
-              v-if="loaded"
-              type="bar"
-              :data="insightsData.decadesBirthData"
-            />
+            <Chart v-if="loaded" type="bar" :data="insightsData.decadesBirthData" />
           </div>
           <div class="col-5">
             <p>
@@ -32,15 +28,8 @@
         <div class="grid">
           <div class="col-6">
             <h2>Table</h2>
-            <DataTable
-              :value="insightsData.gendersData"
-              stripedRows
-              :rows="10"
-              selectionMode="single"
-              dataKey="_id"
-              tableStyle="min-width: 50rem"
-              v-if="loaded"
-            >
+            <DataTable :value="insightsData.gendersData" stripedRows :rows="10" selectionMode="single" dataKey="_id"
+              tableStyle="min-width: 50rem" v-if="loaded">
               <Column key="gender" field="gender" header="Gender"></Column>
               <Column key="country" field="count" header="Total"></Column>
               <Column key="percent" field="percent" header="%"></Column>
@@ -48,10 +37,7 @@
           </div>
           <div class="col-3">
             <h2>Gender</h2>
-            <GendersChart
-              v-if="loaded"
-              :chartData="insightsData.gendersChartData"
-            />
+            <GendersChart v-if="loaded" :chartData="insightsData.gendersChartData" />
           </div>
         </div>
       </TabPanel>
@@ -60,25 +46,12 @@
           <div class="col-6">
             <h2>Birth places (historical)</h2>
 
-            <Chart
-              v-if="loaded"
-              type="pie"
-              :data="insightsData.histBirthsChartData"
-              :options="options"
-            />
+            <Chart v-if="loaded" type="pie" :data="insightsData.histBirthsChartData" :options="options" />
           </div>
           <div class="col-6">
             <h2>Table</h2>
-            <DataTable
-              :value="insightsData.histBirthsData"
-              paginator
-              stripedRows
-              :rows="10"
-              :rowsPerPageOptions="[5, 10, 20, 50]"
-              selectionMode="single"
-              dataKey="_id"
-              tableStyle="min-width: 50rem"
-            >
+            <DataTable :value="insightsData.histBirthsData" paginator stripedRows :rows="10"
+              :rowsPerPageOptions="[5, 10, 20, 50]" selectionMode="single" dataKey="_id" tableStyle="min-width: 50rem">
               <Column key="_id" field="_id" header="Country"></Column>
               <Column key="country" field="count" header="Total"></Column>
               <Column key="percent" field="percent" header="%"></Column>
@@ -91,12 +64,7 @@
           <div class="col-6">
             <h2>Has titles</h2>
 
-            <Chart
-              v-if="loaded"
-              type="pie"
-              :data="insightsData.hasTitlesData"
-              :options="options"
-            />
+            <Chart v-if="loaded" type="pie" :data="insightsData.hasTitlesData" :options="options" />
           </div>
         </div>
       </TabPanel>
@@ -106,10 +74,15 @@
 
 <script setup>
 import Chart from "primevue/chart";
+import { usePersonsStore } from "@/stores/personsStore";
 
 // TODO: esto no funciona tal vez porque el Chart modifica el objeto
 // y no lo hace o no lo puede hacer...
-const insightsData = inject("insightsData");
+// const insightsData = inject("insightsData");
+//
+
+const store = usePersonsStore();
+const { insightsData } = storeToRefs(store);
 
 // const props = defineProps({
 //   insightsData: { type: Object, required: true, default: null },
@@ -121,7 +94,7 @@ const loaded = ref(false);
 const options = { responsive: true };
 
 if (insightsData) {
-  console.log("insightsData", insightsData);
+  // console.log("insightsData", insightsData);
   loaded.value = true;
 }
 </script>
