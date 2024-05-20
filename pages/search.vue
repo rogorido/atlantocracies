@@ -45,6 +45,10 @@
       <NuxtLink to="#insights">
         <Button label="View insights" rounded />
       </NuxtLink>
+
+      <NuxtLink to="/groups">
+        <Button label="Analyze the group" rounded />
+      </NuxtLink>
     </div>
 
     <div id="selectedpersons" v-if="persons.length > 0">
@@ -61,6 +65,7 @@
 
 <script setup>
 import { useFilterStore } from "../stores/filterStore";
+import { usePersonsStore } from "../stores/personsStore";
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
@@ -79,6 +84,7 @@ const insightsData = reactive({
 const loaded = ref(false);
 
 const storefilter = useFilterStore();
+const storepersons = usePersonsStore();
 
 // si no use storeToRefs funciona cuando actualizo en los componentes
 // pero no si actualizo directamente en el store con $reset.
@@ -122,6 +128,8 @@ async function updateData() {
   insightsData.decadesBirthData = data.decadesBirthsChartData;
 
   calculatePercentages();
+
+  storepersons.persons = persons.value;
 }
 
 function calculatePercentages() {
@@ -154,6 +162,7 @@ function calculatePercentages() {
 function onReset() {
   storefilter.$reset();
 }
+
 </script>
 
 <style>
