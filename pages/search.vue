@@ -47,7 +47,7 @@
       </NuxtLink>
 
       <NuxtLink to="/groups">
-        <Button label="Analyze the group" rounded />
+        <Button label="Analyze the group" :disabled="analyzeButtonDisabled" rounded />
       </NuxtLink>
     </div>
 
@@ -71,6 +71,7 @@ const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
 const persons = ref([]);
+const analyzeButtonDisabled = ref(true);
 
 const insightsData = reactive({
   gendersData: null,
@@ -97,7 +98,7 @@ provide("persons", readonly(persons));
 
 // Importnate: esto no puede ser readonly porque luego los datos
 // de los gráficos los modifica chartjs (añade pej los colores)
-provide("insightsData", insightsData);
+// provide("insightsData", insightsData);
 
 onMounted(async () => {
   updateData();
@@ -110,6 +111,7 @@ onMounted(async () => {
 storefilter.$subscribe((mutation, state) => {
   updateData();
   localStorage.setItem("filter", JSON.stringify(filter.value));
+
 });
 
 async function updateData() {
@@ -130,6 +132,12 @@ async function updateData() {
   calculatePercentages();
 
   storepersons.persons = persons.value;
+  storepersons.insightsData = insightsData;
+  if (Object.keys(filter.value).length === 0) {
+    analyzeButtonDisabled.value = true;
+  } else {
+    analyzeButtonDisabled.value = false;
+  }
 }
 
 function calculatePercentages() {
