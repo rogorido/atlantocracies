@@ -6,9 +6,4 @@ export const useFilterStore = defineStore("filter", {
     initialized: false,
   }),
 
-  actions: {
-    setFilter(filter) {
-      this.filter = filter;
-    },
-  },
 });
