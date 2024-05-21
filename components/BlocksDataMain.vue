@@ -63,7 +63,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 const props = defineProps({ stats: { type: Object, required: true } });
 </script>
 

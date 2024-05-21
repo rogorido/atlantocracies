@@ -12,7 +12,7 @@ import "vis-network/styles/vis-network.css";
 import { layouts } from "chart.js";
 
 const props = defineProps({
-  personsrelated: { type: Object, required: true, default: () => {} },
+  personsrelated: { type: Object, required: true, default: () => { } },
 });
 
 let network = null;
