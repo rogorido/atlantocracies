@@ -1,6 +1,8 @@
 <template>
   <div>
     <div id="cyto" ref="cyto"></div>
+    <Button label="test" @click="test" />
+    <Button label="recuperar" @click="recup" />
   </div>
 </template>
 <script setup>
@@ -16,8 +18,33 @@ const props = defineProps({
 });
 
 let network = null;
+let col = null;
 
 const cyto = ref(null);
+
+function probar() {
+
+  return network.nodes().filter(function (ele) {
+    const nombre = ele.data('label');
+    // console.log(nombre);
+    if (nombre === undefined) {
+      return false;
+    } else {
+      // console.log(nombre.includes('Bernard'));
+      return nombre.includes('Bernard');
+      // return ele.data('label').includes('Bernard');
+    }
+  });
+}
+
+function test() {
+  console.log(probar());
+  col = network.remove(probar());
+}
+
+function recup() {
+  col.restore();
+}
 
 onMounted(() => {
   // console.log("the props are: ", JSON.stringify(props, null, 2));
@@ -56,6 +83,9 @@ onMounted(() => {
   network.on('tap', 'node', function (evt) {
     var node = evt.target;
     console.log('tapped ' + node.id());
+    evt.target.connectedEdges().animate({
+      style: { lineColor: "red" }
+    })
   });
 })
 
