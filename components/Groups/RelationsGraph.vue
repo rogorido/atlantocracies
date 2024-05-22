@@ -5,6 +5,11 @@
 </template>
 <script setup>
 import cytoscape from "cytoscape";
+// import klay from "cytoscape-klay";
+import fcose from "cytoscape-fcose";
+
+// cytoscape.use(klay);
+cytoscape.use(fcose);
 
 const props = defineProps({
   personsrelated: { type: Object, required: true, default: () => { } },
@@ -25,7 +30,7 @@ onMounted(() => {
   network = cytoscape({
     container: cyto.value, elements,
     layout: {
-      name: "random",
+      name: "fcose",
     },
     style: [
       // the stylesheet for the graph
@@ -33,35 +38,37 @@ onMounted(() => {
         selector: "node",
         style: {
           "background-color": "#666",
-          label: "data(namePerson)",
+          // label: "data(namePerson)",
         },
       },
 
       {
-        selector: '.H',
+        selector: '.mainperson',
         style: {
           'background-color': 'red',
           'shape': 'square'
         }
-      }, {
-        selector: "edge",
-        style: {
-          width: 3,
-          "line-color": "gray",
-          "curve-style": "bezier",
-          "target-arrow-color": "#ccc",
-          "target-arrow-shape": "triangle",
-        },
       },
+      { selector: '.Matrimonio', style: { 'line-color': 'red', 'line-style': 'dashed' } }
     ],
   });
+
+  network.on('tap', 'node', function (evt) {
+    var node = evt.target;
+    console.log('tapped ' + node.id());
+  });
+})
+
+onUnmounted(() => {
+  network.removeAllListeners();
+
 })
 </script>
 
 <style scoped>
 #cyto {
-  width: 800px;
-  height: 400px;
+  width: 1000px;
+  height: 600px;
   border: 1px solid lightgray;
 }
 </style>
