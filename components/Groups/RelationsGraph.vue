@@ -3,6 +3,12 @@
     <div id="cyto" ref="cyto"></div>
     <Button label="test" @click="test" />
     <Button label="recuperar" @click="recup" />
+    <Button label="recuperar" @click="recup2" />
+    <div>
+      <p>{{ tiposrels }}</p>
+    </div>
+    <Dropdown v-model="selectedRelation" :options="tiposrels" placeholder="Select relations" :maxSelectedLabels="1"
+      class="w-full md:w-20rem" />
   </div>
 </template>
 <script setup>
@@ -19,31 +25,42 @@ const props = defineProps({
 
 let network = null;
 let col = null;
+let otros = null;
 
 const cyto = ref(null);
 
-function probar() {
+const tiposrels = ref([]);
+const selectedRelation = ref('');
+
+
+function probar2() {
 
   return network.nodes().filter(function (ele) {
-    const nombre = ele.data('label');
-    // console.log(nombre);
-    if (nombre === undefined) {
-      return false;
-    } else {
-      // console.log(nombre.includes('Bernard'));
-      return nombre.includes('Bernard');
-      // return ele.data('label').includes('Bernard');
-    }
+    return ele.data('label')?.includes('Bernard') ?? false;
   });
 }
 
+
+watch(selectedRelation, () => {
+  console.log("hola");
+
+  // const leches = network.edges('[type != "' + selectedRelation.value + '"]');
+  // // console.log(leches);
+  // otros = network.remove(leches);
+
+  // esto tb funciona. 
+  otros = network.edges('[type != "' + selectedRelation.value + '"]').remove();
+})
+
 function test() {
-  console.log(probar());
-  col = network.remove(probar());
+  col = network.remove(probar2());
 }
 
 function recup() {
   col.restore();
+}
+function recup2() {
+  otros.restore();
 }
 
 onMounted(() => {
@@ -87,6 +104,10 @@ onMounted(() => {
       style: { lineColor: "red" }
     })
   });
+  const typeRelsValues = props.personsrelated.edges.map(item => item.data.type)
+  const uniqueSet = new Set(typeRelsValues);
+
+  tiposrels.value = Array.from(uniqueSet);
 })
 
 onUnmounted(() => {
