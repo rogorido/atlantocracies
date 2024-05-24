@@ -53,6 +53,25 @@
         sortable
       ></Column>
     </DataTable>
+    <h3>Historical birth places</h3>
+    <DataTable
+      :value="histBirthMatrimoniosSummary"
+      paginator
+      stripedRows
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      dataKey="idItem"
+      tableStyle="max-width: 30rem"
+    >
+      <template #empty> No relations found. </template>
+      <Column
+        field="histBirthRelated"
+        header="Historical birth place"
+        sortable
+      ></Column>
+      <Column field="count" header="Total" sortable></Column>
+      <Column field="percentage" header="%" sortable> </Column>
+    </DataTable>
   </div>
 </template>
 <script setup>
@@ -79,24 +98,6 @@ const filters = ref({
   typeRelation: { value: null, matchMode: FilterMatchMode.EQUALS },
 });
 
-// function probar2() {
-//   return network.nodes().filter(function (ele) {
-//     return ele.data("label")?.includes("Bernard") ?? false;
-//   });
-// }
-//
-// watch(selectedRelation, () => {
-//   console.log("hola");
-//
-//   // const leches = network.edges('[type != "' + selectedRelation.value + '"]');
-//   // // console.log(leches);
-//   // otros = network.remove(leches);
-//
-//   // esto tb funciona.
-//   otros = network
-//     .edges('[type != "' + filters.value.typeRelation.selected + '"]')
-//     .remove();
-// });
 watch(filters, () => {
   console.log("en modificación");
 
@@ -130,6 +131,23 @@ const typeRelationsSummary = Object.entries(countMap).map(
     typeRel,
     count,
     percentage: ((count / totalItems) * 100).toFixed(1),
+  }),
+);
+
+const matrimonios = props.personsrelated.filter(
+  (item) => item.typeRelation === "Matrimonio",
+);
+
+const countMapMatrimonios = matrimonios.reduce((acc, item) => {
+  acc[item.histBirthRelated] = (acc[item.histBirthRelated] || 0) + 1;
+  return acc;
+}, {});
+const totalMatrimonios = matrimonios.length;
+const histBirthMatrimoniosSummary = Object.entries(countMapMatrimonios).map(
+  ([histBirthRelated, count]) => ({
+    histBirthRelated,
+    count,
+    percentage: ((count / totalMatrimonios) * 100).toFixed(1),
   }),
 );
 
