@@ -2,7 +2,7 @@
   <div class="p-container">
     <div v-if="loading">Loading...</div>
     <div v-else>
-      <BlocksDataMain :stats="stats" class="mt-5" />
+      <MainPageBlocksData :stats="stats" class="mt-5" />
     </div>
     <MainPageDescriptions />
   </div>

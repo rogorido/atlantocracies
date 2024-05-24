@@ -4,7 +4,7 @@
     <div class="grid">
       <div class="col-6">
         <div class="grid">
-          <CardDataPlace :place="ciudad" />
+          <PlacesCardDataPlace :place="ciudad" />
         </div>
       </div>
       <div class="col-6">
@@ -35,7 +35,7 @@
 
         <TabPanel header="Related places">
           <h2>Places related to {{ useRoute().params.placebyid }}</h2>
-          <RelatedPlaces :placesrelated="data.placesrelated" />
+          <PlacesRelatedPlaces :placesrelated="data.placesrelated" />
         </TabPanel>
         <TabPanel header="Related events">
           <div class="grid">
@@ -55,7 +55,6 @@
 
 <script setup>
 import { usePlacesStore } from "../stores/placesStore";
-import CardDataPlace from "~/components/CardDataPlace.vue";
 
 //import { createSlug } from "../../utils/createSlug.ts";
 //console.log(createSlug(useRoute().params.placebyid));
@@ -81,6 +80,6 @@ const api = config.public.apiBaseUrl;
 
 // with useLazyFetch the page is loaded while the data is being fetched
 const { data, pending, error } = await useLazyFetch(
-  `${api}/places/placeid/${useRoute().params.placebyid}`
+  `${api}/places/placeid/${useRoute().params.placebyid}`,
 );
 </script>
