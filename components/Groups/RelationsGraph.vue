@@ -1,18 +1,19 @@
 <template>
   <div>
-    <Button label="test" @click="test" />
-    <Button label="recuperar" @click="recup" />
-    <Button label="recuperar" @click="recup2" />
-    <div>
-      <p>{{ tiposrels }}</p>
-    </div>
-    <Dropdown
-      v-model="filters.typeRelation.value"
-      :options="tiposrels"
-      placeholder="Select relations"
-      :maxSelectedLabels="1"
-      class="w-full md:w-20rem"
-    />
+    <DataTable
+      :value="typeRelationsSummary"
+      paginator
+      stripedRows
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      dataKey="idItem"
+      tableStyle="max-width: 30rem"
+    >
+      <template #empty> No relations found. </template>
+      <Column field="typeRel" header="Relation type" sortable></Column>
+      <Column field="count" header="Total" sortable></Column>
+      <Column field="percentage" header="%" sortable> </Column>
+    </DataTable>
     <div id="cyto" ref="cyto"></div>
   </div>
   <div>
@@ -41,6 +42,16 @@
           />
         </template>
       </Column>
+      <Column
+        field="namePersonRelated"
+        header="Related person"
+        sortable
+      ></Column>
+      <Column
+        field="placeRelation"
+        header="Place of relation"
+        sortable
+      ></Column>
     </DataTable>
   </div>
 </template>
@@ -57,38 +68,35 @@ const props = defineProps({
 });
 
 let network = null;
-let col = null;
-let otros = null;
+let removedElements = null;
 
 const cyto = ref(null);
 
 const tiposrels = ref([]);
-const selectedRelation = ref("");
+// const selectedRelation = ref("");
 
 const filters = ref({
   typeRelation: { value: null, matchMode: FilterMatchMode.EQUALS },
 });
 
-console.log("hola y es así.");
-
-function probar2() {
-  return network.nodes().filter(function (ele) {
-    return ele.data("label")?.includes("Bernard") ?? false;
-  });
-}
-
-watch(selectedRelation, () => {
-  console.log("hola");
-
-  // const leches = network.edges('[type != "' + selectedRelation.value + '"]');
-  // // console.log(leches);
-  // otros = network.remove(leches);
-
-  // esto tb funciona.
-  otros = network
-    .edges('[type != "' + filters.value.typeRelation.selected + '"]')
-    .remove();
-});
+// function probar2() {
+//   return network.nodes().filter(function (ele) {
+//     return ele.data("label")?.includes("Bernard") ?? false;
+//   });
+// }
+//
+// watch(selectedRelation, () => {
+//   console.log("hola");
+//
+//   // const leches = network.edges('[type != "' + selectedRelation.value + '"]');
+//   // // console.log(leches);
+//   // otros = network.remove(leches);
+//
+//   // esto tb funciona.
+//   otros = network
+//     .edges('[type != "' + filters.value.typeRelation.selected + '"]')
+//     .remove();
+// });
 watch(filters, () => {
   console.log("en modificación");
 
@@ -96,22 +104,35 @@ watch(filters, () => {
   // // console.log(leches);
   // otros = network.remove(leches);
 
-  // esto tb funciona.
-  otros = network
-    .edges('[type != "' + filters.value.typeRelation.value + '"]')
-    .remove();
+  // primero recupero los elementos que se han quitado
+  if (removedElements) {
+    removedElements.restore();
+  }
+
+  // solo si hay un valor quitamos lso edges
+  if (filters.value.typeRelation.value) {
+    removedElements = network
+      .edges('[type != "' + filters.value.typeRelation.value + '"]')
+      .remove();
+  }
 });
 
-function test() {
-  col = network.remove(probar2());
-}
+// Paso 1: Contar las ocurrencias de cada valor de `typeRel`
+const countMap = props.personsrelated.reduce((acc, item) => {
+  acc[item.typeRelation] = (acc[item.typeRelation] || 0) + 1;
+  return acc;
+}, {});
 
-function recup() {
-  col.restore();
-}
-function recup2() {
-  otros.restore();
-}
+// Paso 2: Calcular el porcentaje de cada valor
+const totalItems = props.personsrelated.length;
+const typeRelationsSummary = Object.entries(countMap).map(
+  ([typeRel, count]) => ({
+    typeRel,
+    count,
+    percentage: ((count / totalItems) * 100).toFixed(1),
+  }),
+);
+
 onMounted(() => {
   // console.log("the props are: ", JSON.stringify(props, null, 2));
 
