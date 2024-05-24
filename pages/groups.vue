@@ -6,7 +6,8 @@
     <h2 class="text-center uppercase">Global insights</h2>
     <SearchInsights />
     <div v-if="pending">Cargando datos...</div>
-    <GroupsRelationsGraph :personsrelated="data.personsrelationscyto" v-else />
+    <GroupsRelationsGraph :personsrelatedcyto="data.personsrelationscyto" :personsrelated="data.personsrelationstable"
+      v-else />
   </div>
 </template>
 
