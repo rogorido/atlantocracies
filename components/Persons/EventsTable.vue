@@ -10,6 +10,7 @@
       dataKey="_id"
       tableStyle="min-width: 50rem"
     >
+      <template #empty> No events found. </template>
       <Column
         v-for="col of columns"
         :key="col.field"
