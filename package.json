@@ -2,7 +2,7 @@
   "name": "AtlantoUI",
   "private": true,
   "author": "Igor Sosa Mayor <joseleopoldo1792@gmail.com>",
-  "version": "0.3.30",
+  "version": "0.3.31",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -22,7 +22,7 @@
     "cytoscape-fcose": "^2.2.0",
     "cytoscape-klay": "^3.1.4",
     "nuxt": "^3.11.2",
-    "ol": "^9.2.2",
+    "ol": "^9.2.3",
     "ol-contextmenu": "^5.4.0",
     "ol-ext": "^4.0.18",
     "pinia": "^2.1.7",
@@ -33,10 +33,10 @@
     "vis-timeline": "^7.7.3",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2",
-    "vue3-openlayers": "^9.0.3"
+    "vue3-openlayers": "^10.0.0"
   },
   "devDependencies": {
-    "nuxt-primevue": "^0.3.1",
+    "nuxt-primevue": "^3.0.0",
     "sass": "^1.77.2"
   }
 }
