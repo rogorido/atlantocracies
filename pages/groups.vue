@@ -71,6 +71,7 @@
         <!-- </TabPanel> -->
       </TabView>
     </section>
+    <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
   </div>
 </template>
 
