@@ -45,15 +45,15 @@
         sortable
       />
       <Column
-        field="placebirth"
-        header="Birth Place"
-        dataType="string"
+        field="deathyear"
+        header="Death date"
+        dataType="numeric"
         style="min-width: 6rem"
         sortable
       />
       <Column
-        field="datedeath"
-        header="Death date"
+        field="placebirth"
+        header="Birth Place"
         dataType="string"
         style="min-width: 6rem"
         sortable
@@ -108,7 +108,21 @@
             class="pi"
             :class="{
               'pi-check-circle text-green-500': data.hasFather,
-              'pi-times-circle text-red-400': !data.hasFather,
+            }"
+          ></i>
+        </template>
+      </Column>
+      <Column
+        field="hasMother"
+        header="Has Mother"
+        dataType="boolean"
+        style="min-width: 6rem"
+      >
+        <template #body="{ data }">
+          <i
+            class="pi"
+            :class="{
+              'pi-check-circle text-green-500': data.hasFather,
             }"
           ></i>
         </template>
