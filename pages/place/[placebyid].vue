@@ -30,7 +30,7 @@
             {{ useRoute().params.placebyid }}. You can click on a person to see
             the datails.
           </p>
-          <PersonsTable :persons="data.personsall" />
+          <SearchMacroTablePersons />
         </TabPanel>
 
         <TabPanel header="Related places">
@@ -62,6 +62,7 @@ import { usePlacesStore } from "../stores/placesStore";
 const loaded = ref(false);
 const store = usePlacesStore();
 const ciudad = ref();
+const persons = ref([]);
 
 // we get a array with only one obje
 ciudad.value = store.nuevo;
@@ -79,7 +80,13 @@ const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
 // with useLazyFetch the page is loaded while the data is being fetched
-const { data, pending, error } = await useLazyFetch(
+const { data, pending, error } = await useFetch(
   `${api}/places/placeid/${useRoute().params.placebyid}`,
 );
+
+if (data) {
+  persons.value = data.value.personsall;
+  provide("persons", readonly(persons.value));
+  console.log(persons.value);
+}
 </script>

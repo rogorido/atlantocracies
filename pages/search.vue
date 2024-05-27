@@ -47,7 +47,11 @@
       </NuxtLink>
 
       <NuxtLink to="/groups">
-        <Button label="Analyze the group" :disabled="analyzeButtonDisabled" rounded />
+        <Button
+          label="Analyze the group"
+          :disabled="analyzeButtonDisabled"
+          rounded
+        />
       </NuxtLink>
     </div>
 
@@ -111,7 +115,6 @@ onMounted(async () => {
 storefilter.$subscribe((mutation, state) => {
   updateData();
   localStorage.setItem("filter", JSON.stringify(filter.value));
-
 });
 
 async function updateData() {
@@ -131,7 +134,7 @@ async function updateData() {
 
   calculatePercentages();
 
-  storepersons.persons = persons.value;
+  // storepersons.persons = persons.value;
   storepersons.insightsData = insightsData;
   if (Object.keys(filter.value).length === 0) {
     analyzeButtonDisabled.value = true;
@@ -170,7 +173,6 @@ function calculatePercentages() {
 function onReset() {
   storefilter.$reset();
 }
-
 </script>
 
 <style>
@@ -186,7 +188,7 @@ ul.p-tabview-nav {
   border: 3px dashed var(--primary-color);
 }
 
-.p-card-content>p {
+.p-card-content > p {
   font-size: 2.4rem;
   color: #af2f14;
   text-align: center;

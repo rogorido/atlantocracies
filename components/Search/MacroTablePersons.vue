@@ -182,13 +182,13 @@ import { FilterMatchMode } from "primevue/api";
 const dt = ref(); // reference to the datatable to export!
 
 // NOTE: por ahora quito el inject/provide.
-// const persons = inject("persons", []);
-
+const persons = inject("persons", []);
+console.log(persons);
 const selectedPerson = ref();
 
 const storepersons = usePersonsStore();
-const { persons } = storeToRefs(storepersons);
-
+// const { persons } = storeToRefs(storepersons);
+//
 // TODO: la cuestioón es qué hacer con el slug. Tengo una función de chatgpt
 // pero si lo paso así luego en la página [placebyid] no puedo acceder al nombre
 // con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no

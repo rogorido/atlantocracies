@@ -25,7 +25,8 @@
     </div>
     <Chart v-if="loaded" type="bar" :data="birthyears" class="w-full" />
 
-    <PersonsTable :persons="persons" v-if="loaded" />
+    <!-- I should use searchmacrotablepersons -->
+    <!-- <PersonsTable :persons="persons" v-if="loaded" /> -->
   </div>
 </template>
 
