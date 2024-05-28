@@ -12,6 +12,7 @@
           <GroupsRelationsGraph
             :personsrelatedcyto="data.personsrelationscyto"
             :personsrelated="data.personsrelationstable"
+            :placesrelated="data.placesrelated"
           />
         </TabPanel>
 

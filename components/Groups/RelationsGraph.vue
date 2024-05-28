@@ -72,6 +72,14 @@
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable> </Column>
     </DataTable>
+    <ClientOnly>
+      <PlacesMap
+        :coordenadas="coordinates"
+        :multipoint="multipoint"
+        v-if="showplacesmap"
+      />
+      <template #fallback> Loading map... </template>
+    </ClientOnly>
   </div>
 </template>
 <script setup>
@@ -84,6 +92,7 @@ cytoscape.use(fcose);
 const props = defineProps({
   personsrelatedcyto: { type: Object, required: true, default: () => {} },
   personsrelated: { type: Array, required: true, default: () => [] },
+  placesrelated: { type: Array, required: true, default: () => [] },
 });
 
 let network = null;
@@ -207,6 +216,29 @@ onMounted(() => {
 onUnmounted(() => {
   network.removeAllListeners();
 });
+
+// asuntos de las places... realmente esto es una pequeña chapuza.
+// TODO: realmente habría que desgajar por tipos, etc. Ver en backend.
+
+const coordinates = ref();
+const multipoint = ref(false);
+const showplacesmap = ref(false);
+
+// tengo que ver si tiene una o más por ellío de multipoint
+if (props.placesrelated.length > 1) {
+  coordinates.value = props.placesrelated.map((item) => item.coords);
+  multipoint.value = true;
+  showplacesmap.value = true;
+  console.log(coordinates.value);
+} else if (props.placesrelated.length === 1) {
+  // tenemos que poner las coordenadas en un array creando un array de arrays
+  // pq es lo que tengo definido en PlacesMap
+  coordinates.value = [props.placesrelated.coords];
+  multipoint.value = false;
+  showplacesmap.value = true;
+} else {
+  showplacesmap.value = false;
+}
 </script>
 
 <style scoped>

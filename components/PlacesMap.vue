@@ -40,7 +40,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { boundingExtent, getCenter } from "ol/extent";
 
 const center = ref();
