@@ -2,7 +2,12 @@
   <div>
     <h1 class="text-center">Places</h1>
     <ClientOnly>
-      <PlacesMap :coordenadas="coordenadas" :multipoint="true" v-if="loaded" />
+      <PlacesMap
+        :places="places"
+        :coordenadas="coordenadas"
+        :multipoint="true"
+        v-if="loaded"
+      />
 
       <template #fallback> Loading map... </template>
     </ClientOnly>
