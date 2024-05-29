@@ -2,7 +2,7 @@
   "name": "AtlantoUI",
   "private": true,
   "author": "Igor Sosa Mayor <joseleopoldo1792@gmail.com>",
-  "version": "0.3.39",
+  "version": "0.3.40",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -32,8 +32,7 @@
     "vis-network": "^9.1.9",
     "vis-timeline": "^7.7.3",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.2",
-    "vue3-openlayers": "^10.0.0"
+    "vue-router": "^4.3.2"
   },
   "devDependencies": {
     "nuxt-primevue": "^3.0.0",
