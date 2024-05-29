@@ -14,7 +14,7 @@ import { Style, Fill, Stroke, Circle as CircleStyle } from "ol/style";
 import { fromLonLat } from "ol/proj";
 import Overlay from "ol/Overlay";
 
-import { calculateSize, normalize } from "@/utils/mapPoints";
+import { calculateSize } from "@/utils/mapPoints";
 
 const props = defineProps({
   places: { type: Array, required: true },
@@ -22,6 +22,7 @@ const props = defineProps({
 });
 
 const mapContainer = ref(null);
+const map = ref(null);
 const popupContent = ref(null);
 const overlay = ref(null);
 
@@ -36,7 +37,7 @@ const maxTotalplaces = Math.max(
 const scaleFactor = 10;
 
 onMounted(() => {
-  const map = new Map({
+  map.value = new Map({
     target: mapContainer.value,
     layers: [
       new TileLayer({
@@ -52,7 +53,7 @@ onMounted(() => {
   const features = props.places.map((item) => {
     const size = calculateSize(
       item.totalplaces,
-      map.getView().getZoom(),
+      map.value.getView().getZoom(),
       minTotalplaces,
       maxTotalplaces,
       scaleFactor,
@@ -87,7 +88,7 @@ onMounted(() => {
     source: vectorSource,
   });
 
-  map.addLayer(vectorLayer);
+  map.value.addLayer(vectorLayer);
 
   const popup = document.createElement("div");
   popup.className = "ol-popup";
@@ -99,10 +100,10 @@ onMounted(() => {
     stopEvent: false,
     offset: [0, -10],
   });
-  map.addOverlay(overlay.value);
+  map.value.addOverlay(overlay.value);
 
-  map.on("pointermove", (event) => {
-    const feature = map.forEachFeatureAtPixel(event.pixel, (feature) => {
+  map.value.on("pointermove", (event) => {
+    const feature = map.value.forEachFeatureAtPixel(event.pixel, (feature) => {
       return feature;
     });
 
@@ -125,8 +126,9 @@ onMounted(() => {
   });
   //
   // Update point sizes on zoom change
-  map.on("change:resolution", () => {
-    const zoom = map.getView().getZoom();
+  map.value.getView().on("change:resolution", () => {
+    const zoom = map.value.getView().getZoom();
+    console.log("el zoom es", zoom);
     vectorSource.getFeatures().forEach((feature) => {
       const totalplaces = feature.get("totalplaces");
       const size = calculateSize(
@@ -140,13 +142,19 @@ onMounted(() => {
         new Style({
           image: new CircleStyle({
             radius: size,
-            fill: new Fill({ color: "red" }),
-            stroke: new Stroke({ color: "black", width: 1 }),
+            fill: new Fill({ color: "rgba(255, 0, 0, 0.5)" }),
+            stroke: new Stroke({ color: "#ff0000", width: 1 }),
           }),
         }),
       );
     });
   });
+});
+
+onUnmounted(() => {
+  if (map.value) {
+    map.value.setTarget(null);
+  }
 });
 
 // TODO: cómo usarlo con lo nuevo?
