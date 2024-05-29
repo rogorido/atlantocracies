@@ -9,11 +9,7 @@
       </div>
       <div class="col-6">
         <ClientOnly>
-          <PlacesMap
-            :coordenadas="coordenadas"
-            :multipoint="false"
-            v-if="loaded"
-          />
+          <PlacesMap :places="[ciudad]" :multipoint="false" v-if="loaded" />
 
           <template #fallback> Loading map... </template>
         </ClientOnly>

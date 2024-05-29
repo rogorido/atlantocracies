@@ -74,7 +74,7 @@
     </DataTable>
     <ClientOnly>
       <PlacesMap
-        :coordenadas="coordinates"
+        :places="placesrelated"
         :multipoint="multipoint"
         v-if="showplacesmap"
       />

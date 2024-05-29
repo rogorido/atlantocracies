@@ -16,7 +16,6 @@ import Overlay from "ol/Overlay";
 
 const props = defineProps({
   places: { type: Array, required: true },
-  coordenadas: { type: Array, required: true },
   multipoint: { type: Boolean, required: true },
 });
 
