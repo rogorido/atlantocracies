@@ -20,6 +20,8 @@ const props = defineProps({
   places: { type: Array, required: true },
   multipoint: { type: Boolean, required: true },
 });
+const popupContent = ref(null);
+const overlay = ref(null);
 
 const mapContainer = ref(null);
 const map = ref(null);
