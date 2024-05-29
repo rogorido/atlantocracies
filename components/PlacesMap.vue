@@ -29,6 +29,7 @@ const popupContent = ref(null);
 const overlay = ref(null);
 
 // Calculate min and max totalevents for normalization
+// idea from GPT...
 const minTotalplaces = Math.min(
   ...props.places.map((city) => city.totalplaces),
 );
@@ -36,6 +37,7 @@ const maxTotalplaces = Math.max(
   ...props.places.map((city) => city.totalplaces),
 );
 
+// we have to experiment with values...
 const scaleFactor = 7;
 
 onMounted(() => {
