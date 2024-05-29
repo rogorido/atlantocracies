@@ -14,6 +14,8 @@ import { Style, Fill, Stroke, Circle as CircleStyle } from "ol/style";
 import { fromLonLat } from "ol/proj";
 import Overlay from "ol/Overlay";
 
+import { calculateSize, normalize } from "@/utils/mapPoints";
+
 const props = defineProps({
   places: { type: Array, required: true },
   multipoint: { type: Boolean, required: true },
@@ -23,8 +25,38 @@ const mapContainer = ref(null);
 const popupContent = ref(null);
 const overlay = ref(null);
 
+// Calculate min and max totalevents for normalization
+const minTotalplaces = Math.min(
+  ...props.places.map((city) => city.totalplaces),
+);
+const maxTotalplaces = Math.max(
+  ...props.places.map((city) => city.totalplaces),
+);
+
+const scaleFactor = 10;
+
 onMounted(() => {
+  const map = new Map({
+    target: mapContainer.value,
+    layers: [
+      new TileLayer({
+        source: new OSM(),
+      }),
+    ],
+    view: new View({
+      center: fromLonLat([0, 0]),
+      zoom: 2,
+    }),
+  });
+
   const features = props.places.map((item) => {
+    const size = calculateSize(
+      item.totalplaces,
+      map.getView().getZoom(),
+      minTotalplaces,
+      maxTotalplaces,
+      scaleFactor,
+    );
     const feature = new Feature({
       geometry: new Point(fromLonLat(item.coords)),
       place: item.place,
@@ -35,6 +67,15 @@ onMounted(() => {
       totalrelations: item.totalrelations,
       totalplaces: item.totalplaces,
     });
+    feature.setStyle(
+      new Style({
+        image: new CircleStyle({
+          radius: size,
+          fill: new Fill({ color: "rgba(255, 0, 0, 0.5)" }),
+          stroke: new Stroke({ color: "#ff0000", width: 1 }),
+        }),
+      }),
+    );
     return feature;
   });
 
@@ -44,28 +85,9 @@ onMounted(() => {
 
   const vectorLayer = new VectorLayer({
     source: vectorSource,
-    style: new Style({
-      image: new CircleStyle({
-        radius: 7,
-        fill: new Fill({ color: "rgba(255, 0, 0, 0.5)" }),
-        stroke: new Stroke({ color: "#ff0000", width: 1 }),
-      }),
-    }),
   });
 
-  const map = new Map({
-    target: mapContainer.value,
-    layers: [
-      new TileLayer({
-        source: new OSM(),
-      }),
-      vectorLayer,
-    ],
-    view: new View({
-      center: fromLonLat([0, 0]),
-      zoom: 2,
-    }),
-  });
+  map.addLayer(vectorLayer);
 
   const popup = document.createElement("div");
   popup.className = "ol-popup";
@@ -100,6 +122,30 @@ onMounted(() => {
     } else {
       popup.style.display = "none";
     }
+  });
+  //
+  // Update point sizes on zoom change
+  map.on("change:resolution", () => {
+    const zoom = map.getView().getZoom();
+    vectorSource.getFeatures().forEach((feature) => {
+      const totalplaces = feature.get("totalplaces");
+      const size = calculateSize(
+        totalplaces,
+        zoom,
+        minTotalplaces,
+        maxTotalplaces,
+        scaleFactor,
+      );
+      feature.setStyle(
+        new Style({
+          image: new CircleStyle({
+            radius: size,
+            fill: new Fill({ color: "red" }),
+            stroke: new Stroke({ color: "black", width: 1 }),
+          }),
+        }),
+      );
+    });
   });
 });
 
