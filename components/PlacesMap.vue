@@ -34,7 +34,7 @@ const maxTotalplaces = Math.max(
   ...props.places.map((city) => city.totalplaces),
 );
 
-const scaleFactor = 10;
+const scaleFactor = 7;
 
 onMounted(() => {
   map.value = new Map({
