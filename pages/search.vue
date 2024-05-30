@@ -129,7 +129,10 @@ async function updateData() {
   insightsData.gendersChartData = data.gendersChartData;
   insightsData.histBirthsChartData = data.histBirthsChartData;
   insightsData.histBirthsData = data.histBirthsData;
-  insightsData.hasTitlesData = data.hasTitlesChartData;
+  insightsData.hasTitlesChartData = data.hasTitlesChartData;
+  insightsData.hasTitlesData = data.hasTitlesData;
+  insightsData.hasPositionsData = data.hasPositionsData;
+  insightsData.hasPositionsChartData = data.hasPositionsChartData;
   insightsData.decadesBirthData = data.decadesBirthsChartData;
 
   calculatePercentages();
@@ -143,6 +146,7 @@ async function updateData() {
   }
 }
 
+// TODO: aquí hay mucho código repetido...
 function calculatePercentages() {
   if (Array.isArray(insightsData.gendersData)) {
     const total = insightsData.gendersData.reduce(
@@ -164,6 +168,33 @@ function calculatePercentages() {
 
     // Calcular el porcentaje para cada objeto en el array
     insightsData.histBirthsData.forEach((obj) => {
+      let porcentaje = (obj.count / sumaTotal) * 100;
+      obj.percent = porcentaje.toFixed(2);
+    });
+  }
+
+  if (Array.isArray(insightsData.hasTitlesData)) {
+    const sumaTotal = insightsData.hasTitlesData.reduce(
+      (total, obj) => total + obj.count,
+      0,
+    );
+
+    // Calcular el porcentaje para cada objeto en el array
+    insightsData.hasTitlesData.forEach((obj) => {
+      let porcentaje = (obj.count / sumaTotal) * 100;
+      obj.percent = porcentaje.toFixed(2);
+    });
+  }
+
+  // positions
+  if (Array.isArray(insightsData.hasPositionsData)) {
+    const sumaTotal = insightsData.hasPositionsData.reduce(
+      (total, obj) => total + obj.count,
+      0,
+    );
+
+    // Calcular el porcentaje para cada objeto en el array
+    insightsData.hasPositionsData.forEach((obj) => {
       let porcentaje = (obj.count / sumaTotal) * 100;
       obj.percent = porcentaje.toFixed(2);
     });

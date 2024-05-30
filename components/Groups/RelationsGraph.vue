@@ -26,7 +26,7 @@
       :rows="10"
       :rowsPerPageOptions="[5, 10, 20, 50]"
       dataKey="idItem"
-      tableStyle="max-width: 30rem"
+      tableStyle="max-width: 80rem"
     >
       <template #empty> No relations found. </template>
       <Column field="nameMainPerson" header="Main Person" sortable></Column>
