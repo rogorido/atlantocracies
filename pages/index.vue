@@ -10,35 +10,22 @@
 
 <script setup>
 import { useStatsStore } from "../stores/statsStore";
-import { usePlacesStore } from "../stores/placesStore";
 import { useFilterStore } from "../stores/filterStore";
 
-const config = useRuntimeConfig();
-const api = config.public.apiBaseUrl;
-
 const stats = ref({});
-const places = ref([]);
-const placesstore = usePlacesStore();
-const store = useStatsStore();
+const statsstore = useStatsStore();
 const filterstore = useFilterStore();
 
 const { filter } = storeToRefs(filterstore);
 
 const loading = ref(true);
 
-// const options = { responsive: true };
-
-const { data } = await useFetch(`${api}/general/generalstats`);
-if (data.value) {
-  stats.value = data.value;
+if (!statsstore.initialized) {
+  await statsstore.fetchStats();
 }
+stats.value = statsstore.stats;
 
-if (!placesstore.initialized) {
-  await placesstore.fetchPlaces();
-  places.value = placesstore.places;
-  stats.value.totalPlaces = places.value.length;
-  loading.value = false;
-}
+loading.value = false;
 
 // TODO: en teoría habría que hacerlo con el callOnce de <nuxt>
 // pero no sé si es posible con el async?
