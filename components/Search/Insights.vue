@@ -114,11 +114,30 @@
                 field="hasPositions"
                 header="Positions"
               ></Column>
-              <Column key="count" field="count" header="Total"></Column>
-              <Column key="percent" field="percent" header="%"></Column>
+              <Column
+                key="count"
+                field="count"
+                header="Total"
+                sortable
+              ></Column>
+              <Column
+                key="percent"
+                field="percent"
+                header="%"
+                sortable
+              ></Column>
             </DataTable>
           </div>
         </div>
+        <TreeTable
+          :value="insightsData.positionsTableTree"
+          :paginator="true"
+          :rows="10"
+          :rowsPerPageOptions="[10, 20, 30, 40]"
+        >
+          <Column field="name" header="Name" sortable expander></Column>
+          <Column field="count" header="Total" sortable></Column>
+        </TreeTable>
       </TabPanel>
       <TabPanel header="Titles">
         <div class="grid">
@@ -180,7 +199,7 @@ const loaded = ref(false);
 const options = { responsive: true };
 
 if (insightsData) {
-  console.log("insightsData", insightsData.value.hasTitlesData);
+  console.log("insightsData", insightsData.value.positionsTableTree);
   loaded.value = true;
 }
 </script>

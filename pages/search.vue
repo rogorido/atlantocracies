@@ -133,6 +133,7 @@ async function updateData() {
   insightsData.hasTitlesData = data.hasTitlesData;
   insightsData.hasPositionsData = data.hasPositionsData;
   insightsData.hasPositionsChartData = data.hasPositionsChartData;
+  insightsData.positionsTableTree = data.positionsTableTree;
   insightsData.decadesBirthData = data.decadesBirthsChartData;
 
   calculatePercentages();
