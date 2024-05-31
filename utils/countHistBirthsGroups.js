@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 // Función para agrupar y estructurar los datos con porcentajes
+// de chatgpt
 export function groupByHistBirth(data) {
   const mainMap = new Map();
   let totalMainCount = 0;
