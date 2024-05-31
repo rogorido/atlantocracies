@@ -91,14 +91,6 @@
           <div class="col-6">
             <h2>Has positions</h2>
 
-            <Chart
-              v-if="loaded"
-              type="pie"
-              :data="insightsData.hasPositionsChartData"
-              :options="options"
-            />
-          </div>
-          <div class="col-6">
             <h2>Table</h2>
             <DataTable
               :value="insightsData.hasPositionsData"
@@ -127,17 +119,31 @@
                 sortable
               ></Column>
             </DataTable>
+            <Chart
+              v-if="loaded"
+              type="pie"
+              :data="insightsData.hasPositionsChartData"
+              :options="options"
+            />
+          </div>
+          <div class="col-6">
+            <h2>Positions and geographical distribution</h2>
+            <p v-if="insightsData.positionsTableTree.length > 0">
+              There are {{ insightsData.positionsTableTree.length }} different
+              positions.
+            </p>
+            <TreeTable
+              :value="insightsData.positionsTableTree"
+              :paginator="true"
+              :rows="10"
+              :rowsPerPageOptions="[10, 20, 30, 40]"
+            >
+              <template #empty> No positions found. </template>
+              <Column field="name" header="Name" sortable expander></Column>
+              <Column field="count" header="Total" sortable></Column>
+            </TreeTable>
           </div>
         </div>
-        <TreeTable
-          :value="insightsData.positionsTableTree"
-          :paginator="true"
-          :rows="10"
-          :rowsPerPageOptions="[10, 20, 30, 40]"
-        >
-          <Column field="name" header="Name" sortable expander></Column>
-          <Column field="count" header="Total" sortable></Column>
-        </TreeTable>
       </TabPanel>
       <TabPanel header="Titles">
         <div class="grid">

@@ -72,6 +72,23 @@
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable> </Column>
     </DataTable>
+    <h2>Marriages and their territorial distribution</h2>
+    <TreeTable
+      :value="histBirthMatrimoniosGroupBy"
+      :paginator="true"
+      :rows="10"
+      :rowsPerPageOptions="[10, 20, 30, 40]"
+    >
+      <template #empty> No positions found. </template>
+      <Column
+        field="histBirth"
+        header="Historical birth place"
+        sortable
+        expander
+      ></Column>
+      <Column field="count" header="Total" sortable></Column>
+      <Column field="percentage" header="%" sortable></Column>
+    </TreeTable>
     <ClientOnly>
       <PlacesMap
         :places="placesrelated"
@@ -86,6 +103,7 @@
 import { FilterMatchMode } from "primevue/api";
 import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
+import { groupByHistBirth } from "@/utils/countHistBirthsGroups";
 
 cytoscape.use(fcose);
 
@@ -159,6 +177,10 @@ const histBirthMatrimoniosSummary = Object.entries(countMapMatrimonios).map(
     percentage: ((count / totalMatrimonios) * 100).toFixed(1),
   }),
 );
+
+// desglosamos por países para usar un treetable
+const histBirthMatrimoniosGroupBy = groupByHistBirth(matrimonios);
+console.log("histBirthMatrimoniosGroupBy", histBirthMatrimoniosGroupBy);
 
 onMounted(() => {
   // console.log("the props are: ", JSON.stringify(props, null, 2));
