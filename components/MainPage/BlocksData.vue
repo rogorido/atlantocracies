@@ -1,64 +1,75 @@
 <template>
   <div class="grid">
-    <div class="col-12 md:col-6 lg:col-4">
-      <Card>
-        <template #title>Total persons</template>
-        <template #content>
-          <p class="numero">
-            {{ stats.totalPersons != null ? stats.totalPersons : 0 }}
-          </p>
-        </template>
-      </Card>
+    <div class="col-12 md:col-4">
+      <div class="flex showdata">
+        <div>Total persons:</div>
+        <div class="numero">
+          {{ stats.totalPersons != null ? stats.totalPersons : 0 }}
+        </div>
+      </div>
+      <div class="flex showdata">
+        <div>Total places:</div>
+        <div class="numero">
+          {{ stats.totalPlaces != null ? stats.totalPlaces : 0 }}
+        </div>
+      </div>
+
+      <div class="flex showdata">
+        <div>Total positions:</div>
+        <div class="numero">
+          {{ stats.totalPositions != null ? stats.totalPositions : 0 }}
+        </div>
+      </div>
+
+      <div class="flex showdata">
+        <div>Total events:</div>
+        <div class="numero">
+          {{ stats.totalEvents != null ? stats.totalEvents : 0 }}
+        </div>
+      </div>
+
+      <div class="flex showdata">
+        <div>Total relations:</div>
+        <div class="numero">
+          {{ stats.totalRelations != null ? stats.totalRelations : 0 }}
+        </div>
+      </div>
+
+      <div class="flex showdata">
+        <div>Total titles:</div>
+        <div class="numero">
+          {{ stats.totalTitles != null ? stats.totalTitles : 0 }}
+        </div>
+      </div>
     </div>
-    <div class="col-12 md:col-6 lg:col-4">
-      <Card>
-        <template #title>Total places</template>
-        <template #content>
-          <p class="numero">
-            {{ stats.totalPlaces != null ? stats.totalPlaces : 0 }}
-          </p>
-        </template>
-      </Card>
-    </div>
-    <div class="col-12 md:col-6 lg:col-4">
-      <Card>
-        <template #title>Total positions</template>
-        <template #content>
-          <p>
-            {{ stats.totalPositions != null ? stats.totalPositions : 0 }}
-          </p>
-        </template>
-      </Card>
-    </div>
-    <div class="col-12 md:col-6 lg:col-4">
-      <Card>
-        <template #title>Total events</template>
-        <template #content>
-          <p>
-            {{ stats.totalEvents != null ? stats.totalEvents : 0 }}
-          </p>
-        </template>
-      </Card>
-    </div>
-    <div class="col-12 md:col-6 lg:col-4">
-      <Card>
-        <template #title>Total relations</template>
-        <template #content>
-          <p>
-            {{ stats.totalRelations != null ? stats.totalRelations : 0 }}
-          </p>
-        </template>
-      </Card>
-    </div>
-    <div class="col-12 md:col-6 lg:col-4">
-      <Card>
-        <template #title>Total titles</template>
-        <template #content>
-          <p>
-            {{ stats.totalTitles != null ? stats.totalTitles : 0 }}
-          </p>
-        </template>
-      </Card>
+    <div class="col-12 md:col-8">
+      <h2 class="text-center uppercase">Atlantocracies</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
+        aspernatur maiores id quo corporis in molestiae magni dignissimos porro
+        vel eos nemo quas, doloremque asperiores quod repudiandae aperiam
+        possimus sed! Fugiat ea dolorum deleniti suscipit maiores, labore
+        quisquam praesentium eius assumenda sapiente optio nisi tenetur
+        officiis. Explicabo fuga, esse delectus officiis perspiciatis odit sunt
+        asperiores architecto laudantium, reiciendis deleniti ad? Distinctio
+        dolorem officia vel voluptates adipisci repudiandae consequuntur maxime
+        vitae quisquam a veniam non quam ex perferendis reprehenderit,
+        voluptatem natus. Quibusdam, voluptate! Expedita enim harum consequatur
+        beatae id sint deserunt?
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
+        aspernatur maiores id quo corporis in molestiae magni dignissimos porro
+        vel eos nemo quas, doloremque asperiores quod repudiandae aperiam
+        possimus sed! Fugiat ea dolorum deleniti suscipit maiores, labore
+        quisquam praesentium eius assumenda sapiente optio nisi tenetur
+        officiis. Explicabo fuga, esse delectus officiis perspiciatis odit sunt
+        asperiores architecto laudantium, reiciendis deleniti ad? Distinctio
+        dolorem officia vel voluptates adipisci repudiandae consequuntur maxime
+        vitae quisquam a veniam non quam ex perferendis reprehenderit,
+        voluptatem natus. Quibusdam, voluptate! Expedita enim harum consequatur
+        beatae id sint deserunt?
+      </p>
     </div>
   </div>
 </template>
@@ -69,16 +80,20 @@ const props = defineProps({ stats: { type: Object, required: true } });
 
 <style scoped>
 .numero {
-  font-size: 2.4rem;
+  font-size: 1.9rem;
+  color: #fff;
+  background-color: #af2f14;
+  width: 50px;
+  border-radius: 50% 20% / 10% 40%;
+  text-align: right;
 }
 
-.p-card {
+.showdata {
   border: 3px dashed var(--primary-color);
-}
-
-.p-card-content > p {
-  font-size: 2.4rem;
-  color: #af2f14;
-  text-align: center;
+  padding: 10px;
+  justify-content: space-between;
+  font-size: 1.8rem;
+  align-items: center;
+  margin-bottom: 10px;
 }
 </style>
