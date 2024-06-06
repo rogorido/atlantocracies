@@ -1,104 +1,52 @@
 <template>
   <div>
-    <DataTable
-      :value="typeRelationsSummary"
-      paginator
-      stripedRows
-      :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]"
-      dataKey="idItem"
-      tableStyle="max-width: 30rem"
-    >
+    <DataTable :value="typeRelationsSummary" paginator stripedRows :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
+      dataKey="idItem" tableStyle="max-width: 30rem">
       <template #empty> No relations found. </template>
       <Column field="typeRel" header="Relation type" sortable></Column>
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable> </Column>
     </DataTable>
     <div id="cyto" ref="cyto"></div>
+    <GroupsCytoPopup v-if="showPopup" :data="popupData" :style="popupStyle" @close="showPopup = false" />
   </div>
   <div>
-    <DataTable
-      v-model:filters="filters"
-      :value="personsrelated"
-      paginator
-      stripedRows
-      filterDisplay="row"
-      :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]"
-      dataKey="idItem"
-      tableStyle="max-width: 80rem"
-    >
+    <DataTable v-model:filters="filters" :value="personsrelated" paginator stripedRows filterDisplay="row" :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]" dataKey="idItem" tableStyle="max-width: 80rem">
       <template #empty> No relations found. </template>
       <Column field="nameMainPerson" header="Main Person" sortable></Column>
       <Column field="genderMainPerson" header="Gender" sortable></Column>
       <Column field="typeRelation" header="Relation" sortable>
         <template #filter="{ filterModel, filterCallback }">
-          <Dropdown
-            v-model="filterModel.value"
-            :options="tiposrels"
-            @change="filterCallback()"
-            class="p-column-filter"
-            placeholder="Search by relation"
-          />
+          <Dropdown v-model="filterModel.value" :options="tiposrels" @change="filterCallback()" class="p-column-filter"
+            placeholder="Search by relation" />
         </template>
       </Column>
-      <Column
-        field="namePersonRelated"
-        header="Related person"
-        sortable
-      ></Column>
-      <Column
-        field="placeRelation"
-        header="Place of relation"
-        sortable
-      ></Column>
+      <Column field="namePersonRelated" header="Related person" sortable></Column>
+      <Column field="placeRelation" header="Place of relation" sortable></Column>
     </DataTable>
     <h3>Historical birth places</h3>
-    <DataTable
-      :value="histBirthMatrimoniosSummary"
-      paginator
-      stripedRows
-      :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]"
-      dataKey="idItem"
-      tableStyle="max-width: 30rem"
-    >
+    <DataTable :value="histBirthMatrimoniosSummary" paginator stripedRows :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]" dataKey="idItem" tableStyle="max-width: 30rem">
       <template #empty> No relations found. </template>
-      <Column
-        field="histBirthRelated"
-        header="Historical birth place"
-        sortable
-      ></Column>
+      <Column field="histBirthRelated" header="Historical birth place" sortable></Column>
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable> </Column>
     </DataTable>
     <h2>Marriages and their territorial distribution</h2>
-    <TreeTable
-      :value="histBirthMatrimoniosGroupBy"
-      :paginator="true"
-      :rows="10"
-      :rowsPerPageOptions="[10, 20, 30, 40]"
-    >
+    <TreeTable :value="histBirthMatrimoniosGroupBy" :paginator="true" :rows="10" :rowsPerPageOptions="[10, 20, 30, 40]">
       <template #empty> No positions found. </template>
-      <Column
-        field="histBirth"
-        header="Historical birth place"
-        sortable
-        expander
-      ></Column>
+      <Column field="histBirth" header="Historical birth place" sortable expander></Column>
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable></Column>
     </TreeTable>
     <ClientOnly>
-      <PlacesMap
-        :places="placesrelated"
-        :multipoint="multipoint"
-        v-if="showplacesmap"
-      />
+      <PlacesMap :places="placesrelated" :multipoint="multipoint" v-if="showplacesmap" />
       <template #fallback> Loading map... </template>
     </ClientOnly>
   </div>
 </template>
+
 <script setup>
 import { FilterMatchMode } from "primevue/api";
 import cytoscape from "cytoscape";
@@ -108,9 +56,20 @@ import { groupByHistBirth } from "@/utils/countHistBirthsGroups";
 cytoscape.use(fcose);
 
 const props = defineProps({
-  personsrelatedcyto: { type: Object, required: true, default: () => {} },
+  personsrelatedcyto: { type: Object, required: true, default: () => { } },
   personsrelated: { type: Array, required: true, default: () => [] },
   placesrelated: { type: Array, required: true, default: () => [] },
+});
+
+const showPopup = ref(false);
+const popupData = reactive({
+  id: '',
+  label: '',
+  otherField: ''
+});
+const popupStyle = reactive({
+  top: '0px',
+  left: '0px'
 });
 
 let network = null;
@@ -221,12 +180,25 @@ onMounted(() => {
   });
 
   network.on("tap", "node", function (evt) {
-    var node = evt.target;
-    console.log("tapped " + node.id());
-    evt.target.connectedEdges().animate({
-      style: { lineColor: "red" },
-    });
+    const node = evt.target;
+    console.log(node.data('id'));
+    popupData.id = node.data('id');
+    popupData.label = node.data('label');
+    popupData.otherField = node.data('otherField');
+
+    const position = node.renderedPosition();
+    popupStyle.top = `${position.y}px`;
+    popupStyle.left = `${position.x}px`;
+
+    showPopup.value = true;
   });
+
+  // network.on('tap', (event) => {
+  //   if (event.target === network) {
+  //     showPopup.value = false;
+  //   }
+  // });
+
   const typeRelsValues = props.personsrelatedcyto.edges.map(
     (item) => item.data.type,
   );
