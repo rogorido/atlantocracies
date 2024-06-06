@@ -7,8 +7,10 @@
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable> </Column>
     </DataTable>
-    <div id="cyto" ref="cyto"></div>
-    <GroupsCytoPopup v-if="showPopup" :data="popupData" :style="popupStyle" @close="showPopup = false" />
+    <div>
+      <div id="cyto" ref="cyto"></div>
+      <GroupsCytoPopup v-if="showPopup" :data="popupData" :style="popupStyle" @close="showPopup = false" />
+    </div>
   </div>
   <div>
     <DataTable v-model:filters="filters" :value="personsrelated" paginator stripedRows filterDisplay="row" :rows="10"
@@ -181,23 +183,57 @@ onMounted(() => {
 
   network.on("tap", "node", function (evt) {
     const node = evt.target;
-    console.log(node.data('id'));
     popupData.id = node.data('id');
     popupData.label = node.data('label');
     popupData.otherField = node.data('otherField');
 
     const position = node.renderedPosition();
-    popupStyle.top = `${position.y}px`;
-    popupStyle.left = `${position.x}px`;
+    const containerRect = cyto.value.getBoundingClientRect();
+
+    // Lío q hay que hacer para que calcule teniendo en cuenta todo el DOM 
+    // idea de chaptgpt
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    popupStyle.top = `${position.y + containerRect.top + scrollTop}px`;
+    popupStyle.left = `${position.x + containerRect.left + scrollLeft}px`;
 
     showPopup.value = true;
   });
 
-  // network.on('tap', (event) => {
-  //   if (event.target === network) {
-  //     showPopup.value = false;
-  //   }
-  // });
+  network.on("tap", "edge", function (evt) {
+    const edge = evt.target;
+    console.log(edge.data('id'));
+    popupData.id = edge.data('id');
+    popupData.label = edge.data('label');
+    popupData.type = edge.data('type');
+
+    // edges no tiene una renederPosition. Hay que calcular la media de los dos nodes.
+    let position;
+    const sourcePos = edge.source().renderedPosition();
+    const targetPos = edge.target().renderedPosition();
+    position = {
+      x: (sourcePos.x + targetPos.x) / 2,
+      y: (sourcePos.y + targetPos.y) / 2
+    };
+
+    const containerRect = cyto.value.getBoundingClientRect();
+
+    // Lío q hay que hacer para que calcule teniendo en cuenta todo el DOM 
+    // idea de chaptgpt
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    popupStyle.top = `${position.y + containerRect.top + scrollTop}px`;
+    popupStyle.left = `${position.x + containerRect.left + scrollLeft}px`;
+
+    showPopup.value = true;
+  });
+
+  // esto borra el popup al pulsar fuera
+  network.on('tap', (event) => {
+    if (event.target === network) {
+      showPopup.value = false;
+    }
+  });
 
   const typeRelsValues = props.personsrelatedcyto.edges.map(
     (item) => item.data.type,
@@ -241,5 +277,14 @@ if (props.placesrelated.length > 1) {
   height: 600px;
   border: 1px solid lightgray;
   margin-bottom: 4em;
+  position: relative;
+}
+
+.popup {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+  z-index: 1000;
 }
 </style>

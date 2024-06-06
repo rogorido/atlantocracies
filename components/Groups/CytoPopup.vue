@@ -3,7 +3,7 @@
     <button class="close-btn" @click="$emit('close')">&times;</button>
     <p><strong>ID:</strong> {{ data.id }}</p>
     <p><strong>Label:</strong> {{ data.label }}</p>
-    <p><strong>Other Field:</strong> {{ data.otherField }}</p>
+    <p><strong>Other Field:</strong> {{ data.type }}</p>
   </div>
 </template>
 
