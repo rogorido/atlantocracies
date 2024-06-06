@@ -6,11 +6,7 @@
         <div class="grid">
           <div class="col-6">
             <h2>Birth years</h2>
-            <Chart
-              v-if="loaded"
-              type="bar"
-              :data="insightsData.decadesBirthData"
-            />
+            <Chart class="graph" v-if="loaded" type="bar" :data="insightsData.decadesBirthData" />
           </div>
           <div class="col-5">
             <p>
@@ -32,26 +28,16 @@
         <div class="grid">
           <div class="col-6">
             <h2>Table</h2>
-            <DataTable
-              :value="insightsData.gendersData"
-              stripedRows
-              :rows="10"
-              selectionMode="single"
-              dataKey="_id"
-              tableStyle="min-width: 50rem"
-              v-if="loaded"
-            >
+            <DataTable :value="insightsData.gendersData" stripedRows :rows="10" selectionMode="single" dataKey="_id"
+              tableStyle="min-width: 50rem" v-if="loaded">
               <Column key="gender" field="gender" header="Gender"></Column>
               <Column key="country" field="count" header="Total"></Column>
               <Column key="percent" field="percent" header="%"></Column>
             </DataTable>
           </div>
-          <div class="col-3">
+          <div class="col-6">
             <h2>Gender</h2>
-            <GendersChart
-              v-if="loaded"
-              :chartData="insightsData.gendersChartData"
-            />
+            <GendersChart class="graph" v-if="loaded" :chartData="insightsData.gendersChartData" :options="options" />
           </div>
         </div>
       </TabPanel>
@@ -60,25 +46,12 @@
           <div class="col-6">
             <h2>Birth places (historical)</h2>
 
-            <Chart
-              v-if="loaded"
-              type="pie"
-              :data="insightsData.histBirthsChartData"
-              :options="options"
-            />
+            <Chart v-if="loaded" class="graph" type="pie" :data="insightsData.histBirthsChartData" :options="options" />
           </div>
           <div class="col-6">
             <h2>Table</h2>
-            <DataTable
-              :value="insightsData.histBirthsData"
-              paginator
-              stripedRows
-              :rows="10"
-              :rowsPerPageOptions="[5, 10, 20, 50]"
-              selectionMode="single"
-              dataKey="_id"
-              tableStyle="min-width: 50rem"
-            >
+            <DataTable :value="insightsData.histBirthsData" paginator stripedRows :rows="10"
+              :rowsPerPageOptions="[5, 10, 20, 50]" selectionMode="single" dataKey="_id" tableStyle="min-width: 50rem">
               <Column key="_id" field="_id" header="Country"></Column>
               <Column key="country" field="count" header="Total"></Column>
               <Column key="percent" field="percent" header="%"></Column>
@@ -92,39 +65,13 @@
             <h2>Has positions</h2>
 
             <h2>Table</h2>
-            <DataTable
-              :value="insightsData.hasPositionsData"
-              stripedRows
-              :rows="10"
-              selectionMode="single"
-              dataKey="_id"
-              tableStyle="min-width: 50rem"
-              v-if="loaded"
-            >
-              <Column
-                key="hasPositions"
-                field="hasPositions"
-                header="Positions"
-              ></Column>
-              <Column
-                key="count"
-                field="count"
-                header="Total"
-                sortable
-              ></Column>
-              <Column
-                key="percent"
-                field="percent"
-                header="%"
-                sortable
-              ></Column>
+            <DataTable :value="insightsData.hasPositionsData" stripedRows :rows="10" selectionMode="single"
+              dataKey="_id" tableStyle="min-width: 50rem" v-if="loaded">
+              <Column key="hasPositions" field="hasPositions" header="Positions"></Column>
+              <Column key="count" field="count" header="Total" sortable></Column>
+              <Column key="percent" field="percent" header="%" sortable></Column>
             </DataTable>
-            <Chart
-              v-if="loaded"
-              type="pie"
-              :data="insightsData.hasPositionsChartData"
-              :options="options"
-            />
+            <Chart v-if="loaded" type="pie" :data="insightsData.hasPositionsChartData" :options="options" />
           </div>
           <div class="col-6">
             <h2>Positions and geographical distribution</h2>
@@ -132,12 +79,8 @@
               There are {{ insightsData.positionsTableTree.length }} different
               positions.
             </p>
-            <TreeTable
-              :value="insightsData.positionsTableTree"
-              :paginator="true"
-              :rows="10"
-              :rowsPerPageOptions="[10, 20, 30, 40]"
-            >
+            <TreeTable :value="insightsData.positionsTableTree" :paginator="true" :rows="10"
+              :rowsPerPageOptions="[10, 20, 30, 40]">
               <template #empty> No positions found. </template>
               <Column field="name" header="Name" sortable expander></Column>
               <Column field="count" header="Total" sortable></Column>
@@ -150,29 +93,13 @@
           <div class="col-6">
             <h2>Has titles</h2>
 
-            <Chart
-              v-if="loaded"
-              type="pie"
-              :data="insightsData.hasTitlesChartData"
-              :options="options"
-            />
+            <Chart v-if="loaded" type="pie" :data="insightsData.hasTitlesChartData" :options="options" />
           </div>
           <div class="col-6">
             <h2>Table</h2>
-            <DataTable
-              :value="insightsData.hasTitlesData"
-              stripedRows
-              :rows="10"
-              selectionMode="single"
-              dataKey="_id"
-              tableStyle="min-width: 50rem"
-              v-if="loaded"
-            >
-              <Column
-                key="hasTitles"
-                field="hasTitles"
-                header="Titles"
-              ></Column>
+            <DataTable :value="insightsData.hasTitlesData" stripedRows :rows="10" selectionMode="single" dataKey="_id"
+              tableStyle="min-width: 50rem" v-if="loaded">
+              <Column key="hasTitles" field="hasTitles" header="Titles"></Column>
               <Column key="count" field="count" header="Total"></Column>
               <Column key="percent" field="percent" header="%"></Column>
             </DataTable>
@@ -202,10 +129,16 @@ const { insightsData } = storeToRefs(store);
 // TODO: probablemente no se necesita esto...
 const loaded = ref(false);
 
-const options = { responsive: true };
+const options = { responsive: true, maintainAspectRatio: false };
 
 if (insightsData) {
   console.log("insightsData", insightsData.value.positionsTableTree);
   loaded.value = true;
 }
 </script>
+
+<style scoped>
+.graph {
+  width: 100%;
+}
+</style>

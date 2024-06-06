@@ -265,7 +265,7 @@ if (props.placesrelated.length > 1) {
 
 <style scoped>
 #cyto {
-  width: 1000px;
+  width: 100%;
   height: 600px;
   border: 1px solid lightgray;
   margin-bottom: 4em;
