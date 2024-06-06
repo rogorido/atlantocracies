@@ -186,6 +186,7 @@ onMounted(() => {
     popupData.id = node.data('id');
     popupData.label = node.data('label');
     popupData.otherField = node.data('otherField');
+    popupData.isNode = true;
 
     const position = node.renderedPosition();
     const containerRect = cyto.value.getBoundingClientRect();
@@ -203,9 +204,9 @@ onMounted(() => {
   network.on("tap", "edge", function (evt) {
     const edge = evt.target;
     console.log(edge.data('id'));
-    popupData.id = edge.data('id');
-    popupData.label = edge.data('label');
     popupData.type = edge.data('type');
+    // para que el popup represente una cosa u otra...
+    popupData.isNode = false;
 
     // edges no tiene una renederPosition. Hay que calcular la media de los dos nodes.
     let position;

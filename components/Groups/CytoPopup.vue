@@ -1,9 +1,14 @@
 <template>
   <div class="popup" :style="style">
     <button class="close-btn" @click="$emit('close')">&times;</button>
-    <p><strong>ID:</strong> {{ data.id }}</p>
-    <p><strong>Label:</strong> {{ data.label }}</p>
-    <p><strong>Other Field:</strong> {{ data.type }}</p>
+    <div v-if="data.isNode">
+      <p><strong>ID:</strong> {{ data.id }}</p>
+      <p><strong>Label:</strong> {{ data.label }}</p>
+      <p><strong>Other Field:</strong> {{ data.type }}</p>
+    </div>
+    <div v-else>
+      <p><strong>Type of relation:</strong> {{ data.type }}</p>
+    </div>
   </div>
 </template>
 
