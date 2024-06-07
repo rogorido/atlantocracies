@@ -2,7 +2,7 @@
   "name": "AtlantoUI",
   "private": true,
   "author": "Igor Sosa Mayor <joseleopoldo1792@gmail.com>",
-  "version": "0.7.11",
+  "version": "0.7.12",
   "type": "module",
   "scripts": {
     "build": "nuxt build",

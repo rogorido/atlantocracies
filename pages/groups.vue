@@ -9,7 +9,7 @@
     <section v-else>
       <TabView>
         <TabPanel header="Relations">
-          <GroupsRelationsGraph
+          <GroupsRelationsMain
             :personsrelatedcyto="data.personsrelationscyto"
             :personsrelated="data.personsrelationstable"
             :placesrelated="data.placesrelated"
