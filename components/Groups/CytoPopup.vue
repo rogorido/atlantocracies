@@ -2,29 +2,28 @@
   <div class="popup" :style="style">
     <button class="close-btn" @click="$emit('close')">&times;</button>
     <div v-if="data.isNode">
+      <h3>Person selected</h3>
       <p><strong>ID:</strong> {{ data.id }}</p>
-      <p><strong>Label:</strong> {{ data.label }}</p>
-      <p><strong>Other Field:</strong> {{ data.type }}</p>
+      <p><strong>Name:</strong> {{ data.label }}</p>
     </div>
     <div v-else>
-      <p><strong>Type of relation:</strong> {{ data.type }}</p>
+      <h3>Type of relation</h3>
+      <p>{{ data.type }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
-
-const props = defineProps(
-  {
-    data: {
-      type: Object,
-      required: true
-    },
-    style: {
-      type: Object,
-      required: true
-    }
-  })
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true,
+  },
+  style: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
 
 <style scoped>
