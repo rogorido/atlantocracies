@@ -15,7 +15,13 @@ export default defineNuxtConfig({
       uiVersion: process.env.npm_package_version,
     },
   },
-  modules: ["@nuxtjs/robots", "nuxt-primevue", "@nuxt/content", "@pinia/nuxt"],
+  modules: [
+    "@nuxtjs/robots",
+    "nuxt-primevue",
+    "@nuxt/content",
+    "@pinia/nuxt",
+    "@nuxt/image"
+  ],
   $development: {
     debug: true,
   },
