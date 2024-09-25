@@ -10,6 +10,17 @@
     :maxSelectedLabels="3"
     class="mb-3 w-full"
   />
+  <MultiSelect
+    v-model="selectedItems"
+    display="chip"
+    filter
+    :loading="loading"
+    :options="titlescontinents"
+    optionLabel="_id"
+    placeholder="Select continent"
+    :maxSelectedLabels="3"
+    class="mb-3 w-full"
+  />
 </template>
 
 <script setup>
@@ -24,7 +35,13 @@ if (!storetitles.initialized === true) {
   await storetitles.fetchTitles();
 }
 
+// NOTE: importante es que items es un array de objetos:
+// titlestypes, titlescontinents, etc.
 items.value = storetitles.titlesList;
+
+console.log(items.value);
+
+const titlescontinents = storetitles.titlesContinentsList;
 loading.value = false;
 
 watch(selectedItems, () => {
