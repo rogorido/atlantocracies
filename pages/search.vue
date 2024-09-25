@@ -9,6 +9,7 @@
         <SearchHasEventsOption />
         <SearchHasTitlesOption />
         <SearchHasPositionsOption />
+        <SearchSourceSelect />
       </div>
 
       <div class="col-4">
@@ -68,6 +69,7 @@
 </template>
 
 <script setup>
+import SourceSelect from "~/components/Search/SourceSelect.vue";
 import { useFilterStore } from "../stores/filterStore";
 import { usePersonsStore } from "../stores/personsStore";
 
