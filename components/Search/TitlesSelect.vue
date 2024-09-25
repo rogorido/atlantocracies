@@ -11,7 +11,7 @@
     class="mb-3 w-full"
   />
   <MultiSelect
-    v-model="selectedItems"
+    v-model="selectedContinents"
     display="chip"
     filter
     :loading="loading"
@@ -27,6 +27,7 @@
 import { useTitlesStore } from "../stores/titlesStore";
 import { useSelectManagement } from "~/composables/SelectManagement";
 
+const selectedContinents = ref([]);
 const loading = ref(true);
 const storetitles = useTitlesStore();
 const { filter, selectedItems, items } = useSelectManagement(true);
@@ -35,12 +36,7 @@ if (!storetitles.initialized === true) {
   await storetitles.fetchTitles();
 }
 
-// NOTE: importante es que items es un array de objetos:
-// titlestypes, titlescontinents, etc.
 items.value = storetitles.titlesList;
-
-console.log(items.value);
-
 const titlescontinents = storetitles.titlesContinentsList;
 loading.value = false;
 
@@ -48,12 +44,14 @@ watch(selectedItems, () => {
   if (selectedItems.value != null && Array.isArray(selectedItems.value)) {
     if (selectedItems.value.length === 0) {
       delete filter.value.tiposTitles;
+      selectedContinents.value = [];
     } else {
       filter.value.tiposTitles = selectedItems.value.map((title) => title._id);
     }
   }
 });
 
+// TODO: habría que cargar tb el valor de los otros campos (continentes, etc.)
 onMounted(() => {
   if (Object.keys(filter.value).length != 0) {
     if (filter.value.tiposTitles != undefined) {
