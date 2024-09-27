@@ -30,10 +30,9 @@ loading.value = false;
 watch(selectedItems, () => {
   if (selectedItems.value != null && Array.isArray(selectedItems.value)) {
     if (selectedItems.value.length === 0) {
-      delete filter.value.tiposTitles;
-      selectedContinents.value = [];
+      delete filter.value.source;
     } else {
-      filter.value.tiposTitles = selectedItems.value.map((title) => title._id);
+      filter.value.source = selectedItems.value.map((source) => source._id);
     }
   }
 });
@@ -41,9 +40,9 @@ watch(selectedItems, () => {
 // TODO: habría que cargar tb el valor de los otros campos (continentes, etc.)
 onMounted(() => {
   if (Object.keys(filter.value).length != 0) {
-    if (filter.value.tiposTitles != undefined) {
-      selectedItems.value = filter.value.tiposTitles.map((title) => {
-        return { _id: title };
+    if (filter.value.source != undefined) {
+      selectedItems.value = filter.value.source.map((source) => {
+        return { _id: source };
       });
     }
   }
