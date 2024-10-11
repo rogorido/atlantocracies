@@ -1,77 +1,75 @@
 <template>
-  <div>
-    <h1 class="text-center">{{ useRoute().params.relationbyid }}</h1>
+  <h1 class="text-center">{{ useRoute().params.relationbyid }}</h1>
+  <div v-if="pending">Loading data...</div>
+  <div v-else-if="error">{{ error }}</div>
+  <div v-else>
     <div class="grid">
-      <div class="col-6"></div>
-      <div class="col-6"></div>
-    </div>
-    <div v-if="pending">Loading data...</div>
-    <div v-else-if="error">{{ error }}</div>
-    <div v-else>
-      <h2>Concrete data</h2>
-      <DataTable
-        paginator
-        stripedRows
-        :value="data.relationid"
-        :rows="10"
-        :rowsPerPageOptions="[5, 10, 20, 50]"
-        selectionMode="single"
-        dataKey="_id"
-        @rowSelect="onRowSelect"
-        tableStyle="min-width: 50rem"
-      >
-        <Column
-          v-for="col of columnsRel"
-          :key="col.field"
-          :field="col.field"
-          :header="col.header"
-          sortable
-        ></Column>
-      </DataTable>
-      <h2>Positions</h2>
-      <DataTable
-        paginator
-        stripedRows
-        :value="data.positions"
-        :rows="10"
-        :rowsPerPageOptions="[5, 10, 20, 50]"
-        dataKey="_id"
-        tableStyle="min-width: 50rem"
-      >
-        <Column
-          v-for="col of columnsPositions"
-          :key="col.field"
-          :field="col.field"
-          :header="col.header"
-          sortable
-        ></Column>
-      </DataTable>
+      <div class="col-6">
+        <h2>Concrete data</h2>
+        <DataTable
+          paginator
+          stripedRows
+          :value="data.relationid"
+          :rows="10"
+          :rowsPerPageOptions="[5, 10, 20, 50]"
+          selectionMode="single"
+          dataKey="_id"
+          @rowSelect="onRowSelect"
+          tableStyle="min-width: 50rem"
+        >
+          <Column
+            v-for="col of columnsRel"
+            :key="col.field"
+            :field="col.field"
+            :header="col.header"
+            sortable
+          ></Column>
+        </DataTable>
+      </div>
+      <div class="col-6">
+        <h2>Positions</h2>
+        <DataTable
+          paginator
+          stripedRows
+          :value="data.positions"
+          :rows="10"
+          :rowsPerPageOptions="[5, 10, 20, 50]"
+          dataKey="_id"
+          tableStyle="min-width: 50rem"
+        >
+          <Column
+            v-for="col of columnsPositions"
+            :key="col.field"
+            :field="col.field"
+            :header="col.header"
+            sortable
+          ></Column>
+        </DataTable>
+      </div>
     </div>
   </div>
   <!-- Detalles  -->
-  <section class="details-section">
-    <div v-if="details">
-      <h2>{{ details._id }}</h2>
-      <p>Number of informations: {{ details.totalInformations }}</p>
-      <div class="grid">
-        <div class="col-4">
-          <DataTable :value="details.positions">
-            <Column field="info" header="Position"></Column
-          ></DataTable>
-        </div>
-        <div class="col-4">
-          <DataTable :value="details.titlesInf">
-            <Column field="info" header="Titles"></Column
-          ></DataTable>
-        </div>
-        <div class="col-4">
-          <DataTable :value="details.placesInf">
-            <Column field="info" header="Place"></Column
-          ></DataTable>
-        </div>
+  <section v-if="details" class="details-section">
+    <h2>Details about {{ details._id }}</h2>
+    <p>Number of informations: {{ details.totalInformations }}</p>
+    <div class="grid">
+      <div class="col-4">
+        <DataTable :value="details.positions">
+          <Column field="info" header="Position"></Column
+        ></DataTable>
       </div>
-      {{ details }}
+      <div class="col-4">
+        <DataTable :value="details.titlesInf">
+          <Column field="info" header="Titles"></Column
+        ></DataTable>
+      </div>
+      <div class="col-4">
+        <DataTable :value="details.placesInf">
+          <Column field="info" header="Place"></Column
+        ></DataTable>
+      </div>
     </div>
+    <SearchMacroTablePersons />
   </section>
 </template>
 
@@ -81,7 +79,14 @@ const api = config.public.apiBaseUrl;
 
 const details = ref({});
 
+// necesitamos esto para pasar los datos al componente SearchMacroTablePersons
+const personsdetails = ref([]);
+// provide tiene que ser usado en setup; no puede usarse en
+// la función onrowselect de abajo.
+provide("persons", readonly(personsdetails));
+
 // with useLazyFetch the page is loaded while the data is being fetched
+// TODO: atención mirar esto del pending que parece que no existe ya...
 const { data, pending, error } = await useFetch(
   `${api}/relations/${useRoute().params.relationbyid}`,
 );
@@ -98,18 +103,6 @@ const columnsPositions = [
   { field: "_id", header: "Position" },
   { field: "count", header: "Total" },
 ];
-
-// TODO: la cuestioón es qué hacer con el slug. Tengo una función de chatgpt
-// pero si lo paso así luego en la página [placebyid] no puedo acceder al nombre
-// con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
-// veo cómo es posible... es posible con query, pero eso es otra cosa...
-function probar() {
-  // return navigateTo(`/place/${selectedPlace.value}`, {
-  //   open: { target: "_blank" },
-  // });
-
-  return navigateTo(`/person/${selectedPerson.value}`);
-}
 
 const onRowSelect = (event) => {
   details.value = event.data;
@@ -144,5 +137,11 @@ const onRowSelect = (event) => {
       detailsSection.scrollIntoView({ behavior: "smooth" });
     }
   }, 100);
+  console.log(
+    "el valor de data es: ",
+    JSON.stringify(details.value.personsWithRelation, null, 2),
+  );
+
+  personsdetails.value = details.value.personsWithRelation;
 };
 </script>
