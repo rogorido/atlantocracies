@@ -65,5 +65,8 @@ const histBirthMatrimoniosSummary = Object.entries(countMapMatrimonios).map(
 
 // desglosamos por países para usar un treetable
 const histBirthMatrimoniosGroupBy = groupByHistBirth(matrimonios);
-console.log("histBirthMatrimoniosGroupBy", histBirthMatrimoniosGroupBy);
+console.log(
+  "histBirthMatrimoniosGroupBy",
+  JSON.stringify(histBirthMatrimoniosGroupBy, null, 2),
+);
 </script>
