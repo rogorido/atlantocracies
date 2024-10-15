@@ -15,7 +15,7 @@
         </ClientOnly>
       </div>
     </div>
-    <div v-if="pending">Loading data...</div>
+    <div v-if="status">Loading data...</div>
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
       <TabView>
@@ -76,7 +76,7 @@ const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
 // with useLazyFetch the page is loaded while the data is being fetched
-const { data, pending, error } = await useFetch(
+const { data, status, error } = await useFetch(
   `${api}/places/placeid/${useRoute().params.placebyid}`,
 );
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="pending">Loading data</div>
+  <div v-if="status === 'pending'">Loading data...</div>
   <div v-else-if="error">{{ error }}</div>
   <div v-else>
     <h1 class="text-center">Management</h1>
@@ -85,11 +85,7 @@
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
-const {
-  data: management,
-  pending,
-  error,
-} = await useFetch(`${api}/management`);
+const { data: management, status, error } = await useFetch(`${api}/management`);
 
 const columns = [
   { field: "_id", header: "Field" },

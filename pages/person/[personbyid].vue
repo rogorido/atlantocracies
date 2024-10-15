@@ -1,5 +1,5 @@
 <template>
-  <div v-if="pending">Loading data</div>
+  <div v-if="status === 'pending'">Loading data...</div>
   <div v-else-if="error">{{ error }}</div>
   <div v-else>
     <h1 class="text-center">
@@ -86,8 +86,8 @@ const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
 // with useLazyFetch the page is loaded while the data is being fetched
-const { data, pending, error } = await useLazyFetch(
-  `${api}/persons/personsbyid/${useRoute().params.personbyid}`
+const { data, status, error } = await useLazyFetch(
+  `${api}/persons/personsbyid/${useRoute().params.personbyid}`,
 );
 const loadPersonsData = async () => {
   try {

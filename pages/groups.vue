@@ -5,7 +5,7 @@
 
     <h2 class="text-center uppercase">Global insights</h2>
     <SearchInsights />
-    <div v-if="pending">Cargando datos...</div>
+    <div v-if="status === 'pending'">Loading data...</div>
     <section v-else>
       <TabView>
         <TabPanel header="Relations">
@@ -89,7 +89,7 @@ const api = config.public.apiBaseUrl;
 const storefilter = useFilterStore();
 const { filter } = storeToRefs(storefilter);
 
-const { data, pending, error } = await useFetch(`${api}/groups`, {
+const { data, status, error } = await useFetch(`${api}/groups`, {
   method: "POST",
   body: filter.value,
 });

@@ -1,6 +1,8 @@
 <template>
-  <h1 class="text-center">{{ useRoute().params.relationbyid }}</h1>
-  <div v-if="pending">Loading data...</div>
+  <h1 class="text-center">
+    Type of relation: {{ useRoute().params.relationbyid }}
+  </h1>
+  <div v-if="status === 'pending'">Loading data...</div>
   <div v-else-if="error">{{ error }}</div>
   <div v-else>
     <div class="grid">
@@ -131,8 +133,8 @@ const personsdetails = ref([]);
 provide("persons", readonly(personsdetails));
 
 // with useLazyFetch the page is loaded while the data is being fetched
-// TODO: atención mirar esto del pending que parece que no existe ya...
-const { data, pending, error } = await useFetch(
+// TODO: atención mirar esto del status que parece que no existe ya...
+const { data, status, error } = await useFetch(
   `${api}/relations/${useRoute().params.relationbyid}`,
 );
 
