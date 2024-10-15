@@ -1,7 +1,14 @@
 <template>
   <div>
-    <DataTable :value="typeRelationsSummary" paginator stripedRows :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
-      dataKey="idItem" tableStyle="max-width: 30rem">
+    <DataTable
+      :value="typeRelationsSummary"
+      paginator
+      stripedRows
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      dataKey="idItem"
+      tableStyle="max-width: 30rem"
+    >
       <template #empty> No relations found. </template>
       <Column field="typeRel" header="Relation type" sortable></Column>
       <Column field="count" header="Total" sortable></Column>
@@ -9,41 +16,94 @@
     </DataTable>
     <div>
       <div id="cyto" ref="cyto"></div>
-      <GroupsCytoPopup v-if="showPopup" :data="popupData" :style="popupStyle" @close="showPopup = false" />
+      <GroupsCytoPopup
+        v-if="showPopup"
+        :data="popupData"
+        :style="popupStyle"
+        @close="showPopup = false"
+      />
     </div>
   </div>
   <div>
-    <DataTable v-model:filters="filters" :value="personsrelated" paginator stripedRows filterDisplay="row" :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]" dataKey="idItem" tableStyle="max-width: 80rem">
+    <DataTable
+      v-model:filters="filters"
+      :value="personsrelated"
+      paginator
+      stripedRows
+      filterDisplay="row"
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      dataKey="idItem"
+      tableStyle="max-width: 80rem"
+    >
       <template #empty> No relations found. </template>
       <Column field="nameMainPerson" header="Main Person" sortable></Column>
       <Column field="genderMainPerson" header="Gender" sortable></Column>
       <Column field="typeRelation" header="Relation" sortable>
         <template #filter="{ filterModel, filterCallback }">
-          <Dropdown v-model="filterModel.value" :options="tiposrels" @change="filterCallback()" class="p-column-filter"
-            placeholder="Search by relation" />
+          <Dropdown
+            v-model="filterModel.value"
+            :options="tiposrels"
+            @change="filterCallback()"
+            class="p-column-filter"
+            placeholder="Search by relation"
+          />
         </template>
       </Column>
-      <Column field="namePersonRelated" header="Related person" sortable></Column>
-      <Column field="placeRelation" header="Place of relation" sortable></Column>
+      <Column
+        field="namePersonRelated"
+        header="Related person"
+        sortable
+      ></Column>
+      <Column
+        field="placeRelation"
+        header="Place of relation"
+        sortable
+      ></Column>
     </DataTable>
     <h3>Historical birth places</h3>
-    <DataTable :value="histBirthMatrimoniosSummary" paginator stripedRows :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]" dataKey="idItem" tableStyle="max-width: 30rem">
+    <DataTable
+      :value="histBirthMatrimoniosSummary"
+      paginator
+      stripedRows
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      dataKey="idItem"
+      tableStyle="max-width: 30rem"
+    >
       <template #empty> No relations found. </template>
-      <Column field="histBirthRelated" header="Historical birth place" sortable></Column>
+      <Column
+        field="histBirthRelated"
+        header="Historical birth place"
+        sortable
+      ></Column>
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable> </Column>
     </DataTable>
     <h2>Marriages and their territorial distribution</h2>
-    <TreeTable :value="histBirthMatrimoniosGroupBy" :paginator="true" :rows="10" :rowsPerPageOptions="[10, 20, 30, 40]">
+    <TreeTable
+      size="small"
+      :value="histBirthMatrimoniosGroupBy"
+      :paginator="true"
+      :rows="10"
+      :rowsPerPageOptions="[10, 20, 30, 40]"
+    >
       <template #empty> No positions found. </template>
-      <Column field="histBirth" header="Historical birth place" sortable expander></Column>
+      <Column
+        field="histBirth"
+        header="Historical birth place"
+        sortable
+        expander
+      ></Column>
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable></Column>
     </TreeTable>
     <ClientOnly>
-      <PlacesMap :places="placesrelated" :multipoint="multipoint" v-if="showplacesmap" />
+      <PlacesMap
+        :places="placesrelated"
+        :multipoint="multipoint"
+        v-if="showplacesmap"
+      />
       <template #fallback> Loading map... </template>
     </ClientOnly>
   </div>
@@ -58,20 +118,20 @@ import { groupByHistBirth } from "@/utils/countHistBirthsGroups";
 cytoscape.use(fcose);
 
 const props = defineProps({
-  personsrelatedcyto: { type: Object, required: true, default: () => { } },
+  personsrelatedcyto: { type: Object, required: true, default: () => {} },
   personsrelated: { type: Array, required: true, default: () => [] },
   placesrelated: { type: Array, required: true, default: () => [] },
 });
 
 const showPopup = ref(false);
 const popupData = reactive({
-  id: '',
-  label: '',
-  otherField: ''
+  id: "",
+  label: "",
+  otherField: "",
 });
 const popupStyle = reactive({
-  top: '0px',
-  left: '0px'
+  top: "0px",
+  left: "0px",
 });
 
 let network = null;
@@ -183,18 +243,19 @@ onMounted(() => {
 
   network.on("tap", "node", function (evt) {
     const node = evt.target;
-    popupData.id = node.data('id');
-    popupData.label = node.data('label');
-    popupData.otherField = node.data('otherField');
+    popupData.id = node.data("id");
+    popupData.label = node.data("label");
+    popupData.otherField = node.data("otherField");
     popupData.isNode = true;
 
     const position = node.renderedPosition();
     const containerRect = cyto.value.getBoundingClientRect();
 
-    // Lío q hay que hacer para que calcule teniendo en cuenta todo el DOM 
+    // Lío q hay que hacer para que calcule teniendo en cuenta todo el DOM
     // idea de chaptgpt
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollLeft =
+      window.pageXOffset || document.documentElement.scrollLeft;
     popupStyle.top = `${position.y + containerRect.top + scrollTop}px`;
     popupStyle.left = `${position.x + containerRect.left + scrollLeft}px`;
 
@@ -203,8 +264,8 @@ onMounted(() => {
 
   network.on("tap", "edge", function (evt) {
     const edge = evt.target;
-    console.log(edge.data('id'));
-    popupData.type = edge.data('type');
+    console.log(edge.data("id"));
+    popupData.type = edge.data("type");
     // para que el popup represente una cosa u otra...
     popupData.isNode = false;
 
@@ -214,15 +275,16 @@ onMounted(() => {
     const targetPos = edge.target().renderedPosition();
     position = {
       x: (sourcePos.x + targetPos.x) / 2,
-      y: (sourcePos.y + targetPos.y) / 2
+      y: (sourcePos.y + targetPos.y) / 2,
     };
 
     const containerRect = cyto.value.getBoundingClientRect();
 
-    // Lío q hay que hacer para que calcule teniendo en cuenta todo el DOM 
+    // Lío q hay que hacer para que calcule teniendo en cuenta todo el DOM
     // idea de chaptgpt
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollLeft =
+      window.pageXOffset || document.documentElement.scrollLeft;
     popupStyle.top = `${position.y + containerRect.top + scrollTop}px`;
     popupStyle.left = `${position.x + containerRect.left + scrollLeft}px`;
 
@@ -230,7 +292,7 @@ onMounted(() => {
   });
 
   // esto borra el popup al pulsar fuera
-  network.on('tap', (event) => {
+  network.on("tap", (event) => {
     if (event.target === network) {
       showPopup.value = false;
     }

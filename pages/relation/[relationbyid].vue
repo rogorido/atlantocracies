@@ -49,40 +49,48 @@
     </div>
     <!-- Agregados de lugares -->
     <div>
-      <h2>Places of Origins (aggregates)</h2>
-      <TreeTable
-        :value="data.infOriginsCountries"
-        :paginator="true"
-        :rows="10"
-        :rowsPerPageOptions="[10, 20, 30, 40]"
-      >
-        <template #empty> No positions found. </template>
-        <Column
-          field="place"
-          header="Historical birth place"
-          sortable
-          expander
-        ></Column>
-        <Column field="count" header="Total" sortable></Column>
-        <Column field="percentage" header="%" sortable></Column>
-      </TreeTable>
-      <h2>Historical Places of Origins (aggregates)</h2>
-      <TreeTable
-        :value="data.infOriginsHistBirths"
-        :paginator="true"
-        :rows="10"
-        :rowsPerPageOptions="[10, 20, 30, 40]"
-      >
-        <template #empty> No positions found. </template>
-        <Column
-          field="place"
-          header="Historical birth place"
-          sortable
-          expander
-        ></Column>
-        <Column field="count" header="Total" sortable></Column>
-        <Column field="percentage" header="%" sortable></Column>
-      </TreeTable>
+      <div class="grid">
+        <div class="col-6">
+          <h2>Places of Origins (aggregates)</h2>
+          <TreeTable
+            :value="data.infOriginsCountries"
+            :paginator="true"
+            :rows="10"
+            size="small"
+            :rowsPerPageOptions="[10, 20, 30, 40]"
+          >
+            <template #empty> No positions found. </template>
+            <Column
+              field="place"
+              header="Historical birth place"
+              sortable
+              expander
+            ></Column>
+            <Column field="count" header="Total" sortable></Column>
+            <Column field="percentage" header="%" sortable></Column>
+          </TreeTable>
+        </div>
+        <div class="col-6">
+          <h2>Historical Places of Origins (aggregates)</h2>
+          <TreeTable
+            :value="data.infOriginsHistBirths"
+            :paginator="true"
+            :rows="10"
+            size="small"
+            :rowsPerPageOptions="[10, 20, 30, 40]"
+          >
+            <template #empty> No positions found. </template>
+            <Column
+              field="place"
+              header="Historical birth place"
+              sortable
+              expander
+            ></Column>
+            <Column field="count" header="Total" sortable></Column>
+            <Column field="percentage" header="%" sortable></Column>
+          </TreeTable>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Detalles  -->
