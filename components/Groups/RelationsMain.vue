@@ -21,6 +21,7 @@
     </div>
   </div>
   <div id="Relationships Graph">
+    <h3 class="text-center">Graph of relationships</h3>
     <div id="cyto" ref="cyto"></div>
     <GroupsCytoPopup
       v-if="showPopup"
@@ -29,6 +30,10 @@
       @close="showPopup = false"
     />
   </div>
+
+  <!-- Personas relacionadas -->
+  <hr class="simplehr" />
+  <h3 class="text-center">Related Persons</h3>
   <div>
     <DataTable
       v-model:filters="filters"
@@ -67,9 +72,15 @@
       ></Column>
     </DataTable>
 
+    <hr class="simplehr" />
     <!-- Historical birthplaces  -->
-    <GroupsRelationsHistoricalBirths :personsrelated="personsrelated" />
+    <div id="marriages">
+      <GroupsRelationsHistoricalBirths :personsrelated="personsrelated" />
+    </div>
 
+    <!-- Lugares relacionados -->
+    <hr class="simplehr" />
+    <h3 id="places" class="text-center">Related Places</h3>
     <ClientOnly>
       <PlacesMap
         :places="placesrelated"
@@ -283,5 +294,19 @@ if (props.placesrelated.length > 1) {
   border: 1px solid black;
   padding: 10px;
   z-index: 1000;
+}
+
+hr {
+  border: none;
+  height: 20px;
+  background-color: #cd4f35; /* Color de la línea */
+  margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+hr.simplehr {
+  border: none;
+  height: 5px;
+  background-color: #cd4f35; /* Color de la línea */
+  margin: 20px 0; /* Espaciado superior e inferior */
 }
 </style>

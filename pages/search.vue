@@ -102,6 +102,7 @@ const { filter } = storeToRefs(storefilter);
 
 provide("persons", readonly(persons));
 
+// NOTE:
 // Importnate: esto no puede ser readonly porque luego los datos
 // de los gráficos los modifica chartjs (añade pej los colores)
 // provide("insightsData", insightsData);

@@ -1,12 +1,38 @@
 <template>
   <div>
     <h1 class="text-center">Analyzing groups</h1>
+
+    <div class="flex gap-3 mt-4">
+      <NuxtLink to="#insights">
+        <Button label="View insights" rounded />
+      </NuxtLink>
+
+      <NuxtLink to="#relations">
+        <Button label="View relations" rounded />
+      </NuxtLink>
+
+      <NuxtLink to="#marriages">
+        <Button label="View marriages" rounded />
+      </NuxtLink>
+
+      <NuxtLink to="#places">
+        <Button label="View related places" rounded />
+      </NuxtLink>
+    </div>
+
+    <!-- Macro tabla de personas. -->
     <SearchMacroTablePersons />
 
-    <h2 class="text-center uppercase">Global insights</h2>
-    <SearchInsights />
+    <hr />
+    <div id="insights">
+      <h2 class="text-center uppercase">Global insights</h2>
+      <SearchInsights />
+    </div>
+
+    <hr class="simplehr" />
     <div v-if="status === 'pending'">Loading data...</div>
-    <section v-else>
+    <section id="relations" v-else>
+      <h3 class="text-center uppercase">Relations</h3>
       <TabView>
         <TabPanel header="Relations">
           <GroupsRelationsMain
@@ -94,7 +120,22 @@ const { data, status, error } = await useFetch(`${api}/groups`, {
   body: filter.value,
 });
 
-console.log(data.value.personsrelationscyto);
+// console.log(data.value.personsrelationscyto);
 
 provide("persons", data.value.personsDetails);
 </script>
+
+<style scoped>
+hr {
+  border: none;
+  height: 20px;
+  background-color: #cd4f35; /* Color de la línea */
+  margin: 20px 0; /* Espaciado superior e inferior */
+}
+hr.simplehr {
+  border: none;
+  height: 5px;
+  background-color: #cd4f35; /* Color de la línea */
+  margin: 20px 0; /* Espaciado superior e inferior */
+}
+</style>

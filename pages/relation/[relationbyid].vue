@@ -98,6 +98,7 @@
       </div>
     </section>
   </div>
+  <hr />
   <!-- Detalles  -->
   <!-- we define details as ref({}) and therefore is always present and we have to check if it is void. -->
   <section v-if="Object.keys(details).length > 0" class="details-section">
@@ -105,16 +106,19 @@
     <p>Number of informations: {{ details.totalInformations }}</p>
     <div class="grid">
       <div class="col-4">
+        <h3>Positions held</h3>
         <DataTable :value="details.positions">
           <Column field="info" header="Position"></Column
         ></DataTable>
       </div>
       <div class="col-4">
+        <h3>Titles held</h3>
         <DataTable :value="details.titlesInf">
           <Column field="info" header="Titles"></Column
         ></DataTable>
       </div>
       <div class="col-4">
+        <h3>Places</h3>
         <DataTable :value="details.placesInf">
           <Column field="info" header="Place"></Column
         ></DataTable>
@@ -122,6 +126,7 @@
     </div>
     <SearchMacroTablePersons />
   </section>
+  <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
 </template>
 
 <script setup>
@@ -186,3 +191,12 @@ const onRowSelect = (event) => {
   personsdetails.value = details.value.personsWithRelation;
 };
 </script>
+
+<style scoped>
+hr {
+  border: none;
+  height: 20px;
+  background-color: #cd4f35; /* Color de la línea */
+  margin: 20px 0; /* Espaciado superior e inferior */
+}
+</style>

@@ -25,6 +25,7 @@
     </div>
   </div>
   <div>
+    <h3 class="text-center">Related persons to the main persons</h3>
     <DataTable
       v-model:filters="filters"
       :value="personsrelated"
@@ -61,7 +62,7 @@
         sortable
       ></Column>
     </DataTable>
-    <h3>Historical birth places</h3>
+    <h3 class="text-center">Historical birth places</h3>
     <DataTable
       :value="histBirthMatrimoniosSummary"
       paginator
@@ -80,7 +81,7 @@
       <Column field="count" header="Total" sortable></Column>
       <Column field="percentage" header="%" sortable> </Column>
     </DataTable>
-    <h2>Marriages and their territorial distribution</h2>
+    <h3 class="text-center">Marriages and their territorial distribution</h3>
     <TreeTable
       size="small"
       :value="histBirthMatrimoniosGroupBy"
@@ -349,5 +350,19 @@ if (props.placesrelated.length > 1) {
   border: 1px solid black;
   padding: 10px;
   z-index: 1000;
+}
+
+hr {
+  border: none;
+  height: 20px;
+  background-color: #cd4f35; /* Color de la línea */
+  margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+hr.simplehr {
+  border: none;
+  height: 5px;
+  background-color: #cd4f35; /* Color de la línea */
+  margin: 20px 0; /* Espaciado superior e inferior */
 }
 </style>
