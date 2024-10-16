@@ -5,99 +5,103 @@
   <div v-if="status === 'pending'">Loading data...</div>
   <div v-else-if="error">{{ error }}</div>
   <div v-else>
-    <div class="grid">
-      <div class="col-6">
-        <h2>Concrete data</h2>
-        <DataTable
-          paginator
-          stripedRows
-          :value="data.relationid"
-          :rows="10"
-          :rowsPerPageOptions="[5, 10, 20, 50]"
-          selectionMode="single"
-          dataKey="_id"
-          @rowSelect="onRowSelect"
-          tableStyle="min-width: 50rem"
-        >
-          <Column
-            v-for="col of columnsRel"
-            :key="col.field"
-            :field="col.field"
-            :header="col.header"
-            sortable
-          ></Column>
-        </DataTable>
-      </div>
-      <div class="col-6">
-        <h2>Positions</h2>
-        <DataTable
-          paginator
-          stripedRows
-          :value="data.positions"
-          :rows="10"
-          :rowsPerPageOptions="[5, 10, 20, 50]"
-          dataKey="_id"
-          tableStyle="min-width: 50rem"
-        >
-          <Column
-            v-for="col of columnsPositions"
-            :key="col.field"
-            :field="col.field"
-            :header="col.header"
-            sortable
-          ></Column>
-        </DataTable>
-      </div>
-    </div>
-    <!-- Agregados de lugares -->
-    <div>
+    <section>
+      <h2 class="mt-5 text-center uppercase">Aggregated data</h2>
       <div class="grid">
         <div class="col-6">
-          <h2>Places of Origins (aggregates)</h2>
-          <TreeTable
-            :value="data.infOriginsCountries"
-            :paginator="true"
+          <h2>Concrete data</h2>
+          <DataTable
+            paginator
+            stripedRows
+            :value="data.relationid"
             :rows="10"
-            size="small"
-            :rowsPerPageOptions="[10, 20, 30, 40]"
+            :rowsPerPageOptions="[5, 10, 20, 50]"
+            selectionMode="single"
+            dataKey="_id"
+            @rowSelect="onRowSelect"
+            tableStyle="min-width: 50rem"
           >
-            <template #empty> No positions found. </template>
             <Column
-              field="place"
-              header="Historical birth place"
+              v-for="col of columnsRel"
+              :key="col.field"
+              :field="col.field"
+              :header="col.header"
               sortable
-              expander
             ></Column>
-            <Column field="count" header="Total" sortable></Column>
-            <Column field="percentage" header="%" sortable></Column>
-          </TreeTable>
+          </DataTable>
         </div>
         <div class="col-6">
-          <h2>Historical Places of Origins (aggregates)</h2>
-          <TreeTable
-            :value="data.infOriginsHistBirths"
-            :paginator="true"
+          <h2>Positions</h2>
+          <DataTable
+            paginator
+            stripedRows
+            :value="data.positions"
             :rows="10"
-            size="small"
-            :rowsPerPageOptions="[10, 20, 30, 40]"
+            :rowsPerPageOptions="[5, 10, 20, 50]"
+            dataKey="_id"
+            tableStyle="min-width: 50rem"
           >
-            <template #empty> No positions found. </template>
             <Column
-              field="place"
-              header="Historical birth place"
+              v-for="col of columnsPositions"
+              :key="col.field"
+              :field="col.field"
+              :header="col.header"
               sortable
-              expander
             ></Column>
-            <Column field="count" header="Total" sortable></Column>
-            <Column field="percentage" header="%" sortable></Column>
-          </TreeTable>
+          </DataTable>
         </div>
       </div>
-    </div>
+      <!-- Agregados de lugares -->
+      <div>
+        <div class="grid">
+          <div class="col-6">
+            <h2>Countries of Origin (aggregated)</h2>
+            <TreeTable
+              :value="data.infOriginsCountries"
+              :paginator="true"
+              :rows="10"
+              size="small"
+              :rowsPerPageOptions="[10, 20, 30, 40]"
+            >
+              <template #empty> No positions found. </template>
+              <Column
+                field="place"
+                header="Historical birth place"
+                sortable
+                expander
+              ></Column>
+              <Column field="count" header="Total" sortable></Column>
+              <Column field="percentage" header="%" sortable></Column>
+            </TreeTable>
+          </div>
+          <div class="col-6">
+            <h2>Historical Places of Origin (aggregated)</h2>
+            <TreeTable
+              :value="data.infOriginsHistBirths"
+              :paginator="true"
+              :rows="10"
+              size="small"
+              :rowsPerPageOptions="[10, 20, 30, 40]"
+            >
+              <template #empty> No positions found. </template>
+              <Column
+                field="place"
+                header="Historical birth place"
+                sortable
+                expander
+              ></Column>
+              <Column field="count" header="Total" sortable></Column>
+              <Column field="percentage" header="%" sortable></Column>
+            </TreeTable>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
   <!-- Detalles  -->
-  <section v-if="details" class="details-section">
-    <h2>Details about {{ details._id }}</h2>
+  <!-- we define details as ref({}) and therefore is always present and we have to check if it is void. -->
+  <section v-if="Object.keys(details).length > 0" class="details-section">
+    <h2 class="mt-5 text-center uppercase">Details about {{ details._id }}</h2>
     <p>Number of informations: {{ details.totalInformations }}</p>
     <div class="grid">
       <div class="col-4">
@@ -138,9 +142,9 @@ const { data, status, error } = await useFetch(
   `${api}/relations/${useRoute().params.relationbyid}`,
 );
 
-if (data) {
-  console.log(data.value.positions);
-}
+// if (data) {
+//   console.log(data.value.positions);
+// }
 
 const columnsRel = [
   { field: "_id", header: "Person" },
@@ -155,17 +159,6 @@ const columnsPositions = [
 const onRowSelect = (event) => {
   details.value = event.data;
 
-  // esto se puede hacer mejor con algo así para no repetir el código similar:
-  // function transformArrays(object, fields) {
-  //  fields.forEach(field => {
-  //    if (Array.isArray(object[field])) {
-  //      object[field] = object[field].map(item => {
-  //        return { value: item }; // o cualquier otra clave
-  //      });
-  //    }
-  //  });
-  //}
-  //
   details.value.positions = details.value.positions.map((position) => {
     return { info: position };
   });
