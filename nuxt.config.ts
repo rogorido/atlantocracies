@@ -1,3 +1,4 @@
+import Aura from "@primevue/themes/aura";
 const isProdEnv = process.env.NODE_ENV === "production";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -20,11 +21,13 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxtjs/robots",
-    "nuxt-primevue",
+    "@primevue/nuxt-module",
     "@nuxt/content",
     "@pinia/nuxt",
-    "@nuxt/image"
+    "@nuxt/image",
   ],
+
+  primevue: { options: { theme: { preset: Aura } } },
 
   $development: {
     debug: true,
@@ -33,3 +36,4 @@ export default defineNuxtConfig({
   robots: { rules: { UserAgent: "*", Disallow: "/" } },
   compatibilityDate: "2024-10-18",
 });
+

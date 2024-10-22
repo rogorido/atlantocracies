@@ -72,7 +72,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { usePlacesStore } from "../stores/placesStore";
-import { FilterMatchMode } from "primevue/api";
+import { FilterMatchMode } from "@primevue/core/api";
 
 // es imporante lo de v-if con loaded pq si no locarga antes de tener los datos...
 // https://vue-chartjs.org/guide/#chart-with-api-data

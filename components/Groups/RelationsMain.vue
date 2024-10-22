@@ -93,7 +93,7 @@
 </template>
 
 <script setup>
-import { FilterMatchMode } from "primevue/api";
+import { FilterMatchMode } from "@primevue/core/api";
 import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
 

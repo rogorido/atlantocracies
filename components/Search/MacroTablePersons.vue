@@ -177,7 +177,7 @@
 <script setup>
 import { usePersonsStore } from "../stores/personsStore";
 
-import { FilterMatchMode } from "primevue/api";
+import { FilterMatchMode } from "@primevue/core/api";
 
 const dt = ref(); // reference to the datatable to export!
 
