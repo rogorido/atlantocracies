@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MenuBar />
+    <OwnMenuBar />
     <Hero />
     <slot />
     <FooterGeneral />

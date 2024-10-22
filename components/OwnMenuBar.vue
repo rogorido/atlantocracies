@@ -28,12 +28,7 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
-const items = reactive([
+const items = ref([
   {
     label: "Home",
     icon: "pi pi-home",
