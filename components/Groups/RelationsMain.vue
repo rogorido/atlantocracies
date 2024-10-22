@@ -129,7 +129,7 @@ const filters = ref({
 });
 
 watch(filters, () => {
-  console.log("en modificación");
+  // console.log("en modificación");
 
   // const leches = network.edges('[type != "' + selectedRelation.value + '"]');
   // // console.log(leches);
@@ -182,6 +182,10 @@ onMounted(() => {
       {
         selector: ".Matrimonio",
         style: { "line-color": "red", "line-style": "dashed" },
+      },
+      {
+        selector: ".parent",
+        style: { "line-color": "green", "line-style": "dashed" },
       },
     ],
   });

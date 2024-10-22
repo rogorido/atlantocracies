@@ -31,7 +31,7 @@
           </DataTable>
         </div>
         <div class="col-6">
-          <h2>Positions</h2>
+          <h2>Positions (total, not persons!)</h2>
           <DataTable
             paginator
             stripedRows
@@ -55,7 +55,9 @@
       <div>
         <div class="grid">
           <div class="col-6">
-            <h2>Countries of Origin (aggregated)</h2>
+            <h2>
+              Countries of Origin (aggregated): Place <-> Present countries
+            </h2>
             <TreeTable
               :value="data.infOriginsCountries"
               :paginator="true"
@@ -66,7 +68,7 @@
               <template #empty> No positions found. </template>
               <Column
                 field="place"
-                header="Historical birth place"
+                header="Place | Current country"
                 sortable
                 expander
               ></Column>
@@ -75,7 +77,10 @@
             </TreeTable>
           </div>
           <div class="col-6">
-            <h2>Historical Places of Origin (aggregated)</h2>
+            <h2>
+              Historical Places of Origin (aggregated): Place <-> Historical
+              countries
+            </h2>
             <TreeTable
               :value="data.infOriginsHistBirths"
               :paginator="true"
@@ -86,7 +91,7 @@
               <template #empty> No positions found. </template>
               <Column
                 field="place"
-                header="Historical birth place"
+                header="Place | Historical country"
                 sortable
                 expander
               ></Column>

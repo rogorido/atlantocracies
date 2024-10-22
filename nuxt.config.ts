@@ -5,8 +5,10 @@ const isProdEnv = process.env.NODE_ENV === "production";
 export default defineNuxtConfig({
   devtools: { enabled: true },
   build: {},
+
   //ssr: true,
   ssr: false,
+
   runtimeConfig: {
     public: {
       apiBaseUrl: isProdEnv
@@ -15,6 +17,7 @@ export default defineNuxtConfig({
       uiVersion: process.env.npm_package_version,
     },
   },
+
   modules: [
     "@nuxtjs/robots",
     "nuxt-primevue",
@@ -22,8 +25,11 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxt/image"
   ],
+
   $development: {
     debug: true,
   },
+
   robots: { rules: { UserAgent: "*", Disallow: "/" } },
+  compatibilityDate: "2024-10-18",
 });
