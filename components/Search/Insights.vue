@@ -1,8 +1,16 @@
 <template>
   <div>
     <h2 id="insights" class="mt-5 text-center uppercase">Insights</h2>
-    <TabView>
-      <TabPanel header="Birth years in decades">
+    <Tabs value="0">
+      <TabList>
+        <Tab value="0">Birth years in decades</Tab>
+        <Tab value="1">Gender</Tab>
+        <Tab value="2">Birth places (historical)</Tab>
+        <Tab value="3">Positions</Tab>
+        <Tab value="4">Titles</Tab>
+      </TabList>
+
+      <TabPanel value="0">
         <div class="grid">
           <div class="col-6">
             <h2>Birth years</h2>
@@ -29,7 +37,7 @@
           </div>
         </div>
       </TabPanel>
-      <TabPanel header="Gender">
+      <TabPanel value="1">
         <div class="grid">
           <div class="col-6">
             <h2>Table</h2>
@@ -58,7 +66,7 @@
           </div>
         </div>
       </TabPanel>
-      <TabPanel header="Birth places (historical)">
+      <TabPanel value="2">
         <div class="grid">
           <div class="col-6">
             <h2>Birth places (historical)</h2>
@@ -90,7 +98,7 @@
           </div>
         </div>
       </TabPanel>
-      <TabPanel header="Positions">
+      <TabPanel value="3">
         <div class="grid">
           <div class="col-6">
             <h2>Has positions</h2>
@@ -150,7 +158,7 @@
           </div>
         </div>
       </TabPanel>
-      <TabPanel header="Titles">
+      <TabPanel value="4">
         <div class="grid">
           <div class="col-6">
             <h2>Has titles</h2>
@@ -184,7 +192,7 @@
           </div>
         </div>
       </TabPanel>
-    </TabView>
+    </Tabs>
   </div>
 </template>
 

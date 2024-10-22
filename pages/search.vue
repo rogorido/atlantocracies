@@ -211,7 +211,7 @@ function onReset() {
 </script>
 
 <style>
-ul.p-tabview-nav {
+.p-tablist-tab-list {
   justify-content: center;
 }
 

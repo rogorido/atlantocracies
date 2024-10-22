@@ -18,8 +18,15 @@
     <div v-if="status">Loading data...</div>
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
-      <TabView>
-        <TabPanel header="Related persons">
+      <Tabs>
+        <TabList>
+          <Tab value="0">Related persons</Tab>
+          <Tab value="1">Related places</Tab>
+          <Tab value="2">Related events</Tab>
+        </TabList>
+
+        <!-- Related persons -->
+        <TabPanel value="0">
           <h2>Persons related to {{ useRoute().params.placebyid }}</h2>
           <p>
             There are {{ data.personsall.length }} persons related to
@@ -29,11 +36,14 @@
           <SearchMacroTablePersons />
         </TabPanel>
 
-        <TabPanel header="Related places">
+        <!-- Related places -->
+        <TabPanel value="1">
           <h2>Places related to {{ useRoute().params.placebyid }}</h2>
           <PlacesRelatedPlaces :placesrelated="data.placesrelated" />
         </TabPanel>
-        <TabPanel header="Related events">
+
+        <!-- Related events -->
+        <TabPanel value="2">
           <div class="grid">
             <div class="col-6">
               <h2>Events related to {{ useRoute().params.placebyid }}</h2>
@@ -44,7 +54,7 @@
             </div>
           </div>
         </TabPanel>
-      </TabView>
+      </Tabs>
     </div>
   </div>
 </template>

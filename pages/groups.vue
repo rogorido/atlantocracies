@@ -33,8 +33,12 @@
     <div v-if="status === 'pending'">Loading data...</div>
     <section id="relations" v-else>
       <h3 class="text-center uppercase">Relations</h3>
-      <TabView>
-        <TabPanel header="Relations">
+      <Tabs value="0">
+        <TabList>
+          <Tab value="0">Relations</Tab>
+        </TabList>
+
+        <TabPanel value="0">
           <GroupsRelationsMain
             :personsrelatedcyto="data.personsrelationscyto"
             :personsrelated="data.personsrelationstable"
@@ -96,7 +100,7 @@
         <!--     ></Column> -->
         <!--   </DataTable> -->
         <!-- </TabPanel> -->
-      </TabView>
+      </Tabs>
     </section>
     <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
   </div>

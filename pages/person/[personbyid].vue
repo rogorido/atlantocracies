@@ -5,8 +5,17 @@
     <h1 class="text-center">
       {{ data.persondetails ? data.persondetails.name : "" }}
     </h1>
-    <TabView>
-      <TabPanel header="Relations">
+    <Tabs>
+      <TabList>
+        <Tab value="0">Relations</Tab>
+        <Tab value="1">Events</Tab>
+        <Tab value="2">Positions</Tab>
+        <Tab value="3">Titles</Tab>
+        <Tab value="4">Places</Tab>
+      </TabList>
+
+      <!-- Relations -->
+      <TabPanel value="0">
         <div class="grid">
           <div class="col-6">
             <h2>Relations</h2>
@@ -17,7 +26,9 @@
           </div>
         </div>
       </TabPanel>
-      <TabPanel header="Events">
+
+      <!-- Events -->
+      <TabPanel value="1">
         <div class="grid">
           <div class="col-6">
             <h2>Events</h2>
@@ -30,13 +41,17 @@
           </div>
         </div>
       </TabPanel>
-      <TabPanel header="Positions">
+
+      <!-- Positions -->
+      <TabPanel value="2">
         <div class="col-6">
           <h2>Positions</h2>
           <PersonsPositionsTable :positions="data.persondetails.positions" />
         </div>
       </TabPanel>
-      <TabPanel header="Titles">
+
+      <!-- Titles -->
+      <TabPanel value="3">
         <div class="grid">
           <div class="col-6">
             <h2>Titles</h2>
@@ -44,7 +59,9 @@
           </div>
         </div>
       </TabPanel>
-      <TabPanel header="Places">
+
+      <!-- Places -->
+      <TabPanel value="4">
         <div class="grid">
           <div class="col-6">
             <h2>Places</h2>
@@ -65,7 +82,7 @@
           </div>
         </div>
       </TabPanel>
-    </TabView>
+    </Tabs>
   </div>
 </template>
 
