@@ -94,6 +94,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: ["protected"],
+});
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 

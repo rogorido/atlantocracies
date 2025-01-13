@@ -108,6 +108,10 @@
 
 <script setup>
 // import { usePersonsStore } from "@/stores/personsStore";
+definePageMeta({
+  middleware: ["protected"],
+});
+
 import { useFilterStore } from "@/stores/filterStore";
 
 const config = useRuntimeConfig();
