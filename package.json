@@ -2,7 +2,7 @@
   "name": "AtlantoUI",
   "private": true,
   "author": "Igor Sosa Mayor <joseleopoldo1792@gmail.com>",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -16,29 +16,29 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@nuxt/content": "^2.13.4",
-    "@nuxtjs/robots": "^4.1.11",
-    "@pinia/nuxt": "^0.7.0",
-    "@primevue/themes": "^4.2.1",
-    "chart.js": "^4.4.6",
-    "cytoscape": "^3.30.3",
+    "@nuxtjs/robots": "^5.1.0",
+    "@pinia/nuxt": "^0.9.0",
+    "@primevue/themes": "^4.2.5",
+    "chart.js": "^4.4.7",
+    "cytoscape": "^3.30.4",
     "cytoscape-fcose": "^2.2.0",
     "cytoscape-klay": "^3.1.4",
-    "ol": "^10.2.1",
+    "ol": "^10.3.1",
     "ol-contextmenu": "^5.5.0",
     "ol-ext": "^4.0.24",
-    "pinia": "^2.2.6",
+    "pinia": "^2.3.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
-    "primevue": "^4.2.1",
+    "primevue": "^4.2.5",
     "vis-network": "^9.1.9",
     "vis-timeline": "^7.7.3",
-    "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@nuxt/image": "^1.8.1",
-    "@primevue/nuxt-module": "^4.2.1",
-    "nuxt": "^3.14.159",
-    "sass": "^1.80.6"
+    "@nuxt/image": "^1.9.0",
+    "@primevue/nuxt-module": "^4.2.5",
+    "nuxt": "^3.15.1",
+    "sass": "^1.83.1"
   }
 }
