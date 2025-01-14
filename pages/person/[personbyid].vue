@@ -23,7 +23,7 @@
             <PersonsRelationsTable :relations="data.persondetails.relations" />
           </div>
           <div class="col-6">
-            <PersonsRelationsGraph :personsrelated="data.personnetwork" />
+            <PersonsRelationsGraph :personsrelatedcyto="data.personnetwork" />
           </div>
         </div>
       </TabPanel>
@@ -35,11 +35,11 @@
             <h2>Events</h2>
             <PersonsEventsTable :events="data.persondetails.events" />
           </div>
-          <div class="col-6">
-            <PersonsEventsTimeLine
-              :eventstimeline="data.personeventstimeline"
-            />
-          </div>
+          <!-- <div class="col-6"> -->
+          <!--   <PersonsEventsTimeLine -->
+          <!--     :eventstimeline="data.personeventstimeline" -->
+          <!--   /> -->
+          <!-- </div> -->
         </div>
       </TabPanel>
 
