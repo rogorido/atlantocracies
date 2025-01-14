@@ -3,7 +3,7 @@
     <button class="close-btn" @click="$emit('close')">&times;</button>
     <div v-if="data.isNode">
       <h3>Person selected</h3>
-      <p><strong>ID:</strong> {{ data.id }}</p>
+      <!-- <p><strong>ID:</strong> {{ data.id }}</p> -->
       <p><strong>Name:</strong> {{ data.label }}</p>
     </div>
     <div v-else>

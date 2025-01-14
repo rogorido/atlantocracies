@@ -152,8 +152,6 @@ watch(filters, () => {
       .remove();
 
     removedElements = removedNodes.union(removedEdges);
-
-    console.log("Elementos eliminados:", removedElements);
   }
 });
 
