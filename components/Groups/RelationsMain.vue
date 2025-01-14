@@ -20,7 +20,7 @@
       <GroupsRelationsSummaryTable :personsrelated="personsrelated" />
     </div>
   </div>
-  <div id="Relationships Graph">
+  <div id="RelationshipsGraph">
     <h3 class="text-center">Graph of relationships</h3>
     <div id="cyto" ref="cyto"></div>
     <GroupsCytoPopup
