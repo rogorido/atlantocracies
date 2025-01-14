@@ -142,9 +142,18 @@ watch(filters, () => {
 
   // solo si hay un valor quitamos lso edges
   if (filters.value.typeRelation.value) {
-    removedElements = network
+    let removedEdges = network
       .edges('[type != "' + filters.value.typeRelation.value + '"]')
       .remove();
+
+    let removedNodes = network
+      .nodes()
+      .filter((node) => node.degree() === 0)
+      .remove();
+
+    removedElements = removedNodes.union(removedEdges);
+
+    console.log("Elementos eliminados:", removedElements);
   }
 });
 
