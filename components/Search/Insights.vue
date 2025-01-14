@@ -8,6 +8,7 @@
         <Tab value="2">Birth places (historical)</Tab>
         <Tab value="3">Positions</Tab>
         <Tab value="4">Titles</Tab>
+        <Tab value="5">Sources</Tab>
       </TabList>
 
       <TabPanel value="0">
@@ -190,6 +191,35 @@
               <Column key="percent" field="percent" header="%"></Column>
             </DataTable>
           </div>
+        </div>
+      </TabPanel>
+      <TabPanel value="5">
+        <div class="grid">
+          <div class="col-6">
+            <h2>Table</h2>
+            <DataTable
+              :value="insightsData.sourcesData"
+              stripedRows
+              :rows="10"
+              selectionMode="single"
+              dataKey="_id"
+              tableStyle="min-width: 50rem"
+              v-if="loaded"
+            >
+              <Column key="source" field="source" header="Source"></Column>
+              <Column key="count" field="count" header="Total"></Column>
+              <Column key="percent" field="percent" header="%"></Column>
+            </DataTable>
+          </div>
+          <!-- <div class="col-6"> -->
+          <!--   <h2>Sources</h2> -->
+          <!--   <GendersChart -->
+          <!--     class="graph" -->
+          <!--     v-if="loaded" -->
+          <!--     :chartData="insightsData.sourcesChartData" -->
+          <!--     :options="options" -->
+          <!--   /> -->
+          <!-- </div> -->
         </div>
       </TabPanel>
     </Tabs>

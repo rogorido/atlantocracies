@@ -80,6 +80,8 @@ const persons = ref([]);
 const analyzeButtonDisabled = ref(true);
 
 const insightsData = reactive({
+  sourcesData: null,
+  sourcesChartData: null,
   gendersData: null,
   gendersChartData: null,
   histBirthsChartData: null,
@@ -128,6 +130,8 @@ async function updateData() {
 
   persons.value = data.result;
 
+  insightsData.sourcesData = data.sourcesData;
+  insightsData.sourcesChartData = data.sourcesChartData;
   insightsData.gendersData = data.gendersData;
   insightsData.gendersChartData = data.gendersChartData;
   insightsData.histBirthsChartData = data.histBirthsChartData;
@@ -163,7 +167,19 @@ function calculatePercentages() {
     });
   }
 
-  // Calcular la suma total de todos los valores
+  // sources data
+  if (Array.isArray(insightsData.sourcesData)) {
+    const total = insightsData.sourcesData.reduce(
+      (total, obj) => total + obj.count,
+      0,
+    );
+    insightsData.sourcesData.forEach((obj) => {
+      let porcentaje = (obj.count / total) * 100;
+      obj.percent = porcentaje.toFixed(2);
+    });
+  }
+
+  // histBirthsData
   if (Array.isArray(insightsData.histBirthsData)) {
     const sumaTotal = insightsData.histBirthsData.reduce(
       (total, obj) => total + obj.count,
