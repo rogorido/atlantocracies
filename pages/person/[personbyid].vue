@@ -1,11 +1,12 @@
 <template>
   <div v-if="status === 'pending'">Loading data...</div>
-  <div v-else-if="error">{{ error }}</div>
+  <div v-else-if="status === 'error'">{{ error }}</div>
   <div v-else>
     <h1 class="text-center">
       {{ data.persondetails ? data.persondetails.name : "" }}
     </h1>
-    <Tabs>
+    <p>Esto es una prueba {{ data.persondetails.gender }}</p>
+    <Tabs value="0">
       <TabList>
         <Tab value="0">Relations</Tab>
         <Tab value="1">Events</Tab>
@@ -87,17 +88,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { usePersonsStore } from "../../stores/personsStore";
+// import { ref, computed } from "vue";
+// import { usePersonsStore } from "../../stores/personsStore";
 
 //import { createSlug } from "../../utils/createSlug.ts";
 //console.log(createSlug(useRoute().params.placebyid));
 
-const loaded = ref(false);
-const store = usePersonsStore();
-
-const eventstimeline = ref({});
-const relationsnetwork = ref({});
+// const loaded = ref(false);
+// const store = usePersonsStore();
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
@@ -106,28 +104,4 @@ const api = config.public.apiBaseUrl;
 const { data, status, error } = await useLazyFetch(
   `${api}/persons/personsbyid/${useRoute().params.personbyid}`,
 );
-const loadPersonsData = async () => {
-  try {
-    eventstimeline.value = data.personeventstimeline;
-    relationsnetwork.value = data.personnetwork;
-
-    loaded.value = true;
-  } catch (err) {
-    console.log("error en mymap5", err);
-  }
-};
-
-const columns = [
-  { field: "name", header: "Name" },
-  { field: "gender", header: "Gender" },
-  { field: "histBirth", header: "Birth territory" },
-  { field: "wasMarried", header: "Was married" },
-  //  { field: "hasFather", header: "Has father" },
-  { field: "hasMother", header: "Has mother" },
-  { field: "tiposEventos", header: "Eventos" },
-];
-
-const getName = computed(() => {
-  personData.value.name;
-});
 </script>
