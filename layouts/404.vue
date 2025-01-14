@@ -1,6 +1,8 @@
 <template>
   <div>
-    Layout: 404
+    <OwnMenuBar />
+    <Hero />
     <slot />
+    <FooterGeneral />
   </div>
 </template>
