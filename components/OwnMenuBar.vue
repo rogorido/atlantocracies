@@ -25,17 +25,17 @@
       </a>
     </template>
   </Menubar>
-  <nav v-if="authStore.isAuthenticated">
-    <button @click="authStore.logout">Logout</button>
-  </nav>
-  <nav v-else class="flex gap-4">
-    <NuxtLink to="/login" class="text-blue-500 hover:text-blue-600">
-      Login
-    </NuxtLink>
-    <!-- <NuxtLink to="/signup" class="text-blue-500 hover:text-blue-600"> -->
-    <!--   Sign Up -->
-    <!-- </NuxtLink> -->
-  </nav>
+  <!-- <nav v-if="authStore.isAuthenticated"> -->
+  <!--   <button @click="authStore.logout">Logout</button> -->
+  <!-- </nav> -->
+  <!-- <nav v-else class="flex gap-4"> -->
+  <!--   <NuxtLink to="/login" class="text-blue-500 hover:text-blue-600"> -->
+  <!--     Login -->
+  <!--   </NuxtLink> -->
+  <!--   <!-- <NuxtLink to="/signup" class="text-blue-500 hover:text-blue-600"> -->
+  <!--   <!--   Sign Up -->
+  <!--   <!-- </NuxtLink> -->
+  <!-- </nav> -->
 </template>
 
 <script setup>
@@ -98,6 +98,11 @@ const items = ref([
         route: "/management",
       },
     ],
+  },
+  {
+    label: "Login/Logout",
+    icon: "pi pi-users",
+    route: "/login",
   },
 ]);
 
