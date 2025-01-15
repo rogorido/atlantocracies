@@ -38,18 +38,17 @@
 import { useSelectManagement } from "~/composables/SelectManagement";
 
 const { filter, selectedItems } = useSelectManagement("dates");
-selectedItems.value = [1450, 1800];
 
-// const valor1 = ref(selectedItems[0]);
-// const valor2 = ref(selectedItems[1]);
+// we put the initial values
+selectedItems.value = [1450, 1800];
 
 // NOTE: imporante hay que usar deep:true. Entiendo que porque es un array
 // pero por qué funciona en los otros. Yo creo que es porque cambio un valodr
 // dentro del array en los componentes.
+// NOTE: important is to convert the array to strings to compare them!
 watch(
   selectedItems,
   () => {
-    console.log("el valor es", JSON.stringify(selectedItems.value, null, 2));
     if (selectedItems.value.toString() === [1450, 1800].toString()) {
       delete filter.value.deathYear;
     } else {
