@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center">Search</h1>
+    <h1 class="text-center">General Search</h1>
 
     <div class="grid">
       <div class="col-4">
@@ -60,16 +60,12 @@
       <section>
         <SearchMacroTablePersons />
       </section>
-      <section>
-        <SearchInsights />
-      </section>
     </div>
     <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
   </div>
 </template>
 
 <script setup>
-import SourceSelect from "~/components/Search/SourceSelect.vue";
 import { useFilterStore } from "../stores/filterStore";
 import { usePersonsStore } from "../stores/personsStore";
 
