@@ -6,20 +6,26 @@
       <div class="col-8">
         <Tabs value="0">
           <TabList>
-            <Tab value="0">Personal filters</Tab>
+            <Tab
+              v-tooltip="'Select filters related to personal aspects.'"
+              value="0"
+              >Personal filters</Tab
+            >
             <Tab value="1">Professional filters</Tab>
           </TabList>
           <TabPanels>
             <TabPanel value="0">
               <SearchGenderOption />
               <SearchMarriedOption />
-              <SearchHasEventsOption />
-              <SearchHasTitlesOption />
-              <SearchHasPositionsOption />
+              <SearchBirthSelect />
+              <SearchDeathSelect />
               <SearchHistBirthsSelect />
               <SearchSourceSelect />
             </TabPanel>
             <TabPanel value="1">
+              <SearchHasEventsOption />
+              <SearchHasTitlesOption />
+              <SearchHasPositionsOption />
               <SearchPositionsSelect />
               <SearchRelationsSelect />
               <SearchTitlesSelect />
@@ -40,11 +46,16 @@
       </div>
     </div>
     <div class="flex gap-3">
-      <Button label="Reset filters" @click="onReset" />
+      <Button
+        v-tooltip="'Reset all filters.'"
+        label="Reset filters"
+        @click="onReset"
+      />
 
       <NuxtLink to="/groups">
         <Button
           label="Analyze the group"
+          v-tooltip="'Analyze the selected group. You have to be logged in.'"
           :disabled="analyzeButtonDisabled"
           rounded
         />
@@ -61,6 +72,7 @@
 </template>
 
 <script setup>
+import { Tab } from "primevue";
 import { useFilterStore } from "../stores/filterStore";
 import { usePersonsStore } from "../stores/personsStore";
 

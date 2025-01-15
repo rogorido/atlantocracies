@@ -123,6 +123,7 @@ const api = config.public.apiBaseUrl;
 const storefilter = useFilterStore();
 const { filter } = storeToRefs(storefilter);
 
+// NOTE: no veo diferencia usando uselazyfetch... por qué?
 const { data, status, error } = await useFetch(`${api}/groups`, {
   method: "POST",
   body: filter.value,
