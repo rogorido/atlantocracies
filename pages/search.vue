@@ -152,18 +152,16 @@ async function updateData() {
 
   calculatePercentages();
 
-  // storepersons.persons = persons.value;
   storepersons.insightsData = insightsData;
 
-  if (Object.keys(filter.value).length === 0) {
-    analyzeButtonDisabled.value = true;
-  } else if (
-    Object.keys(filter.value).length > 0 &&
-    !authStore.isAuthenticated
-  ) {
+  // Analyze only avalaible under some circumstances
+  if (!authStore.isAuthenticated) {
     analyzeButtonDisabled.value = true;
   } else {
-    analyzeButtonDisabled.value = false;
+    // If there is no filter we disable analysis...
+    Object.keys(filter.value).length === 0
+      ? (analyzeButtonDisabled.value = true)
+      : (analyzeButtonDisabled.value = false);
   }
 }
 
