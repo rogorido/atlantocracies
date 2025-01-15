@@ -19,7 +19,7 @@
 <script setup>
 import { useSelectManagement } from "~/composables/SelectManagement";
 
-const { filter, selectedItems } = useSelectManagement(false);
+const { filter, selectedItems } = useSelectManagement("multiselect");
 
 selectedItems.value = "All";
 

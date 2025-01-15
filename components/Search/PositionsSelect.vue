@@ -19,7 +19,7 @@ import { useSelectManagement } from "~/composables/SelectManagement";
 const loading = ref(true);
 const storepositions = usePositionsStore();
 
-const { filter, selectedItems, items } = useSelectManagement(true);
+const { filter, selectedItems, items } = useSelectManagement("multiselect");
 
 if (!storepositions.initialized === true) {
   await storepositions.fetchPositions();

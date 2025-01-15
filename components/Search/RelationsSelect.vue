@@ -18,7 +18,7 @@ import { useSelectManagement } from "~/composables/SelectManagement";
 
 const loading = ref(true);
 const storerelations = useRelationsStore();
-const { filter, selectedItems, items } = useSelectManagement(true);
+const { filter, selectedItems, items } = useSelectManagement("multiselect");
 
 if (!storerelations.initialized === true) {
   await storerelations.fetchRelations();

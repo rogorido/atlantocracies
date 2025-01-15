@@ -3,13 +3,13 @@
     v-model="selectedItems"
     display="chip"
     filter
+    v-tooltip="'Select the historical place of birth to filter on.'"
     :loading="loading"
     :options="items"
     optionLabel="_id"
-    placeholder="Select historical birth
-  country"
+    placeholder="Select historical birth country"
     :maxSelectedLabels="3"
-    class="w-full"
+    class="mb-3 w-full"
   />
 </template>
 
@@ -19,7 +19,7 @@ import { useSelectManagement } from "~/composables/SelectManagement";
 
 const loading = ref(true);
 const storehistbirths = useHistBirthsStore();
-const { filter, selectedItems, items } = useSelectManagement(true);
+const { filter, selectedItems, items } = useSelectManagement("multiselect");
 
 if (!storehistbirths.initialized === true) {
   await storehistbirths.fetchHistBirths();

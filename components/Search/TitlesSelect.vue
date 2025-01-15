@@ -13,6 +13,7 @@
   <MultiSelect
     v-model="selectedContinents"
     display="chip"
+    v-show="showContinent"
     filter
     :loading="loading"
     :options="titlescontinents"
@@ -30,11 +31,13 @@ import { useSelectManagement } from "~/composables/SelectManagement";
 const selectedContinents = ref([]);
 const loading = ref(true);
 const storetitles = useTitlesStore();
-const { filter, selectedItems, items } = useSelectManagement(true);
+const { filter, selectedItems, items } = useSelectManagement("multiselect");
 
 if (!storetitles.initialized === true) {
   await storetitles.fetchTitles();
 }
+
+const showContinent = ref(false);
 
 items.value = storetitles.titlesList;
 const titlescontinents = storetitles.titlesContinentsList;
@@ -45,6 +48,7 @@ watch(selectedItems, () => {
     if (selectedItems.value.length === 0) {
       delete filter.value.titles;
       selectedContinents.value = [];
+      showContinent.value = false;
     } else {
       // Initialize filter.titles if it doesn't exist
       filter.value.titles = filter.value.titles || {};
@@ -56,6 +60,8 @@ watch(selectedItems, () => {
       filter.value.titles.nomTit = selectedItems.value.map(
         (title) => title._id,
       );
+
+      showContinent.value = true;
     }
   }
 });
@@ -83,7 +89,11 @@ watch(selectedContinents, () => {
 
 // TODO: habría que cargar tb el valor de los otros campos (continentes, etc.)
 onMounted(() => {
-  if (Object.keys(filter.value).length != 0) {
+  // IMPORTANT: we have to add "&& filter.value.titles" because otherwise
+  // the check filter.value.titles.nomTit gives an error because filter.value.title
+  // does not exist.
+  // TODO: creo que hay otra forma de hacer esto...
+  if (Object.keys(filter.value).length != 0 && filter.value.titles) {
     if (filter.value.titles.nomTit != undefined) {
       selectedItems.value = filter.value.titles.nomTit.map((title) => {
         return { _id: title };

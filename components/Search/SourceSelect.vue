@@ -6,7 +6,7 @@
     :loading="loading"
     :options="items"
     optionLabel="_id"
-    placeholder="Select sources"
+    placeholder="Select the historical source(s) to filter on"
     :maxSelectedLabels="3"
     class="mb-3 w-full"
   />
@@ -18,7 +18,7 @@ import { useSelectManagement } from "~/composables/SelectManagement";
 
 const loading = ref(true);
 const storesources = useSourcesStore();
-const { filter, selectedItems, items } = useSelectManagement(true);
+const { filter, selectedItems, items } = useSelectManagement("multiselect");
 
 if (!storesources.initialized === true) {
   await storesources.fetchSources();
@@ -37,7 +37,6 @@ watch(selectedItems, () => {
   }
 });
 
-// TODO: habría que cargar tb el valor de los otros campos (continentes, etc.)
 onMounted(() => {
   if (Object.keys(filter.value).length != 0) {
     if (filter.value.source != undefined) {

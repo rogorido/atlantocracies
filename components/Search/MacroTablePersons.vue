@@ -38,14 +38,14 @@
         </template>
       </Column>
       <Column
-        field="birthyear"
+        field="birthYear"
         header="Birth Year"
         dataType="numeric"
         style="min-width: 3rem"
         sortable
       />
       <Column
-        field="deathyear"
+        field="deathYear"
         header="Death date"
         dataType="numeric"
         style="min-width: 6rem"
