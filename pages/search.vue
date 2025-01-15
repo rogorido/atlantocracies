@@ -3,21 +3,29 @@
     <h1 class="text-center">General Search</h1>
 
     <div class="grid">
-      <div class="col-4">
-        <SearchGenderOption />
-        <SearchMarriedOption />
-        <SearchHasEventsOption />
-        <SearchHasTitlesOption />
-        <SearchHasPositionsOption />
-        <SearchSourceSelect />
-      </div>
-
-      <div class="col-4">
-        <!-- TODO faltan lo de places  -->
-        <SearchPositionsSelect />
-        <SearchHistBirthsSelect />
-        <SearchRelationsSelect />
-        <SearchTitlesSelect />
+      <div class="col-8">
+        <Tabs value="0">
+          <TabList>
+            <Tab value="0">Personal filters</Tab>
+            <Tab value="1">Professional filters</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel value="0">
+              <SearchGenderOption />
+              <SearchMarriedOption />
+              <SearchHasEventsOption />
+              <SearchHasTitlesOption />
+              <SearchHasPositionsOption />
+              <SearchHistBirthsSelect />
+              <SearchSourceSelect />
+            </TabPanel>
+            <TabPanel value="1">
+              <SearchPositionsSelect />
+              <SearchRelationsSelect />
+              <SearchTitlesSelect />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </div>
 
       <div class="col-4">
@@ -33,9 +41,7 @@
     </div>
     <div class="flex gap-3">
       <Button label="Reset filters" @click="onReset" />
-    </div>
 
-    <div class="flex gap-3 mt-4">
       <NuxtLink to="/groups">
         <Button
           label="Analyze the group"
@@ -80,7 +86,7 @@ const loaded = ref(false);
 const storefilter = useFilterStore();
 const storepersons = usePersonsStore();
 
-// si no use storeToRefs funciona cuando actualizo en los componentes
+// si no uso storeToRefs funciona cuando actualizo en los componentes
 // pero no si actualizo directamente en el store con $reset.
 // Esto obliga a usar luego .value!
 // Además no sé por qué no desestructura solo el filter
@@ -115,6 +121,8 @@ async function updateData() {
 
   persons.value = data.result;
 
+  // TODO:: actualizamos todo esto que en principio lo usa Insights que antes estaba aquí
+  // no sé si quitarlo de aquí?
   insightsData.sourcesData = data.sourcesData;
   insightsData.sourcesChartData = data.sourcesChartData;
   insightsData.gendersData = data.gendersData;
