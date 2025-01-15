@@ -33,20 +33,9 @@
     </div>
     <div class="flex gap-3">
       <Button label="Reset filters" @click="onReset" />
-      <Button label="Save filter" disabled />
-      <Button label="Load filter" disabled />
-      <Button label="Save results" disabled />
     </div>
 
     <div class="flex gap-3 mt-4">
-      <NuxtLink to="#selectedpersons">
-        <Button label="View Persons" rounded />
-      </NuxtLink>
-
-      <NuxtLink to="#insights">
-        <Button label="View insights" rounded />
-      </NuxtLink>
-
       <NuxtLink to="/groups">
         <Button
           label="Analyze the group"
