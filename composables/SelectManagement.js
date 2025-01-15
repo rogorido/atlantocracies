@@ -24,7 +24,7 @@ export const useSelectManagement = (typeoffield) => {
       } else if (typeoffield === "options") {
         selectedItems.value = "All";
       } else if (typeoffield === "dates") {
-        selectedItems.value = [1450, 1800];
+        selectedItems.value = [1400, 1900];
       }
     }
   });
