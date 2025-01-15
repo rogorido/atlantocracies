@@ -5,8 +5,8 @@
       v-model="selectedItems[0]"
       showButtons
       buttonLayout="horizontal"
-      :min="1450"
-      :max="1800"
+      :min="1400"
+      :max="1900"
     >
       <template #incrementbuttonicon>
         <span class="pi pi-plus" />
@@ -20,8 +20,8 @@
       v-model="selectedItems[1]"
       showButtons
       buttonLayout="horizontal"
-      :min="1450"
-      :max="1800"
+      :min="1400"
+      :max="1900"
     >
       <template #incrementbuttonicon>
         <span class="pi pi-plus" />
@@ -40,7 +40,7 @@ import { useSelectManagement } from "~/composables/SelectManagement";
 const { filter, selectedItems } = useSelectManagement("dates");
 
 // we put the initial values
-selectedItems.value = [1450, 1800];
+selectedItems.value = [1400, 1900];
 
 // NOTE: imporante hay que usar deep:true. Entiendo que porque es un array
 // pero por qué funciona en los otros. Yo creo que es porque cambio un valodr
@@ -49,7 +49,7 @@ selectedItems.value = [1450, 1800];
 watch(
   selectedItems,
   () => {
-    if (selectedItems.value.toString() === [1450, 1800].toString()) {
+    if (selectedItems.value.toString() === [1400, 1900].toString()) {
       delete filter.value.deathYear;
     } else {
       filter.value.deathYear = selectedItems.value;
@@ -68,6 +68,6 @@ onMounted(() => {
 });
 
 function clearDeathYear() {
-  selectedItems.value = [1450, 1800];
+  selectedItems.value = [1400, 1900];
 }
 </script>
