@@ -4,10 +4,10 @@
   </div>
 </template>
 <script setup>
-import { Network } from "vis-network/esnext";
-import { DataSet } from "vis-data/esnext";
-import "vis-network/styles/vis-network.css";
-import { layouts } from "chart.js";
+// import { Network } from "vis-network/esnext";
+// import { DataSet } from "vis-data/esnext";
+// import "vis-network/styles/vis-network.css";
+// import { layouts } from "chart.js";
 
 const props = defineProps({
   placesrelated: { type: Object, required: true },
@@ -24,7 +24,8 @@ onMounted(() => {
     edges: props.placesrelated.placesnetwork.edges,
   };
   var options = { layout: { randomSeed: 2 } };
-  network = new Network(cyto.value, data, options);
+  // esto lo quito por ahora... habría q pasarlo a cytoscape
+  // network = new Network(cyto.value, data, options);
 });
 </script>
 
