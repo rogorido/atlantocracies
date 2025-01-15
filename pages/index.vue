@@ -11,10 +11,12 @@
 <script setup>
 import { useStatsStore } from "../stores/statsStore";
 import { useFilterStore } from "../stores/filterStore";
+import { useAuthStore } from "../stores/auth";
 
 const stats = ref({});
 const statsstore = useStatsStore();
 const filterstore = useFilterStore();
+const authstore = useAuthStore();
 
 const { filter } = storeToRefs(filterstore);
 
@@ -39,5 +41,10 @@ onMounted(() => {
       }
     }
   }
+});
+
+await callOnce(async () => {
+  console.log("This will only be logged once");
+  await authstore.checkAuth();
 });
 </script>

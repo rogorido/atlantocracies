@@ -75,6 +75,7 @@
 import { Tab } from "primevue";
 import { useFilterStore } from "../stores/filterStore";
 import { usePersonsStore } from "../stores/personsStore";
+import { useAuthStore } from "../stores/auth";
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
@@ -95,6 +96,7 @@ const insightsData = reactive({
 
 const loaded = ref(false);
 
+const authStore = useAuthStore();
 const storefilter = useFilterStore();
 const storepersons = usePersonsStore();
 
@@ -152,7 +154,13 @@ async function updateData() {
 
   // storepersons.persons = persons.value;
   storepersons.insightsData = insightsData;
+
   if (Object.keys(filter.value).length === 0) {
+    analyzeButtonDisabled.value = true;
+  } else if (
+    Object.keys(filter.value).length > 0 &&
+    !authStore.isAuthenticated
+  ) {
     analyzeButtonDisabled.value = true;
   } else {
     analyzeButtonDisabled.value = false;
