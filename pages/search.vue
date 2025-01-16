@@ -27,6 +27,7 @@
               <SearchHasTitlesOption />
               <SearchHasPositionsOption />
               <SearchPositionsSelect />
+              <SearchEventsSelect />
               <SearchRelationsSelect />
               <SearchTitlesSelect />
             </TabPanel>
