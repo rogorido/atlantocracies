@@ -36,11 +36,11 @@ watch(selectedItems, () => {
       filter.value.events = filter.value.events || {};
 
       // Initialize filter.events.nomTit if it doesn't exist
-      filter.value.events.nomTit = filter.value.events.nomTit || [];
+      filter.value.events.eventtype = filter.value.events.eventtype || [];
 
-      // Update filter.events.nomTit with selected events
-      filter.value.events.nomTit = selectedItems.value.map(
-        (title) => title._id,
+      // Update filter.events.eventtype with selected events
+      filter.value.events.eventtype = selectedItems.value.map(
+        (event) => event._id,
       );
     }
   }
@@ -49,13 +49,13 @@ watch(selectedItems, () => {
 // TODO: habría que cargar tb el valor de los otros campos (continentes, etc.)
 onMounted(() => {
   // IMPORTANT: we have to add "&& filter.value.events" because otherwise
-  // the check filter.value.events.nomTit gives an error because filter.value.title
+  // the check filter.value.events.eventtype gives an error because filter.value.event
   // does not exist.
   // TODO: creo que hay otra forma de hacer esto...
   if (Object.keys(filter.value).length != 0 && filter.value.events) {
-    if (filter.value.events.nomTit != undefined) {
-      selectedItems.value = filter.value.events.nomTit.map((title) => {
-        return { _id: title };
+    if (filter.value.events.eventtype != undefined) {
+      selectedItems.value = filter.value.events.eventtype.map((event) => {
+        return { _id: event };
       });
     }
   }
