@@ -22,7 +22,6 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/robots",
     "@primevue/nuxt-module",
-    "@nuxt/content",
     "@pinia/nuxt",
     "@nuxt/image",
   ],
@@ -36,4 +35,3 @@ export default defineNuxtConfig({
   robots: { rules: { UserAgent: "*", Disallow: "/" } },
   compatibilityDate: "2024-10-18",
 });
-
