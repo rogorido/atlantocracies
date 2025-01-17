@@ -69,6 +69,7 @@
       </section>
     </div>
     <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
+    <Toast />
   </div>
 </template>
 
@@ -77,6 +78,8 @@ import { Tab } from "primevue";
 import { useFilterStore } from "../stores/filterStore";
 import { usePersonsStore } from "../stores/personsStore";
 import { useAuthStore } from "../stores/auth";
+
+const toast = useToast();
 
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
@@ -117,6 +120,17 @@ provide("persons", readonly(persons));
 
 onMounted(async () => {
   updateData();
+
+  if (Object.keys(filter.value).length > 0) {
+    console.log("estamos en el toast");
+    toast.add({
+      severity: "warn",
+      summary: "Filter activated",
+      detail:
+        "There is an active filter. You can reset it by clicking on the 'Reset filter' button",
+      life: 3000,
+    });
+  }
 
   loaded.value = true;
 });
