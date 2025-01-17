@@ -158,6 +158,18 @@ onMounted(() => {
         return { _id: title };
       });
     }
+
+    if (filter.value.titles.continental) {
+      selectedContinents.value = filter.value.titles.continental.map(
+        (continent) => {
+          return { _id: continent };
+        },
+      );
+    }
+
+    if (filter.value.titles.yearsrange) {
+      selectedYears.value = filter.value.titles.yearsrange;
+    }
   }
 });
 

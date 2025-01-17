@@ -123,6 +123,10 @@ onMounted(() => {
         return { _id: event };
       });
     }
+
+    if (filter.value.events.yearsrange) {
+      selectedYears.value = filter.value.events.yearsrange;
+    }
   }
 });
 
