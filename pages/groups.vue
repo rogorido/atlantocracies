@@ -45,61 +45,6 @@
             :placesrelated="data.placesrelated"
           />
         </TabPanel>
-
-        <!-- <TabPanel header="Events" -->
-        <!--   ><DataTable -->
-        <!--     :value="management.events" -->
-        <!--     paginator -->
-        <!--     stripedRows -->
-        <!--     :rows="10" -->
-        <!--     :rowsPerPageOptions="[5, 10, 20, 50]" -->
-        <!--     dataKey="_id" -->
-        <!--     tableStyle="max-width: 30rem" -->
-        <!--   > -->
-        <!--     <Column -->
-        <!--       v-for="col of columns" -->
-        <!--       :key="col.field" -->
-        <!--       :field="col.field" -->
-        <!--       :header="col.header" -->
-        <!--     ></Column> -->
-        <!--   </DataTable> -->
-        <!-- </TabPanel> -->
-        <!-- <TabPanel header="Positions" -->
-        <!--   ><DataTable -->
-        <!--     :value="management.positions" -->
-        <!--     paginator -->
-        <!--     stripedRows -->
-        <!--     :rows="10" -->
-        <!--     :rowsPerPageOptions="[5, 10, 20, 50]" -->
-        <!--     dataKey="_id" -->
-        <!--     tableStyle="max-width: 30rem" -->
-        <!--   > -->
-        <!--     <Column -->
-        <!--       v-for="col of columns" -->
-        <!--       :key="col.field" -->
-        <!--       :field="col.field" -->
-        <!--       :header="col.header" -->
-        <!--     ></Column> -->
-        <!--   </DataTable> -->
-        <!-- </TabPanel> -->
-        <!-- <TabPanel header="Titles" -->
-        <!--   ><DataTable -->
-        <!--     :value="management.titles" -->
-        <!--     paginator -->
-        <!--     stripedRows -->
-        <!--     :rows="10" -->
-        <!--     :rowsPerPageOptions="[5, 10, 20, 50]" -->
-        <!--     dataKey="_id" -->
-        <!--     tableStyle="max-width: 30rem" -->
-        <!--   > -->
-        <!--     <Column -->
-        <!--       v-for="col of columns" -->
-        <!--       :key="col.field" -->
-        <!--       :field="col.field" -->
-        <!--       :header="col.header" -->
-        <!--     ></Column> -->
-        <!--   </DataTable> -->
-        <!-- </TabPanel> -->
       </Tabs>
     </section>
     <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
