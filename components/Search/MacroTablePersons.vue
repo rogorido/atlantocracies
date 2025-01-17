@@ -75,7 +75,7 @@
           <i
             class="pi"
             :class="{
-              'pi-mars text-green-500': data.gender === 'H',
+              'pi-mars text-red-500': data.gender === 'H',
               'pi-venus text-green-500': data.gender === 'M',
             }"
           ></i>

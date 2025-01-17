@@ -10,5 +10,6 @@ import "~/assets/normalize.css";
 
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
+import "primeflex/themes/primeone-light.css";
 import "@/assets/owncontainers.css";
 </script>
