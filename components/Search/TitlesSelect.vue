@@ -132,13 +132,15 @@ watch(selectedContinents, () => {
 watch(
   selectedYears,
   () => {
-    if (selectedYears.value[0] != 1400 && selectedYears.value[1] != 1900) {
+    if (selectedYears.value[0] != 1400 || selectedYears.value[1] != 1900) {
       filter.value.titles.yearsrange = selectedYears.value;
     } else if (
       selectedYears.value[0] === 1400 &&
       selectedYears.value[1] === 1900
     ) {
-      delete filter.value.titles.yearsrange;
+      if (filter.value.titles?.yearsrange) {
+        delete filter.value.titles.yearsrange;
+      }
     }
   },
   { deep: true },

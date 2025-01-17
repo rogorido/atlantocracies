@@ -70,7 +70,7 @@ watch(selectedItems, () => {
     if (selectedItems.value.length === 0) {
       // esto tiene que ir antes por qué si no daerror en el
       // watch al intentar borrar yearsrange.
-      // selectedYears.value = [1400, 1900];
+      selectedYears.value = [1400, 1900];
       delete filter.value.events;
       checked.value = false;
     } else {
@@ -97,13 +97,15 @@ watch(selectedItems, () => {
 watch(
   selectedYears,
   () => {
-    if (selectedYears.value[0] != 1400 && selectedYears.value[1] != 1900) {
+    if (selectedYears.value[0] != 1400 || selectedYears.value[1] != 1900) {
       filter.value.events.yearsrange = selectedYears.value;
     } else if (
       selectedYears.value[0] === 1400 &&
       selectedYears.value[1] === 1900
     ) {
-      delete filter.value.events.yearsrange;
+      if (filter.value.events?.yearsrange) {
+        delete filter.value.events.yearsrange;
+      }
     }
   },
   { deep: true },
