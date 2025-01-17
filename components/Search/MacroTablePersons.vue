@@ -181,9 +181,7 @@ import { FilterMatchMode } from "@primevue/core/api";
 
 const dt = ref(); // reference to the datatable to export!
 
-// NOTE: por ahora quito el inject/provide.
 const persons = inject("persons", []);
-console.log(persons);
 const selectedPerson = ref();
 
 const storepersons = usePersonsStore();
