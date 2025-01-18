@@ -2,7 +2,7 @@
   "name": "AtlantoUI",
   "private": true,
   "author": "Igor Sosa Mayor <joseleopoldo1792@gmail.com>",
-  "version": "0.9.30",
+  "version": "0.9.31",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@nuxt/image": "^1.9.0",
+    "@nuxtjs/google-fonts": "^3.2.0",
     "@primevue/nuxt-module": "^4.2.5",
     "nuxt": "^3.15.2",
     "sass": "^1.83.4"

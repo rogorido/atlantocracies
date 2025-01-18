@@ -13,3 +13,9 @@ import "primeflex/primeflex.css";
 import "primeflex/themes/primeone-light.css";
 import "@/assets/owncontainers.css";
 </script>
+
+<style>
+html {
+  font-family: Roboto, sans-serif;
+}
+</style>
