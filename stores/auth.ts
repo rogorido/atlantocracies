@@ -80,19 +80,21 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async logout() {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-        await $fetch("/api/auth/logout", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      } finally {
-        this.clearAuth();
-        await navigateTo("/");
-      }
+      this.clearAuth();
+      // esto es lo original que ahora no necesitamos...
+      // try {
+      //   const token = localStorage.getItem("token");
+      //   if (!token) return;
+      //   await $fetch("/api/auth/logout", {
+      //     method: "POST",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   });
+      // } finally {
+      //   this.clearAuth();
+      //   await navigateTo("/");
+      // }
     },
 
     async checkAuth() {
