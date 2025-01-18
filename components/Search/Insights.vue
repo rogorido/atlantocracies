@@ -19,7 +19,7 @@
               class="graph"
               v-if="loaded"
               type="bar"
-              :data="insightsData.decadesBirthData"
+              :data="insightsData.decadesBirthsChartData"
             />
           </div>
           <div class="col-5">
@@ -238,17 +238,13 @@ import { usePersonsStore } from "@/stores/personsStore";
 const store = usePersonsStore();
 const { insightsData } = storeToRefs(store);
 
-// const props = defineProps({
-//   insightsData: { type: Object, required: true, default: null },
-// });
-
 // TODO: probablemente no se necesita esto...
 const loaded = ref(false);
 
 const options = { responsive: true, maintainAspectRatio: false };
 
 if (insightsData) {
-  console.log("insightsData", insightsData.value.positionsTableTree);
+  /*   console.log("insightsData", insightsData.value.positionsTableTree); */
   loaded.value = true;
 }
 </script>

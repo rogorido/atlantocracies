@@ -87,16 +87,16 @@ const api = config.public.apiBaseUrl;
 const persons = ref([]);
 const analyzeButtonDisabled = ref(true);
 
-const insightsData = reactive({
-  sourcesData: null,
-  sourcesChartData: null,
-  gendersData: null,
-  gendersChartData: null,
-  histBirthsChartData: null,
-  histBirthsData: null,
-  hasTitlesData: null,
-  decadesBirthData: null,
-});
+/* const insightsData = reactive({
+ *   sourcesData: null,
+ *   sourcesChartData: null,
+ *   gendersData: null,
+ *   gendersChartData: null,
+ *   histBirthsChartData: null,
+ *   histBirthsData: null,
+ *   hasTitlesData: null,
+ *   decadesBirthData: null,
+ * }); */
 
 const loaded = ref(false);
 
@@ -152,22 +152,22 @@ async function updateData() {
 
   // TODO:: actualizamos todo esto que en principio lo usa Insights que antes estaba aquí
   // no sé si quitarlo de aquí?
-  insightsData.sourcesData = data.sourcesData;
-  insightsData.sourcesChartData = data.sourcesChartData;
-  insightsData.gendersData = data.gendersData;
-  insightsData.gendersChartData = data.gendersChartData;
-  insightsData.histBirthsChartData = data.histBirthsChartData;
-  insightsData.histBirthsData = data.histBirthsData;
-  insightsData.hasTitlesChartData = data.hasTitlesChartData;
-  insightsData.hasTitlesData = data.hasTitlesData;
-  insightsData.hasPositionsData = data.hasPositionsData;
-  insightsData.hasPositionsChartData = data.hasPositionsChartData;
-  insightsData.positionsTableTree = data.positionsTableTree;
-  insightsData.decadesBirthData = data.decadesBirthsChartData;
+  /* insightsData.sourcesData = data.sourcesData;
+  * insightsData.sourcesChartData = data.sourcesChartData;
+  * insightsData.gendersData = data.gendersData;
+  * insightsData.gendersChartData = data.gendersChartData;
+  * insightsData.histBirthsChartData = data.histBirthsChartData;
+  * insightsData.histBirthsData = data.histBirthsData;
+  * insightsData.hasTitlesChartData = data.hasTitlesChartData;
+  * insightsData.hasTitlesData = data.hasTitlesData;
+  * insightsData.hasPositionsData = data.hasPositionsData;
+  * insightsData.hasPositionsChartData = data.hasPositionsChartData;
+  * insightsData.positionsTableTree = data.positionsTableTree;
+  * insightsData.decadesBirthData = data.decadesBirthsChartData;
 
-  calculatePercentages();
-
-  storepersons.insightsData = insightsData;
+  * calculatePercentages();
+   */
+  storepersons.insightsData = data.insightsData;
 
   // Analyze only avalaible under some circumstances
   if (!authStore.isAuthenticated) {
@@ -177,73 +177,6 @@ async function updateData() {
     Object.keys(filter.value).length === 0
       ? (analyzeButtonDisabled.value = true)
       : (analyzeButtonDisabled.value = false);
-  }
-}
-
-// TODO: aquí hay mucho código repetido...
-function calculatePercentages() {
-  if (Array.isArray(insightsData.gendersData)) {
-    const total = insightsData.gendersData.reduce(
-      (total, obj) => total + obj.count,
-      0,
-    );
-    insightsData.gendersData.forEach((obj) => {
-      let porcentaje = (obj.count / total) * 100;
-      obj.percent = porcentaje.toFixed(2);
-    });
-  }
-
-  // sources data
-  if (Array.isArray(insightsData.sourcesData)) {
-    const total = insightsData.sourcesData.reduce(
-      (total, obj) => total + obj.count,
-      0,
-    );
-    insightsData.sourcesData.forEach((obj) => {
-      let porcentaje = (obj.count / total) * 100;
-      obj.percent = porcentaje.toFixed(2);
-    });
-  }
-
-  // histBirthsData
-  if (Array.isArray(insightsData.histBirthsData)) {
-    const sumaTotal = insightsData.histBirthsData.reduce(
-      (total, obj) => total + obj.count,
-      0,
-    );
-
-    // Calcular el porcentaje para cada objeto en el array
-    insightsData.histBirthsData.forEach((obj) => {
-      let porcentaje = (obj.count / sumaTotal) * 100;
-      obj.percent = porcentaje.toFixed(2);
-    });
-  }
-
-  if (Array.isArray(insightsData.hasTitlesData)) {
-    const sumaTotal = insightsData.hasTitlesData.reduce(
-      (total, obj) => total + obj.count,
-      0,
-    );
-
-    // Calcular el porcentaje para cada objeto en el array
-    insightsData.hasTitlesData.forEach((obj) => {
-      let porcentaje = (obj.count / sumaTotal) * 100;
-      obj.percent = porcentaje.toFixed(2);
-    });
-  }
-
-  // positions
-  if (Array.isArray(insightsData.hasPositionsData)) {
-    const sumaTotal = insightsData.hasPositionsData.reduce(
-      (total, obj) => total + obj.count,
-      0,
-    );
-
-    // Calcular el porcentaje para cada objeto en el array
-    insightsData.hasPositionsData.forEach((obj) => {
-      let porcentaje = (obj.count / sumaTotal) * 100;
-      obj.percent = porcentaje.toFixed(2);
-    });
   }
 }
 

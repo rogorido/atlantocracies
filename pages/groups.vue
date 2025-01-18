@@ -70,7 +70,7 @@ const { filter } = storeToRefs(storefilter);
 
 // NOTE: no veo diferencia usando uselazyfetch... por qué?
 // const { data, status, error } = await useFetch(`${api}/groups`, {
-const { data, status, error } = await useLazyFetch(`${api}/groups`, {
+const { data, status, error } = await useFetch(`${api}/groups`, {
   method: "POST",
   body: filter.value,
 });
