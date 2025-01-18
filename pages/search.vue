@@ -53,14 +53,14 @@
         @click="onReset"
       />
 
-      <NuxtLink to="/groups">
-        <Button
-          label="Analyze the group"
-          v-tooltip="'Analyze the selected group. You have to be logged in.'"
-          :disabled="analyzeButtonDisabled"
-          rounded
-        />
-      </NuxtLink>
+      <Button
+        label="Analyze the group"
+        v-tooltip="'Analyze the selected group. You have to be logged in.'"
+        :disabled="analyzeButtonDisabled"
+        @click="probar"
+        :loading="loadingGroups"
+        rounded
+      />
     </div>
 
     <div id="selectedpersons" v-if="persons.length > 0">
@@ -87,18 +87,8 @@ const api = config.public.apiBaseUrl;
 const persons = ref([]);
 const analyzeButtonDisabled = ref(true);
 
-/* const insightsData = reactive({
- *   sourcesData: null,
- *   sourcesChartData: null,
- *   gendersData: null,
- *   gendersChartData: null,
- *   histBirthsChartData: null,
- *   histBirthsData: null,
- *   hasTitlesData: null,
- *   decadesBirthData: null,
- * }); */
-
 const loaded = ref(false);
+const loadingGroups = ref(false);
 
 const authStore = useAuthStore();
 const storefilter = useFilterStore();
@@ -112,6 +102,11 @@ const storepersons = usePersonsStore();
 const { filter } = storeToRefs(storefilter);
 
 provide("persons", readonly(persons));
+
+function probar() {
+  loadingGroups.value = true;
+  return navigateTo("/groups");
+}
 
 // NOTE:
 // Importnate: esto no puede ser readonly porque luego los datos
@@ -150,23 +145,6 @@ async function updateData() {
 
   persons.value = data.result;
 
-  // TODO:: actualizamos todo esto que en principio lo usa Insights que antes estaba aquí
-  // no sé si quitarlo de aquí?
-  /* insightsData.sourcesData = data.sourcesData;
-  * insightsData.sourcesChartData = data.sourcesChartData;
-  * insightsData.gendersData = data.gendersData;
-  * insightsData.gendersChartData = data.gendersChartData;
-  * insightsData.histBirthsChartData = data.histBirthsChartData;
-  * insightsData.histBirthsData = data.histBirthsData;
-  * insightsData.hasTitlesChartData = data.hasTitlesChartData;
-  * insightsData.hasTitlesData = data.hasTitlesData;
-  * insightsData.hasPositionsData = data.hasPositionsData;
-  * insightsData.hasPositionsChartData = data.hasPositionsChartData;
-  * insightsData.positionsTableTree = data.positionsTableTree;
-  * insightsData.decadesBirthData = data.decadesBirthsChartData;
-
-  * calculatePercentages();
-   */
   storepersons.insightsData = data.insightsData;
 
   // Analyze only avalaible under some circumstances

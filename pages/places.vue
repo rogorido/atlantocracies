@@ -104,10 +104,6 @@ const loadData = async () => {
 // con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
 // veo cómo es posible... es posible con query, pero eso es otra cosa...
 function probar() {
-  // return navigateTo(`/place/${selectedPlace.value}`, {
-  //   open: { target: "_blank" },
-  // });
-
   return navigateTo(`/place/${selectedPlace.value}`);
 }
 
