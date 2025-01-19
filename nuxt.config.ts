@@ -28,7 +28,8 @@ export default defineNuxtConfig({
   ],
   googleFonts: {
     families: {
-      Roboto: true,
+      // Roboto: true,
+      Noto: true,
     },
   },
   // }fonts: {
@@ -54,4 +55,3 @@ export default defineNuxtConfig({
   robots: { rules: { UserAgent: "*", Disallow: "/" } },
   compatibilityDate: "2025-01-17",
 });
-

@@ -72,14 +72,17 @@
       ></Column>
     </DataTable>
 
-    <hr class="simplehr" />
+    <DividerShape />
+    <!-- <hr class="simplehr" /> -->
+    <!-- <hr class="simplehr" /> -->
     <!-- Historical birthplaces  -->
     <div id="marriages">
       <GroupsRelationsHistoricalBirths :personsrelated="personsrelated" />
     </div>
 
     <!-- Lugares relacionados -->
-    <hr class="simplehr" />
+    <DividerShape />
+    <!-- <hr class="simplehr" /> -->
     <h3 id="places" class="text-center">Related Places</h3>
     <ClientOnly>
       <PlacesMap

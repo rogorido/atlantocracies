@@ -23,13 +23,15 @@
     <!-- Macro tabla de personas. -->
     <SearchMacroTablePersons />
 
-    <hr />
+    <DividerShape />
+    <!-- <hr /> -->
     <div id="insights">
       <h2 class="text-center uppercase">Global insights</h2>
       <SearchInsights />
     </div>
 
-    <hr class="simplehr" />
+    <DividerShape />
+    <!-- <hr class="simplehr" /> -->
     <div v-if="status === 'pending'">Loading data...</div>
     <section id="relations" v-else>
       <h3 class="text-center uppercase">Relations</h3>
@@ -57,6 +59,7 @@ definePageMeta({
   middleware: ["protected"],
 });
 
+import { DividerShape } from "#components";
 import { useFilterStore } from "@/stores/filterStore";
 
 const config = useRuntimeConfig();

@@ -4,6 +4,11 @@
     <div v-else>
       <MainPageBlocksData :stats="stats" class="mt-5" />
     </div>
+  </div>
+  <div class="p-container-fluid">
+    <DividerShape />
+  </div>
+  <div class="p-container">
     <MainPageDescriptions />
   </div>
 </template>
@@ -12,6 +17,7 @@
 import { useStatsStore } from "../stores/statsStore";
 import { useFilterStore } from "../stores/filterStore";
 import { useAuthStore } from "../stores/auth";
+import { DividerShape } from "#components";
 
 const stats = ref({});
 const statsstore = useStatsStore();

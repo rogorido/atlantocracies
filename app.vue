@@ -16,6 +16,7 @@ import "@/assets/owncontainers.css";
 
 <style>
 html {
-  font-family: Roboto, sans-serif;
+  /* font-family: "Roboto Slab", sans-serif; */
+  font-family: "Noto Sans", sans-serif;
 }
 </style>
