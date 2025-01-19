@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    "@nuxtjs/robots",
+    //"@nuxtjs/robots",
     "@primevue/nuxt-module",
     "@pinia/nuxt",
     "@nuxt/image",
