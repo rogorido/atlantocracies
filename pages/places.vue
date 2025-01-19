@@ -95,7 +95,7 @@ const loadData = async () => {
 
     loaded.value = true;
   } catch (err) {
-    console.log("error en mymap5", err);
+    console.log("Error loading map data.", err);
   }
 };
 

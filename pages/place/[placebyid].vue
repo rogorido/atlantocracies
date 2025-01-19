@@ -15,14 +15,14 @@
         </ClientOnly>
       </div>
     </div>
-    <div v-if="status">Loading data...</div>
-    <div v-else-if="error">{{ error }}</div>
+    <div v-if="status === 'pending'">Loading data...</div>
+    <div v-if="status === 'error'">{{ error }}</div>
     <div v-else>
-      <Tabs>
+      <Tabs value="0">
         <TabList>
           <Tab value="0">Related persons</Tab>
-          <Tab value="1">Related places</Tab>
-          <Tab value="2">Related events</Tab>
+          <!-- <Tab value="1">Related places</Tab> -->
+          <Tab value="1">Related events</Tab>
         </TabList>
 
         <!-- Related persons -->
@@ -37,21 +37,21 @@
         </TabPanel>
 
         <!-- Related places -->
-        <TabPanel value="1">
-          <h2>Places related to {{ useRoute().params.placebyid }}</h2>
-          <PlacesRelatedPlaces :placesrelated="data.placesrelated" />
-        </TabPanel>
+        <!-- <TabPanel value="1"> -->
+        <!--   <h2>Places related to {{ useRoute().params.placebyid }}</h2> -->
+        <!--   <PlacesRelatedPlaces :placesrelated="data.placesrelated" /> -->
+        <!-- </TabPanel> -->
 
         <!-- Related events -->
-        <TabPanel value="2">
+        <TabPanel value="1">
           <div class="grid">
             <div class="col-6">
               <h2>Events related to {{ useRoute().params.placebyid }}</h2>
-              <EventsTable :eventsrelated="data.eventsrelated.eventsplace" />
+              <EventsTable :eventsrelated="data.eventsplace" />
             </div>
-            <div class="col-6">
-              <EventsGraph :eventsrelated="data.eventsrelated" />
-            </div>
+            <!-- <div class="col-6"> -->
+            <!--   <EventsGraph :eventsrelated="data.eventsrelated" /> -->
+            <!-- </div> -->
           </div>
         </TabPanel>
       </Tabs>
