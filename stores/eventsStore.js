@@ -9,7 +9,7 @@ export const useEventsStore = defineStore("events", {
   state: () => ({
     events: [],
     initialized: false,
-    hostias: "",
+    event: "",
   }),
 
   getters: {
@@ -19,10 +19,6 @@ export const useEventsStore = defineStore("events", {
   },
 
   actions: {
-    positionSelected(position) {
-      this.hostias = position;
-    },
-
     async fetchEvents() {
       if (!this.initialized) {
         const data = await $fetch(`${api}/general/eventstypes`);

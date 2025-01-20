@@ -9,7 +9,7 @@ export const useSourcesStore = defineStore("sources", {
   state: () => ({
     sources: [],
     initialized: false,
-    hostias: "",
+    source: "",
   }),
 
   getters: {
@@ -18,8 +18,9 @@ export const useSourcesStore = defineStore("sources", {
   },
 
   actions: {
+    // TODO: do I use this?
     titleSelected(title) {
-      this.hostias = title;
+      this.source = title;
     },
 
     // NOTE: atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!

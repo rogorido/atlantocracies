@@ -10,7 +10,7 @@ export const useTitlesStore = defineStore("titles", {
   state: () => ({
     titles: [],
     initialized: false,
-    hostias: "",
+    title: "",
   }),
 
   getters: {
@@ -21,8 +21,9 @@ export const useTitlesStore = defineStore("titles", {
   },
 
   actions: {
+    // TODO: do I use this?
     titleSelected(title) {
-      this.hostias = title;
+      this.title = title;
     },
 
     // NOTE: atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!

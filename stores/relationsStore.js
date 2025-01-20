@@ -9,7 +9,7 @@ export const useRelationsStore = defineStore("relations", {
   state: () => ({
     relations: [],
     initialized: false,
-    hostias: "",
+    relation: "",
   }),
 
   getters: {
@@ -19,7 +19,7 @@ export const useRelationsStore = defineStore("relations", {
 
   actions: {
     relationSelected(relation) {
-      this.hostias = relation;
+      this.relation = relation;
     },
 
     async fetchRelations() {

@@ -7,18 +7,18 @@ export const usePlacesStore = defineStore("places", {
   state: () => ({
     places: [],
     coordinates: [],
-    hostias: "",
+    place: "",
     initialized: false,
   }),
 
   getters: {
     // we use find since it returns the first object and not an array (like filter)
-    nuevo: (state) => state.places.find((item) => item.place === state.hostias),
+    nuevo: (state) => state.places.find((item) => item.place === state.place),
   },
 
   actions: {
     placeSelected(place) {
-      this.hostias = place;
+      this.place = place;
     },
 
     // NOTE atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!

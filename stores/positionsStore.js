@@ -9,7 +9,7 @@ export const usePositionsStore = defineStore("positions", {
   state: () => ({
     positions: [],
     initialized: false,
-    hostias: "",
+    position: "",
   }),
 
   getters: {
@@ -18,8 +18,9 @@ export const usePositionsStore = defineStore("positions", {
   },
 
   actions: {
+    // TODO: do I use this?
     positionSelected(position) {
-      this.hostias = position;
+      this.position = position;
     },
 
     // NOTE atención: muy importante es que data, pending etc. que devuelve useFetch son refs()!!!
