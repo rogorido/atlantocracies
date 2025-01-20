@@ -41,10 +41,10 @@
         </TabList>
 
         <TabPanel value="0">
-          <GroupsRelationsMain
-            :personsrelatedcyto="data.personsrelationscyto"
-            :personsrelated="data.personsrelationstable"
-            :placesrelated="data.placesrelated"
+          <LazyGroupsRelationsMain
+            :personsrelatedcyto="data.personsRelationsCyto"
+            :personsrelated="data.personsRelationsTable"
+            :placesrelated="data.placesRelated"
           />
         </TabPanel>
       </Tabs>
@@ -59,7 +59,6 @@ definePageMeta({
   middleware: ["protected"],
 });
 
-import { DividerShape } from "#components";
 import { useFilterStore } from "@/stores/filterStore";
 
 const config = useRuntimeConfig();
