@@ -10,6 +10,7 @@
         <DataTable
           :value="histBirthMatrimoniosSummary"
           paginator
+          ref="dt"
           stripedRows
           :rows="10"
           :rowsPerPageOptions="[5, 10, 20, 50]"
@@ -17,6 +18,16 @@
           tableStyle="max-width: 30rem"
         >
           <template #empty> No relations found. </template>
+
+          <template #header>
+            <div style="text-align: right">
+              <Button
+                icon="pi pi-external-link"
+                label="Export"
+                @click="exportCSV($event)"
+              />
+            </div>
+          </template>
           <Column
             field="histBirthRelated"
             header="Historical birth place"
@@ -31,10 +42,21 @@
         <TreeTable
           :value="histBirthMatrimoniosGroupBy"
           :paginator="true"
+          ref="dttree"
           :rows="10"
           :rowsPerPageOptions="[10, 20, 30, 40]"
         >
-          <template #empty> No positions found. </template>
+          <template #empty> No data found. </template>
+
+          <!-- <template #header> -->
+          <!--   <div style="text-align: right"> -->
+          <!--     <Button -->
+          <!--       icon="pi pi-external-link" -->
+          <!--       label="Export" -->
+          <!--       @click="exportTreeCSV($event)" -->
+          <!--     /> -->
+          <!--   </div> -->
+          <!-- </template> -->
           <Column
             field="histBirth"
             header="Historical birth place"
@@ -55,6 +77,9 @@ import { groupByHistBirth } from "@/utils/countHistBirthsGroups";
 const props = defineProps({
   personsRelated: { type: Array, required: true, default: () => [] },
 });
+
+const dt = ref(); // reference to the datatable to export!
+const dttree = ref(); // reference to the datatable to export!
 
 // seleccionamos solo los que son matrimonios
 const matrimonios = props.personsRelated.filter(
@@ -85,4 +110,12 @@ const histBirthMatrimoniosGroupBy = groupByHistBirth(matrimonios);
 //   "histBirthMatrimoniosGroupBy",
 //   JSON.stringify(histBirthMatrimoniosGroupBy, null, 2),
 // );
+
+const exportCSV = () => {
+  dt.value.exportCSV();
+};
+
+// const exportTreeCSV = () => {
+//   dttree.value.exportCSV();
+// };
 </script>

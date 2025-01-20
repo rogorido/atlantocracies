@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <div class="col-12 md:col-4">
+    <div class="col-12 md:col-5">
       <div class="flex showdata">
         <div>Total persons:</div>
         <div class="numero">
@@ -8,41 +8,41 @@
         </div>
       </div>
       <div class="flex showdata">
-        <div>Total places:</div>
+        <div>Total places</div>
         <div class="numero">
           {{ stats.totalPlaces != null ? stats.totalPlaces : 0 }}
         </div>
       </div>
 
       <div class="flex showdata">
-        <div>Total positions:</div>
+        <div>Total type of positions</div>
         <div class="numero">
           {{ stats.totalPositions != null ? stats.totalPositions : 0 }}
         </div>
       </div>
 
       <div class="flex showdata">
-        <div>Total events:</div>
+        <div>Total type of events</div>
         <div class="numero">
           {{ stats.totalEvents != null ? stats.totalEvents : 0 }}
         </div>
       </div>
 
       <div class="flex showdata">
-        <div>Total relations:</div>
+        <div>Total type of relations</div>
         <div class="numero">
           {{ stats.totalRelations != null ? stats.totalRelations : 0 }}
         </div>
       </div>
 
       <div class="flex showdata">
-        <div>Total titles:</div>
+        <div>Total type of titles</div>
         <div class="numero">
           {{ stats.totalTitles != null ? stats.totalTitles : 0 }}
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-8">
+    <div class="col-12 md:col-7">
       <h2 class="text-center uppercase">Atlantocracies</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus

@@ -51,6 +51,15 @@
               tableStyle="min-width: 50rem"
               v-if="loaded"
             >
+              <template #header>
+                <div style="text-align: right">
+                  <Button
+                    icon="pi pi-external-link"
+                    label="Export"
+                    @click="exportCSV($event)"
+                  />
+                </div>
+              </template>
               <Column key="gender" field="gender" header="Gender"></Column>
               <Column key="country" field="count" header="Total"></Column>
               <Column key="percent" field="percent" header="%"></Column>
@@ -92,6 +101,15 @@
               dataKey="_id"
               tableStyle="min-width: 50rem"
             >
+              <template #header>
+                <div style="text-align: right">
+                  <Button
+                    icon="pi pi-external-link"
+                    label="Export"
+                    @click="exportCSV($event)"
+                  />
+                </div>
+              </template>
               <Column key="_id" field="_id" header="Country"></Column>
               <Column key="country" field="count" header="Total"></Column>
               <Column key="percent" field="percent" header="%"></Column>
@@ -153,6 +171,15 @@
               :rowsPerPageOptions="[10, 20, 30, 40]"
             >
               <template #empty> No positions found. </template>
+              <template #header>
+                <div style="text-align: right">
+                  <Button
+                    icon="pi pi-external-link"
+                    label="Export"
+                    @click="exportCSV($event)"
+                  />
+                </div>
+              </template>
               <Column field="name" header="Name" sortable expander></Column>
               <Column field="count" header="Total" sortable></Column>
             </TreeTable>

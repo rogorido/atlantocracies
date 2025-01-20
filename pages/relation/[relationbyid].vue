@@ -13,6 +13,7 @@
           <DataTable
             paginator
             stripedRows
+            ref="dt"
             :value="data.relationid"
             :rows="10"
             :rowsPerPageOptions="[5, 10, 20, 50]"
@@ -21,6 +22,15 @@
             @rowSelect="onRowSelect"
             tableStyle="min-width: 50rem"
           >
+            <template #header>
+              <div style="text-align: right">
+                <Button
+                  icon="pi pi-external-link"
+                  label="Export"
+                  @click="exportCSV($event)"
+                />
+              </div>
+            </template>
             <Column
               v-for="col of columnsRel"
               :key="col.field"
@@ -35,12 +45,22 @@
           <DataTable
             paginator
             stripedRows
+            ref="dtt"
             :value="data.positions"
             :rows="10"
             :rowsPerPageOptions="[5, 10, 20, 50]"
             dataKey="_id"
             tableStyle="min-width: 50rem"
           >
+            <template #header>
+              <div style="text-align: right">
+                <Button
+                  icon="pi pi-external-link"
+                  label="Export"
+                  @click="exportOtherCSV($event)"
+                />
+              </div>
+            </template>
             <Column
               v-for="col of columnsPositions"
               :key="col.field"
@@ -51,6 +71,8 @@
           </DataTable>
         </div>
       </div>
+
+      <DividerShape />
       <!-- Agregados de lugares -->
       <div>
         <div class="grid">
@@ -135,6 +157,8 @@
 </template>
 
 <script setup>
+import { DividerShape } from "#components";
+
 definePageMeta({
   middleware: ["protected"],
 });
@@ -143,7 +167,9 @@ const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
 const details = ref({});
-
+const dt = ref(); // reference to the datatable to export!
+const dtt = ref(); // reference to the datatable to export!
+//
 // necesitamos esto para pasar los datos al componente SearchMacroTablePersons
 const personsdetails = ref([]);
 // provide tiene que ser usado en setup; no puede usarse en
@@ -199,13 +225,21 @@ const onRowSelect = (event) => {
 
   personsdetails.value = details.value.personsWithRelation;
 };
+
+const exportCSV = () => {
+  dt.value.exportCSV();
+};
+
+const exportOtherCSV = () => {
+  dtt.value.exportCSV();
+};
 </script>
 
-<style scoped>
-hr {
-  border: none;
-  height: 20px;
-  background-color: #cd4f35; /* Color de la línea */
-  margin: 20px 0; /* Espaciado superior e inferior */
-}
-</style>
+<!-- <style scoped> -->
+<!-- hr { -->
+<!--   border: none; -->
+<!--   height: 20px; -->
+<!--   background-color: #cd4f35; /* Color de la línea */ -->
+<!--   margin: 20px 0; /* Espaciado superior e inferior */ -->
+<!-- } -->
+<!-- </style> -->
