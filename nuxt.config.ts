@@ -20,32 +20,21 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    //"@nuxtjs/robots",
+    "@nuxtjs/robots",
     "@primevue/nuxt-module",
     "@pinia/nuxt",
     "@nuxt/image",
     "@nuxtjs/google-fonts",
+    "@nuxtjs/sitemap",
   ],
+
   googleFonts: {
     families: {
       // Roboto: true,
       Noto: true,
     },
   },
-  // }fonts: {
-  //     families: [
-  //       // do not resolve this font with any provider from `@nuxt/fonts`
-  //       // { name: "Custom Font", provider: "none" },
-  //       // only resolve this font with the `google` provider
-  //       { name: "Roboto", provider: "google" },
-  //       // specify specific font data - this will bypass any providers
-  //       // {
-  //       //   name: "Other Font",
-  //       //   src: "https://example.com/font.woff2",
-  //       //   weight: "bold",
-  //       // },
-  //     ],
-  //   },
+
   primevue: { options: { theme: { preset: Aura } } },
 
   $development: {
@@ -55,3 +44,4 @@ export default defineNuxtConfig({
   robots: { rules: { UserAgent: "*", Disallow: "/" } },
   compatibilityDate: "2025-01-17",
 });
+
