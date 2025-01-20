@@ -1,16 +1,12 @@
 <template>
   <div>
     <h2 class="text-center">Birth places and marriages</h2>
-    <p>There are a total of {{ totalMatrimonios }} marriages in the search.</p>
     <div class="grid">
       <div class="col-6">
         <h3 class="text-center">
           Historical birth places of the related persons married
         </h3>
-        <p>
-          This table show the geographical procedence of the people related to
-          the main persons found out in the search.
-        </p>
+        <p>This table show the geographical procedence</p>
         <DataTable
           :value="histBirthMatrimoniosSummary"
           paginator
@@ -57,11 +53,11 @@
 import { groupByHistBirth } from "@/utils/countHistBirthsGroups";
 
 const props = defineProps({
-  personsrelated: { type: Array, required: true, default: () => [] },
+  personsRelated: { type: Array, required: true, default: () => [] },
 });
 
 // seleccionamos solo los que son matrimonios
-const matrimonios = props.personsrelated.filter(
+const matrimonios = props.personsRelated.filter(
   (item) => item.typeRelation === "Matrimonio",
 );
 

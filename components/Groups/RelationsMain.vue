@@ -17,7 +17,7 @@
       </p>
     </div>
     <div class="col-4">
-      <GroupsRelationsSummaryTable :personsrelated="personsRelated" />
+      <GroupsRelationsSummaryTable :personsRelated="personsRelated" />
     </div>
   </div>
   <div id="RelationshipsGraph">
@@ -77,7 +77,7 @@
     <!-- <hr class="simplehr" /> -->
     <!-- Historical birthplaces  -->
     <div id="marriages">
-      <GroupsRelationsHistoricalBirths :personsrelated="personsRelated" />
+      <GroupsRelationsHistoricalBirths :personsRelated="personsRelated" />
     </div>
 
     <!-- Lugares relacionados -->

@@ -19,17 +19,17 @@
 
 <script setup>
 const props = defineProps({
-  personsrelated: { type: Array, required: true, default: () => [] },
+  personsRelated: { type: Array, required: true, default: () => [] },
 });
 
 // Paso 1: Contar las ocurrencias de cada valor de `typeRel`
-const countMap = props.personsrelated.reduce((acc, item) => {
+const countMap = props.personsRelated.reduce((acc, item) => {
   acc[item.typeRelation] = (acc[item.typeRelation] || 0) + 1;
   return acc;
 }, {});
 
 // Paso 2: Calcular el porcentaje de cada valor
-const totalItems = props.personsrelated.length;
+const totalItems = props.personsRelated.length;
 const typeRelationsSummary = Object.entries(countMap).map(
   ([typeRel, count]) => ({
     typeRel,
