@@ -24,14 +24,12 @@
     <SearchMacroTablePersons />
 
     <DividerShape />
-    <!-- <hr /> -->
     <div id="insights">
       <h2 class="text-center uppercase">Global insights</h2>
       <SearchInsights />
     </div>
 
     <DividerShape />
-    <!-- <hr class="simplehr" /> -->
     <div v-if="status === 'pending'">Loading data...</div>
     <section id="relations" v-else>
       <h3 class="text-center uppercase">Relations</h3>
@@ -42,9 +40,9 @@
 
         <TabPanel value="0">
           <LazyGroupsRelationsMain
-            :personsrelatedcyto="data.personsRelationsCyto"
-            :personsrelated="data.personsRelationsTable"
-            :placesrelated="data.placesRelated"
+            :personsRelatedCyto="data.personsRelationsCyto"
+            :personsRelated="data.personsRelationsTable"
+            :placesRelated="data.placesRelated"
           />
         </TabPanel>
       </Tabs>
@@ -79,18 +77,3 @@ const { data, status, error } = await useFetch(`${api}/groups`, {
 
 provide("persons", data.value.personsDetails);
 </script>
-
-<style scoped>
-hr {
-  border: none;
-  height: 20px;
-  background-color: #cd4f35; /* Color de la línea */
-  margin: 20px 0; /* Espaciado superior e inferior */
-}
-hr.simplehr {
-  border: none;
-  height: 5px;
-  background-color: #cd4f35; /* Color de la línea */
-  margin: 20px 0; /* Espaciado superior e inferior */
-}
-</style>

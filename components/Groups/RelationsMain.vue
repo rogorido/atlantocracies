@@ -3,7 +3,7 @@
     <div class="col-8">
       <p>
         The selected persons had relationships with many other peersons,forming
-        a network. In the database there are {{ personsrelated.length }} persons
+        a network. In the database there are {{ personsRelated.length }} persons
         related to the selected persons.
       </p>
       <p>Los datos pueden ser analizados desde diferentes pespectivas.</p>
@@ -17,7 +17,7 @@
       </p>
     </div>
     <div class="col-4">
-      <GroupsRelationsSummaryTable :personsrelated="personsrelated" />
+      <GroupsRelationsSummaryTable :personsrelated="personsRelated" />
     </div>
   </div>
   <div id="RelationshipsGraph">
@@ -37,7 +37,7 @@
   <div>
     <DataTable
       v-model:filters="filters"
-      :value="personsrelated"
+      :value="personsRelated"
       paginator
       stripedRows
       filterDisplay="row"
@@ -77,7 +77,7 @@
     <!-- <hr class="simplehr" /> -->
     <!-- Historical birthplaces  -->
     <div id="marriages">
-      <GroupsRelationsHistoricalBirths :personsrelated="personsrelated" />
+      <GroupsRelationsHistoricalBirths :personsrelated="personsRelated" />
     </div>
 
     <!-- Lugares relacionados -->
@@ -86,7 +86,7 @@
     <h3 id="places" class="text-center">Related Places</h3>
     <ClientOnly>
       <PlacesMap
-        :places="placesrelated"
+        :places="placesRelated"
         :multipoint="multipoint"
         v-if="showplacesmap"
       />
@@ -103,9 +103,9 @@ import fcose from "cytoscape-fcose";
 cytoscape.use(fcose);
 
 const props = defineProps({
-  personsrelatedcyto: { type: Object, required: true, default: () => {} },
-  personsrelated: { type: Array, required: true, default: () => [] },
-  placesrelated: { type: Array, required: true, default: () => [] },
+  personsRelatedCyto: { type: Object, required: true, default: () => {} },
+  personsRelated: { type: Array, required: true, default: () => [] },
+  placesRelated: { type: Array, required: true, default: () => [] },
 });
 
 const showPopup = ref(false);
@@ -162,8 +162,8 @@ onMounted(() => {
   // console.log("the props are: ", JSON.stringify(props, null, 2));
 
   var elements = {
-    nodes: props.personsrelatedcyto.nodes,
-    edges: props.personsrelatedcyto.edges,
+    nodes: props.personsRelatedCyto.nodes,
+    edges: props.personsRelatedCyto.edges,
   };
 
   network = cytoscape({
@@ -257,7 +257,7 @@ onMounted(() => {
     }
   });
 
-  const typeRelsValues = props.personsrelatedcyto.edges.map(
+  const typeRelsValues = props.personsRelatedCyto.edges.map(
     (item) => item.data.type,
   );
   const uniqueSet = new Set(typeRelsValues);
@@ -277,15 +277,15 @@ const multipoint = ref(false);
 const showplacesmap = ref(false);
 
 // tengo que ver si tiene una o más por ellío de multipoint
-if (props.placesrelated.length > 1) {
-  coordinates.value = props.placesrelated.map((item) => item.coords);
+if (props.placesRelated.length > 1) {
+  coordinates.value = props.placesRelated.map((item) => item.coords);
   multipoint.value = true;
   showplacesmap.value = true;
   console.log(coordinates.value);
-} else if (props.placesrelated.length === 1) {
+} else if (props.placesRelated.length === 1) {
   // tenemos que poner las coordenadas en un array creando un array de arrays
   // pq es lo que tengo definido en PlacesMap
-  coordinates.value = [props.placesrelated.coords];
+  coordinates.value = [props.placesRelated.coords];
   multipoint.value = false;
   showplacesmap.value = true;
 } else {
