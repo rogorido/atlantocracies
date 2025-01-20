@@ -6,7 +6,10 @@ const isProdEnv = process.env.NODE_ENV === "production";
 export default defineNuxtConfig({
   devtools: { enabled: true },
   build: {},
-
+  site: {
+    url: "https://atlantocracies.digitalhumanities.digital",
+    name: "Atlantocracies UI",
+  },
   //ssr: true,
   ssr: false,
 
@@ -44,4 +47,3 @@ export default defineNuxtConfig({
   robots: { rules: { UserAgent: "*", Disallow: "/" } },
   compatibilityDate: "2025-01-17",
 });
-
