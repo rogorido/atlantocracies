@@ -19,8 +19,8 @@ const relations = ref([]);
 const loaded = ref(false);
 const selectedRelation = ref(null);
 
-const config = useRuntimeConfig();
-const api = config.public.apiBaseUrl;
+// const config = useRuntimeConfig();
+// const api = config.public.apiBaseUrl;
 
 if (!relationsstore.initialized) {
   await relationsstore.fetchRelations();
@@ -34,10 +34,6 @@ loaded.value = true;
 // con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
 // veo cómo es posible... es posible con query, pero eso es otra cosa...
 function probar() {
-  // return navigateTo(`/place/${selectedPlace.value}`, {
-  //   open: { target: "_blank" },
-  // });
-
   return navigateTo(`/relation/${selectedRelation.value}`);
 }
 
