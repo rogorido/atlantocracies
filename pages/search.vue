@@ -50,19 +50,30 @@
       <Button
         v-tooltip="'Reset all filters.'"
         label="Reset filters"
+        icon="pi pi-filter"
         @click="onReset"
       />
 
       <Button
         label="Analyze the group"
         v-tooltip="'Analyze the selected group. You have to be logged in.'"
-        :disabled="analyzeButtonDisabled"
+        icon="pi pi-objects-column"
+        :disabled="ButtonDisabled"
         @click="probar"
         :loading="loadingGroups"
         rounded
       />
+
+      <Button
+        v-tooltip="'Download the used filter for using it in MongoDB Compass.'"
+        icon="pi pi-download"
+        :disabled="ButtonDisabled"
+        label="Download filter"
+        @click="downloadFilter"
+      />
     </div>
 
+    <DividerShape class="mt-3" />
     <div id="selectedpersons" v-if="persons.length > 0">
       <section>
         <SearchMacroTablePersons />
@@ -78,6 +89,7 @@ import { Tab } from "primevue";
 import { useFilterStore } from "../stores/filterStore";
 import { usePersonsStore } from "../stores/personsStore";
 import { useAuthStore } from "../stores/auth";
+import { DividerShape } from "#components";
 
 const toast = useToast();
 
@@ -85,7 +97,8 @@ const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
 const persons = ref([]);
-const analyzeButtonDisabled = ref(true);
+const filterUsed = ref(); // for being downloadead
+const ButtonDisabled = ref(true);
 
 const loaded = ref(false);
 const loadingGroups = ref(false);
@@ -149,17 +162,38 @@ async function updateData() {
 
   // Analyze only avalaible under some circumstances
   if (!authStore.isAuthenticated) {
-    analyzeButtonDisabled.value = true;
+    ButtonDisabled.value = true;
   } else {
     // If there is no filter we disable analysis...
     Object.keys(filter.value).length === 0
-      ? (analyzeButtonDisabled.value = true)
-      : (analyzeButtonDisabled.value = false);
+      ? (ButtonDisabled.value = true)
+      : (ButtonDisabled.value = false);
   }
 }
 
 function onReset() {
   storefilter.$reset();
+}
+
+function downloadFilter() {
+  filterUsed.value = filter.value;
+
+  // Convertir el objeto en una cadena JSON
+  const jsonString = JSON.stringify(filter.value, null, 2);
+
+  // Crear un blob con los datos
+  const blob = new Blob([jsonString], { type: "application/json" });
+  // Crear un enlace en memoria y disparar su descarga
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "filter-atlanto.json";
+  link.style.display = "none"; // No se muestra en pantalla
+  document.body.appendChild(link);
+  link.click(); // Simular el clic
+  document.body.removeChild(link); // Eliminar el enlace del DOM
+
+  // Liberar memoria
+  URL.revokeObjectURL(link.href);
 }
 </script>
 
