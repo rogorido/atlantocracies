@@ -150,21 +150,21 @@
         sortable
       />
       <Column
-        field="numberofRelations"
+        field="numberOfRelations"
         header="# Relations"
         dataType="numeric"
         style="min-width: 3rem"
         sortable
       />
       <Column
-        field="numberofPositions"
+        field="numberOfPositions"
         header="# Positions"
         dataType="numeric"
         style="min-width: 3rem"
         sortable
       />
       <Column
-        field="numberofTitles"
+        field="numberOfTitles"
         header="# Titles"
         dataType="numeric"
         style="min-width: 3rem"
