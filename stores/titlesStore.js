@@ -21,7 +21,6 @@ export const useTitlesStore = defineStore("titles", {
   },
 
   actions: {
-    // TODO: do I use this?
     titleSelected(title) {
       this.title = title;
     },

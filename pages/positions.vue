@@ -14,9 +14,6 @@ const positionsstore = usePositionsStore();
 const positions = ref([]);
 const loaded = ref(false);
 
-const config = useRuntimeConfig();
-const api = config.public.apiBaseUrl;
-
 if (!positionsstore.initialized) {
   await positionsstore.fetchPositions();
 }
