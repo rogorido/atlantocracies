@@ -1,8 +1,9 @@
 <template>
   <div>
     <DataTable
-      :value="eventsrelated"
+      :value="events"
       paginator
+      @rowSelect="onRowSelect"
       stripedRows
       :rows="10"
       :rowsPerPageOptions="[5, 10, 20, 50]"
@@ -21,14 +22,35 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  eventsrelated: { type: Array, required: true },
-});
+import { useEventsStore } from "../stores/eventsStore";
+
+const eventsstore = useEventsStore();
+
+const events = ref([]);
+const loaded = ref(false);
+const selectedEvent = ref(null);
+
+if (!eventsstore.initialized) {
+  await eventsstore.fetchEvents();
+}
+
+events.value = eventsstore.events;
+loaded.value = true;
+// console.log(events.value);
+
+function probar() {
+  return navigateTo(`/event/${selectedEvent.value}`);
+}
+
+const onRowSelect = (e) => {
+  console.log("onRowSelect", e.data._id);
+  selectedEvent.value = e.data._id;
+  eventsstore.eventSelected(e.data._id);
+  probar();
+};
 
 const columns = [
   { field: "_id", header: "Event" },
   { field: "count", header: "Total" },
 ];
 </script>
-
-<style></style>
