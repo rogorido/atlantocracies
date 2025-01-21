@@ -19,6 +19,10 @@ export const useEventsStore = defineStore("events", {
   },
 
   actions: {
+    eventSelected(event) {
+      this.event = event;
+    },
+
     async fetchEvents() {
       if (!this.initialized) {
         const data = await $fetch(`${api}/general/eventstypes`);
