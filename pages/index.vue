@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="p-container-fluid">
-    <DividerShape />
+    <DividerWave />
   </div>
   <div class="p-container">
     <MainPageDescriptions />
