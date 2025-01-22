@@ -192,10 +192,6 @@ const storepersons = usePersonsStore();
 // con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
 // veo cómo es posible... es posible con query, pero eso es otra cosa...
 function goToSite() {
-  // return navigateTo(`/place/${selectedPlace.value}`, {
-  //   open: { target: "_blank" },
-  // });
-
   return navigateTo(`/person/${selectedPerson.value}`);
 }
 
