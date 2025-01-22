@@ -37,7 +37,6 @@ import { useAuthStore } from "../stores/auth";
 import { FilterMatchMode } from "@primevue/core/api";
 
 const eventsstore = useEventsStore();
-
 const authStore = useAuthStore();
 
 const events = ref([]);
@@ -75,8 +74,4 @@ const onRowSelect = (e) => {
 const filters = ref({
   _id: { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
-// const columns = [
-//   { field: "_id", header: "Event" },
-//   { field: "count", header: "Total" },
-// ];
 </script>

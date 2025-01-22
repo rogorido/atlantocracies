@@ -6,6 +6,7 @@
     :rows="10"
     filterDisplay="row"
     v-model:filters="filters"
+    @rowSelect="onRowSelect"
     :rowsPerPageOptions="[5, 10, 20, 50]"
     selectionMode="single"
     dataKey="_id"
@@ -25,10 +26,20 @@
 
     <Column field="count" header="Total" style="min-width: 3rem" sortable />
   </DataTable>
+  <Toast />
 </template>
 
 <script setup>
+import { usePositionsStore } from "../stores/positionsStore";
+import { useAuthStore } from "../stores/auth";
 import { FilterMatchMode } from "@primevue/core/api";
+
+const positionsstore = usePositionsStore();
+const authStore = useAuthStore();
+
+const toast = useToast();
+
+const selectedPosition = ref(null);
 
 const props = defineProps({
   positions: {
@@ -38,38 +49,25 @@ const props = defineProps({
   },
 });
 
-// const storepersons = usePersonsStore();
-// const toast = useToast();
-// const selectedPerson = ref();
+function goToSite() {
+  return navigateTo(`/position/${selectedPosition.value}`);
+}
 
-// // TODO: la cuestioón es qué hacer con el slug. Tengo una función de chatgpt
-// // pero si lo paso así luego en la página [placebyid] no puedo acceder al nombre
-// // con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
-// // veo cómo es posible... es posible con query, pero eso es otra cosa...
-// function goToSite()() {
-//   // return navigateTo(`/place/${selectedPlace.value}`, {
-//   //   open: { target: "_blank" },
-//   // });
+const onRowSelect = (e) => {
+  if (!authStore.isAuthenticated) {
+    toast.add({
+      severity: "error",
+      summary: "Not authenticated!",
+      detail: "You have to log in to see the details!",
+      life: 3000,
+    });
+  } else {
+    selectedPosition.value = e.data._id;
+    positionsstore.positionSelected(e.data._id);
+    goToSite();
+  }
+};
 
-//   return navigateTo(`/person/${selectedPerson.value}`);
-// }
-
-// const onRowSelect = (event) => {
-//   toast.add({
-//     severity: "info",
-//     summary: "Person",
-//     detail: event.data.name,
-//     life: 2000,
-//   });
-//   selectedPerson.value = event.data._id;
-//   storepersons.selectPerson(selectedPerson.value);
-//   goToSite()();
-// };
-
-// const columns = [
-//   { field: "_id", header: "Position" },
-//   { field: "count", header: "Total" },
-// ];
 const filters = ref({
   _id: { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
