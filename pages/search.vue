@@ -116,7 +116,7 @@ const { filter } = storeToRefs(storefilter);
 
 provide("persons", readonly(persons));
 
-function goToSite()() {
+function goToSite() {
   loadingGroups.value = true;
   return navigateTo("/groups");
 }

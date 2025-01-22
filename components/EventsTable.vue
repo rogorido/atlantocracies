@@ -19,16 +19,22 @@
       ></Column>
     </DataTable>
   </div>
+  <Toast />
 </template>
 
 <script setup>
 import { useEventsStore } from "../stores/eventsStore";
+import { useAuthStore } from "../stores/auth";
 
 const eventsstore = useEventsStore();
+
+const authStore = useAuthStore();
 
 const events = ref([]);
 const loaded = ref(false);
 const selectedEvent = ref(null);
+
+const toast = useToast();
 
 if (!eventsstore.initialized) {
   await eventsstore.fetchEvents();
@@ -43,10 +49,18 @@ function goToSite() {
 }
 
 const onRowSelect = (e) => {
-  console.log("onRowSelect", e.data._id);
-  selectedEvent.value = e.data._id;
-  eventsstore.eventSelected(e.data._id);
-  goToSite();
+  if (!authStore.isAuthenticated) {
+    toast.add({
+      severity: "danger",
+      summary: "Not authenticated!",
+      detail: "You have to log in to see the details!",
+      life: 3000,
+    });
+  } else {
+    selectedEvent.value = e.data._id;
+    eventsstore.eventSelected(e.data._id);
+    goToSite();
+  }
 };
 
 const columns = [
