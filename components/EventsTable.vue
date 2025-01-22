@@ -3,20 +3,29 @@
     <DataTable
       :value="events"
       paginator
+      v-model:filters="filters"
       @rowSelect="onRowSelect"
       stripedRows
       :rows="10"
       :rowsPerPageOptions="[5, 10, 20, 50]"
+      filterDisplay="row"
       selectionMode="single"
       dataKey="_id"
       tableStyle="min-width: 50rem"
     >
-      <Column
-        v-for="col of columns"
-        :key="col.field"
-        :field="col.field"
-        :header="col.header"
-      ></Column>
+      <Column field="_id" header="Event" sortable>
+        <template #filter="{ filterModel, filterCallback }">
+          <InputText
+            v-model="filterModel.value"
+            type="text"
+            @input="filterCallback()"
+            class="p-column-filter"
+            placeholder="Search by event"
+          />
+        </template>
+      </Column>
+
+      <Column field="count" header="Total" style="min-width: 3rem" sortable />
     </DataTable>
   </div>
   <Toast />
@@ -25,6 +34,7 @@
 <script setup>
 import { useEventsStore } from "../stores/eventsStore";
 import { useAuthStore } from "../stores/auth";
+import { FilterMatchMode } from "@primevue/core/api";
 
 const eventsstore = useEventsStore();
 
@@ -42,7 +52,6 @@ if (!eventsstore.initialized) {
 
 events.value = eventsstore.events;
 loaded.value = true;
-// console.log(events.value);
 
 function goToSite() {
   return navigateTo(`/event/${selectedEvent.value}`);
@@ -63,8 +72,11 @@ const onRowSelect = (e) => {
   }
 };
 
-const columns = [
-  { field: "_id", header: "Event" },
-  { field: "count", header: "Total" },
-];
+const filters = ref({
+  _id: { value: null, matchMode: FilterMatchMode.CONTAINS },
+});
+// const columns = [
+//   { field: "_id", header: "Event" },
+//   { field: "count", header: "Total" },
+// ];
 </script>

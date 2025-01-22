@@ -4,21 +4,32 @@
     paginator
     stripedRows
     :rows="10"
+    filterDisplay="row"
+    v-model:filters="filters"
     :rowsPerPageOptions="[5, 10, 20, 50]"
     selectionMode="single"
     dataKey="_id"
     tableStyle="min-width: 50rem"
   >
-    <Column
-      v-for="col of columns"
-      :key="col.field"
-      :field="col.field"
-      :header="col.header"
-    ></Column>
+    <Column field="_id" header="Title" sortable>
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText
+          v-model="filterModel.value"
+          type="text"
+          @input="filterCallback()"
+          class="p-column-filter"
+          placeholder="Search by position"
+        />
+      </template>
+    </Column>
+
+    <Column field="count" header="Total" style="min-width: 3rem" sortable />
   </DataTable>
 </template>
 
 <script setup>
+import { FilterMatchMode } from "@primevue/core/api";
+
 const props = defineProps({
   positions: {
     type: Array,
@@ -55,8 +66,11 @@ const props = defineProps({
 //   goToSite()();
 // };
 
-const columns = [
-  { field: "_id", header: "Position" },
-  { field: "count", header: "Total" },
-];
+// const columns = [
+//   { field: "_id", header: "Position" },
+//   { field: "count", header: "Total" },
+// ];
+const filters = ref({
+  _id: { value: null, matchMode: FilterMatchMode.CONTAINS },
+});
 </script>
