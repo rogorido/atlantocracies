@@ -1,45 +1,47 @@
 <template>
-  <h1 class="text-center">
-    Type of relation: {{ useRoute().params.positionbyid }}
-  </h1>
-  <div v-if="status === 'pending'">Loading data...</div>
-  <div v-else-if="error">{{ error }}</div>
-  <div v-else>
-    <SearchMacroTablePersons />
-    <DividerShape />
-    <h2 class="text-center">Geographical distribution</h2>
-    <div class="grid">
-      <div class="col-6">
-        <h2>Per places</h2>
-        <PositionsPlacesTable :places="data.placesAll" />
+  <div class="p-container-fluid">
+    <h1 class="text-center">
+      Type of relation: {{ useRoute().params.positionbyid }}
+    </h1>
+    <div v-if="status === 'pending'">Loading data...</div>
+    <div v-else-if="error">{{ error }}</div>
+    <div v-else>
+      <SearchMacroTablePersons />
+      <DividerShape />
+      <h2 class="text-center">Geographical distribution</h2>
+      <div class="grid">
+        <div class="col-12 lg:col-6">
+          <h2>Per places</h2>
+          <PositionsPlacesTable :places="data.placesAll" />
+        </div>
+        <div class="col-12 lg:col-6">
+          <h2>Per countries</h2>
+          <TitlesCountriesTable :countries="data.countriesAll" />
+        </div>
       </div>
-      <div class="col-6">
-        <h2>Per countries</h2>
-        <TitlesCountriesTable :countries="data.countriesAll" />
-      </div>
+      <!-- <DividerShape /> -->
+      <!-- <h2 class="text-center">Temporal distribution</h2> -->
+      <!-- <div class="grid"> -->
+      <!--   <div class="col-6"> -->
+      <!--     <h2>Decades Graph</h2> -->
+      <!--     <Chart class="graph" type="bar" :options="options" :data="chartData" /> -->
+      <!--   </div> -->
+      <!--   <div class="col-5"> -->
+      <!--     <p> -->
+      <!--       Lorem ipsum dolor sit amet consectetur adipisicing elit. At, -->
+      <!--       reiciendis exercitationem! Illo sunt, natus adipisci quo rem eveniet -->
+      <!--       optio! Esse nobis necessitatibus nihil temporibus laborum! Voluptas -->
+      <!--       neque optio veritatis incidunt. -->
+      <!--     </p> -->
+      <!--     <p> -->
+      <!--       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat -->
+      <!--       voluptates voluptatem reiciendis in asperiores quo quia quam -->
+      <!--       blanditiis, temporibus assumenda corrupti omnis maiores enim. Ipsum -->
+      <!--       accusamus aliquam aperiam rerum doloremque? -->
+      <!--     </p> -->
+      <!--   </div> -->
+      <!-- </div> -->
     </div>
-    <!-- <DividerShape /> -->
-    <!-- <h2 class="text-center">Temporal distribution</h2> -->
-    <!-- <div class="grid"> -->
-    <!--   <div class="col-6"> -->
-    <!--     <h2>Decades Graph</h2> -->
-    <!--     <Chart class="graph" type="bar" :options="options" :data="chartData" /> -->
-    <!--   </div> -->
-    <!--   <div class="col-5"> -->
-    <!--     <p> -->
-    <!--       Lorem ipsum dolor sit amet consectetur adipisicing elit. At, -->
-    <!--       reiciendis exercitationem! Illo sunt, natus adipisci quo rem eveniet -->
-    <!--       optio! Esse nobis necessitatibus nihil temporibus laborum! Voluptas -->
-    <!--       neque optio veritatis incidunt. -->
-    <!--     </p> -->
-    <!--     <p> -->
-    <!--       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat -->
-    <!--       voluptates voluptatem reiciendis in asperiores quo quia quam -->
-    <!--       blanditiis, temporibus assumenda corrupti omnis maiores enim. Ipsum -->
-    <!--       accusamus aliquam aperiam rerum doloremque? -->
-    <!--     </p> -->
-    <!--   </div> -->
-    <!-- </div> -->
   </div>
   <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
 </template>

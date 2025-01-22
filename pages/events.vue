@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="p-container">
     <h1 class="text-center">Events</h1>
 
     <div class="grid">
-      <div class="col-6">
+      <div class="col-12 lg:col-6">
         <p>
           Our datababase contains information about the titles held by the
           persons. If you click on a row, you will get details about the
@@ -16,7 +16,7 @@
           order to see the details!
         </p>
       </div>
-      <div class="col-6">
+      <div class="col-12 lg:col-6">
         <EventsTable />
       </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <div class="col-12 md:col-5">
+    <div class="col-12 lg:col-5">
       <div class="flex showdata">
         <div>Total persons:</div>
         <div class="numero">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-7">
+    <div class="col-12 lg:col-7">
       <h2 class="text-center uppercase">Atlantocracies</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus

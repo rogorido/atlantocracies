@@ -14,7 +14,6 @@
       @rowSelect="onRowSelect"
       v-model:filters="filters"
       filterDisplay="row"
-      tableStyle="min-width: 25rem"
     >
       <template #header>
         <div style="text-align: right">

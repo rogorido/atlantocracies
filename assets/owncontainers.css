@@ -1,8 +1,18 @@
 .p-container-fluid {
   width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
 }
+
+/* Esto se para los dividers para que ocupen todo.  */
+.p-container-divider {
+  width: 100%;
+}
+
 .p-container {
   margin: auto !important;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 @media (min-width: 1200px) {
   .p-container {

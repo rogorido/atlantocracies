@@ -1,158 +1,160 @@
 <template>
-  <h1 class="text-center">
-    Type of relation: {{ useRoute().params.relationbyid }}
-  </h1>
-  <div v-if="status === 'pending'">Loading data...</div>
-  <div v-else-if="error">{{ error }}</div>
-  <div v-else>
-    <section>
-      <h2 class="mt-5 text-center uppercase">Aggregated data</h2>
-      <div class="grid">
-        <div class="col-6">
-          <h2>Concrete data</h2>
-          <DataTable
-            paginator
-            stripedRows
-            ref="dt"
-            :value="data.relationid"
-            :rows="10"
-            :rowsPerPageOptions="[5, 10, 20, 50]"
-            selectionMode="single"
-            dataKey="_id"
-            @rowSelect="onRowSelect"
-            tableStyle="min-width: 50rem"
-          >
-            <template #header>
-              <div style="text-align: right">
-                <Button
-                  icon="pi pi-external-link"
-                  label="Export"
-                  @click="exportCSV($event)"
-                />
-              </div>
-            </template>
-            <Column
-              v-for="col of columnsRel"
-              :key="col.field"
-              :field="col.field"
-              :header="col.header"
-              sortable
-            ></Column>
-          </DataTable>
-        </div>
-        <div class="col-6">
-          <h2>Positions (total, not persons!)</h2>
-          <DataTable
-            paginator
-            stripedRows
-            ref="dtt"
-            :value="data.positions"
-            :rows="10"
-            :rowsPerPageOptions="[5, 10, 20, 50]"
-            dataKey="_id"
-            tableStyle="min-width: 50rem"
-          >
-            <template #header>
-              <div style="text-align: right">
-                <Button
-                  icon="pi pi-external-link"
-                  label="Export"
-                  @click="exportOtherCSV($event)"
-                />
-              </div>
-            </template>
-            <Column
-              v-for="col of columnsPositions"
-              :key="col.field"
-              :field="col.field"
-              :header="col.header"
-              sortable
-            ></Column>
-          </DataTable>
-        </div>
-      </div>
-
-      <DividerShape />
-      <!-- Agregados de lugares -->
-      <div>
+  <div class="p-container-fluid">
+    <h1 class="text-center">
+      Type of relation: {{ useRoute().params.relationbyid }}
+    </h1>
+    <div v-if="status === 'pending'">Loading data...</div>
+    <div v-else-if="error">{{ error }}</div>
+    <div v-else>
+      <section>
+        <h2 class="mt-5 text-center uppercase">Aggregated data</h2>
         <div class="grid">
-          <div class="col-6">
-            <h2>
-              Countries of Origin (aggregated): Place <-> Present countries
-            </h2>
-            <TreeTable
-              :value="data.infOriginsCountries"
-              :paginator="true"
+          <div class="col-12 lg:col-6">
+            <h2>Concrete data</h2>
+            <DataTable
+              paginator
+              stripedRows
+              ref="dt"
+              :value="data.relationid"
               :rows="10"
-              size="small"
-              :rowsPerPageOptions="[10, 20, 30, 40]"
+              :rowsPerPageOptions="[5, 10, 20, 50]"
+              selectionMode="single"
+              dataKey="_id"
+              @rowSelect="onRowSelect"
             >
-              <template #empty> No positions found. </template>
+              <template #header>
+                <div style="text-align: right">
+                  <Button
+                    icon="pi pi-external-link"
+                    label="Export"
+                    @click="exportCSV($event)"
+                  />
+                </div>
+              </template>
               <Column
-                field="place"
-                header="Place | Current country"
+                v-for="col of columnsRel"
+                :key="col.field"
+                :field="col.field"
+                :header="col.header"
                 sortable
-                expander
               ></Column>
-              <Column field="count" header="Total" sortable></Column>
-              <Column field="percentage" header="%" sortable></Column>
-            </TreeTable>
+            </DataTable>
           </div>
-          <div class="col-6">
-            <h2>
-              Historical Places of Origin (aggregated): Place <-> Historical
-              countries
-            </h2>
-            <TreeTable
-              :value="data.infOriginsHistBirths"
-              :paginator="true"
+          <div class="col-12 lg:col-6">
+            <h2>Positions (total, not persons!)</h2>
+            <DataTable
+              paginator
+              stripedRows
+              ref="dtt"
+              :value="data.positions"
               :rows="10"
-              size="small"
-              :rowsPerPageOptions="[10, 20, 30, 40]"
+              :rowsPerPageOptions="[5, 10, 20, 50]"
+              dataKey="_id"
             >
-              <template #empty> No positions found. </template>
+              <template #header>
+                <div style="text-align: right">
+                  <Button
+                    icon="pi pi-external-link"
+                    label="Export"
+                    @click="exportOtherCSV($event)"
+                  />
+                </div>
+              </template>
               <Column
-                field="place"
-                header="Place | Historical country"
+                v-for="col of columnsPositions"
+                :key="col.field"
+                :field="col.field"
+                :header="col.header"
                 sortable
-                expander
               ></Column>
-              <Column field="count" header="Total" sortable></Column>
-              <Column field="percentage" header="%" sortable></Column>
-            </TreeTable>
+            </DataTable>
           </div>
         </div>
+
+        <DividerShape />
+        <!-- Agregados de lugares -->
+        <div>
+          <div class="grid">
+            <div class="col-12 lg:col-6">
+              <h2>
+                Countries of Origin (aggregated): Place <-> Present countries
+              </h2>
+              <TreeTable
+                :value="data.infOriginsCountries"
+                :paginator="true"
+                :rows="10"
+                size="small"
+                :rowsPerPageOptions="[10, 20, 30, 40]"
+              >
+                <template #empty> No positions found. </template>
+                <Column
+                  field="place"
+                  header="Place | Current country"
+                  sortable
+                  expander
+                ></Column>
+                <Column field="count" header="Total" sortable></Column>
+                <Column field="percentage" header="%" sortable></Column>
+              </TreeTable>
+            </div>
+            <div class="col-12 lg:col-6">
+              <h2>
+                Historical Places of Origin (aggregated): Place <-> Historical
+                countries
+              </h2>
+              <TreeTable
+                :value="data.infOriginsHistBirths"
+                :paginator="true"
+                :rows="10"
+                size="small"
+                :rowsPerPageOptions="[10, 20, 30, 40]"
+              >
+                <template #empty> No positions found. </template>
+                <Column
+                  field="place"
+                  header="Place | Historical country"
+                  sortable
+                  expander
+                ></Column>
+                <Column field="count" header="Total" sortable></Column>
+                <Column field="percentage" header="%" sortable></Column>
+              </TreeTable>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <hr />
+    <!-- Detalles  -->
+    <!-- we define details as ref({}) and therefore is always present and we have to check if it is void. -->
+    <section v-if="Object.keys(details).length > 0" class="details-section">
+      <h2 class="mt-5 text-center uppercase">
+        Details about {{ details._id }}
+      </h2>
+      <p>Number of informations: {{ details.totalInformations }}</p>
+      <div class="grid">
+        <div class="col-12 lg:col-4">
+          <h3>Positions held</h3>
+          <DataTable :value="details.positions">
+            <Column field="info" header="Position"></Column
+          ></DataTable>
+        </div>
+        <div class="col-12 lg:col-4">
+          <h3>Titles held</h3>
+          <DataTable :value="details.titlesInf">
+            <Column field="info" header="Titles"></Column
+          ></DataTable>
+        </div>
+        <div class="col-12 lg:col-4">
+          <h3>Places</h3>
+          <DataTable :value="details.placesInf">
+            <Column field="info" header="Place"></Column
+          ></DataTable>
+        </div>
       </div>
+      <SearchMacroTablePersons />
     </section>
   </div>
-  <hr />
-  <!-- Detalles  -->
-  <!-- we define details as ref({}) and therefore is always present and we have to check if it is void. -->
-  <section v-if="Object.keys(details).length > 0" class="details-section">
-    <h2 class="mt-5 text-center uppercase">Details about {{ details._id }}</h2>
-    <p>Number of informations: {{ details.totalInformations }}</p>
-    <div class="grid">
-      <div class="col-4">
-        <h3>Positions held</h3>
-        <DataTable :value="details.positions">
-          <Column field="info" header="Position"></Column
-        ></DataTable>
-      </div>
-      <div class="col-4">
-        <h3>Titles held</h3>
-        <DataTable :value="details.titlesInf">
-          <Column field="info" header="Titles"></Column
-        ></DataTable>
-      </div>
-      <div class="col-4">
-        <h3>Places</h3>
-        <DataTable :value="details.placesInf">
-          <Column field="info" header="Place"></Column
-        ></DataTable>
-      </div>
-    </div>
-    <SearchMacroTablePersons />
-  </section>
   <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
 </template>
 

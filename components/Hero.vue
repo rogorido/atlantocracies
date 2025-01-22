@@ -1,4 +1,3 @@
-import { NuxtLink } from '#build/components';
 <template>
   <div class="contenedor">
     <div class="wrap">

@@ -5,9 +5,9 @@
       <MainPageBlocksData :stats="stats" class="mt-5" />
     </div>
   </div>
-  <div class="p-container-fluid">
-    <DividerWave />
-  </div>
+
+  <DividerWave />
+
   <div class="p-container">
     <MainPageDescriptions />
   </div>

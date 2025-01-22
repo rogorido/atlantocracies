@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="p-container-fluid">
     <h1 class="text-center">General Search</h1>
 
     <div class="grid">
-      <div class="col-8">
+      <div class="col-12 lg:col-8">
         <Tabs value="0">
           <TabList>
             <Tab
@@ -35,7 +35,7 @@
         </Tabs>
       </div>
 
-      <div class="col-4">
+      <div class="col-12 lg:col-4">
         <Card>
           <template #title>Persons</template>
           <template #content>
@@ -72,8 +72,11 @@
         @click="downloadFilter"
       />
     </div>
+  </div>
 
-    <DividerShape class="mt-3" />
+  <DividerShape class="mt-3" />
+
+  <div class="p-container-fluid">
     <div id="selectedpersons" v-if="persons.length > 0">
       <section>
         <SearchMacroTablePersons />

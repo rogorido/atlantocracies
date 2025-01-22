@@ -1,20 +1,27 @@
 <template>
-  <h1 class="text-center">
-    Type of relation: {{ useRoute().params.eventbyid }}
-  </h1>
-  <div v-if="status === 'pending'">Loading data...</div>
-  <div v-else-if="error">{{ error }}</div>
-  <div v-else>
-    <SearchMacroTablePersons />
-    <DividerShape />
-    <div class="grid">
-      <div class="col-6">
-        <h2>Per places</h2>
-        <EventsPlacesTable :places="data.placesAll" />
-      </div>
-      <div class="col-6">
-        <h2>Decades Graph</h2>
-        <Chart class="graph" type="bar" :options="options" :data="chartData" />
+  <div class="p-container-fluid">
+    <h1 class="text-center">
+      Type of relation: {{ useRoute().params.eventbyid }}
+    </h1>
+    <div v-if="status === 'pending'">Loading data...</div>
+    <div v-else-if="error">{{ error }}</div>
+    <div v-else>
+      <SearchMacroTablePersons />
+      <DividerShape />
+      <div class="grid">
+        <div class="col-12 xl:col-6">
+          <h2>Per places</h2>
+          <EventsPlacesTable :places="data.placesAll" />
+        </div>
+        <div class="col-12 xl:col-6">
+          <h2>Decades Graph</h2>
+          <Chart
+            class="graph"
+            type="bar"
+            :options="options"
+            :data="chartData"
+          />
+        </div>
       </div>
     </div>
   </div>
