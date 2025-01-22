@@ -59,7 +59,7 @@
         v-tooltip="'Analyze the selected group. You have to be logged in.'"
         icon="pi pi-objects-column"
         :disabled="ButtonDisabled"
-        @click="probar"
+        @click="goToSite"
         :loading="loadingGroups"
         rounded
       />
@@ -116,7 +116,7 @@ const { filter } = storeToRefs(storefilter);
 
 provide("persons", readonly(persons));
 
-function probar() {
+function goToSite()() {
   loadingGroups.value = true;
   return navigateTo("/groups");
 }

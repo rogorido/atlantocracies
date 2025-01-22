@@ -114,7 +114,7 @@ watch(selectedContinents, () => {
     Array.isArray(selectedContinents.value)
   ) {
     if (selectedContinents.value.length === 0) {
-      // hay que comprobar que exista porque al hacer reset desaparece y da un error
+      // hay que comgoToSite() que exista porque al hacer reset desaparece y da un error
       if (filter.value.titles) delete filter.value.titles.continental;
     } else {
       // Initialize filter.titles.nomTit if it doesn't exist

@@ -191,7 +191,7 @@ const storepersons = usePersonsStore();
 // pero si lo paso así luego en la página [placebyid] no puedo acceder al nombre
 // con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
 // veo cómo es posible... es posible con query, pero eso es otra cosa...
-function probar() {
+function goToSite() {
   // return navigateTo(`/place/${selectedPlace.value}`, {
   //   open: { target: "_blank" },
   // });
@@ -202,7 +202,7 @@ function probar() {
 const onRowSelect = (event) => {
   selectedPerson.value = event.data._id;
   storepersons.selectPerson(selectedPerson.value);
-  probar();
+  goToSite();
 };
 
 const columns = [

@@ -33,7 +33,7 @@ loaded.value = true;
 // pero si lo paso así luego en la página [placebyid] no puedo acceder al nombre
 // con lo que debería meterlo en un store... o pasarlo con un parámetro, pero no
 // veo cómo es posible... es posible con query, pero eso es otra cosa...
-function probar() {
+function goToSite() {
   return navigateTo(`/relation/${selectedRelation.value}`);
 }
 
@@ -42,6 +42,6 @@ const onRowSelect = (event) => {
   selectedRelation.value = event.data._id;
   // relationsstore.relationSelected(selectedRelation.value);
   relationsstore.relationSelected(event.data._id);
-  probar();
+  goToSite();
 };
 </script>

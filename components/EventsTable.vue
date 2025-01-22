@@ -38,7 +38,7 @@ events.value = eventsstore.events;
 loaded.value = true;
 // console.log(events.value);
 
-function probar() {
+function goToSite() {
   return navigateTo(`/event/${selectedEvent.value}`);
 }
 
@@ -46,7 +46,7 @@ const onRowSelect = (e) => {
   console.log("onRowSelect", e.data._id);
   selectedEvent.value = e.data._id;
   eventsstore.eventSelected(e.data._id);
-  probar();
+  goToSite();
 };
 
 const columns = [
