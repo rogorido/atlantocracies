@@ -3,6 +3,7 @@
     <OwnMenuBar />
     <Hero />
     <slot />
+    <DividerWave />
     <FooterGeneral />
   </div>
 </template>
