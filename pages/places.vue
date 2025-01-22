@@ -60,6 +60,18 @@
       <div class="col-6">
         <h2 class="text-center">Some information</h2>
         <p>Places are important etc.</p>
+
+        <p>
+          Our datababase contains information about the titles held by the
+          persons. If you click on a row, you will get details about the
+          selected title (which persons held it, where and when was it granted,
+          etc.).
+        </p>
+        <p v-show="!authStore.isAuthenticated">
+          You have to be
+          <Button as="router-link" label="logged in" to="/login" />logged in
+          order to see the details!
+        </p>
         <p>You can click on a place to see the details.</p>
         <p>You can search by place with the filter option.</p>
         <p>You can sort the table by any column.</p>
@@ -72,6 +84,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { usePlacesStore } from "../stores/placesStore";
+import { useAuthStore } from "../stores/auth";
 import { FilterMatchMode } from "@primevue/core/api";
 
 // es imporante lo de v-if con loaded pq si no locarga antes de tener los datos...
@@ -82,6 +95,7 @@ const coordenadas = ref([]);
 
 const store = usePlacesStore();
 const selectedPlace = ref(null);
+const authStore = useAuthStore();
 
 const toast = useToast();
 
@@ -108,15 +122,18 @@ function goToSite() {
 }
 
 const onRowSelect = (event) => {
-  toast.add({
-    severity: "info",
-    summary: "Place",
-    detail: event.data.place,
-    life: 2000,
-  });
-  selectedPlace.value = event.data.place;
-  store.placeSelected(selectedPlace.value);
-  goToSite();
+  if (!authStore.isAuthenticated) {
+    toast.add({
+      severity: "error",
+      summary: "Not authenticated!",
+      detail: "You have to log in to see the details!",
+      life: 3500,
+    });
+  } else {
+    selectedPlace.value = event.data.place;
+    store.placeSelected(selectedPlace.value);
+    goToSite();
+  }
 };
 
 onMounted(() => {

@@ -51,7 +51,7 @@ function goToSite() {
 const onRowSelect = (e) => {
   if (!authStore.isAuthenticated) {
     toast.add({
-      severity: "danger",
+      severity: "error",
       summary: "Not authenticated!",
       detail: "You have to log in to see the details!",
       life: 3000,

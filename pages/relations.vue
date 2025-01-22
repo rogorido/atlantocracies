@@ -2,25 +2,44 @@
   <div>
     <h1 class="text-center">Relations</h1>
 
-    <RelationsTable
-      :relations="relations"
-      @rowSelect="onRowSelect"
-      tabStyle="max-width: 50rem"
-    />
+    <div class="grid">
+      <div class="col-6">
+        <p>
+          Our datababase contains information about the titles held by the
+          persons. If you click on a row, you will get details about the
+          selected title (which persons held it, where and when was it granted,
+          etc.).
+        </p>
+        <p v-show="!authStore.isAuthenticated">
+          You have to be
+          <Button as="router-link" label="logged in" to="/login" />logged in
+          order to see the details!
+        </p>
+      </div>
+      <div class="col-6">
+        <RelationsTable
+          :relations="relations"
+          @rowSelect="onRowSelect"
+          tabStyle="max-width: 50rem"
+        />
+      </div>
+    </div>
+    <Toast />
   </div>
 </template>
 
 <script setup>
 import { useRelationsStore } from "../stores/relationsStore";
+import { useAuthStore } from "../stores/auth";
 
 const relationsstore = useRelationsStore();
+const authStore = useAuthStore();
 
 const relations = ref([]);
 const loaded = ref(false);
 const selectedRelation = ref(null);
 
-// const config = useRuntimeConfig();
-// const api = config.public.apiBaseUrl;
+const toast = useToast();
 
 if (!relationsstore.initialized) {
   await relationsstore.fetchRelations();
@@ -38,10 +57,17 @@ function goToSite() {
 }
 
 const onRowSelect = (event) => {
-  // console.log("onRowSelect", event.data._id);
-  selectedRelation.value = event.data._id;
-  // relationsstore.relationSelected(selectedRelation.value);
-  relationsstore.relationSelected(event.data._id);
-  goToSite();
+  if (!authStore.isAuthenticated) {
+    toast.add({
+      severity: "error",
+      summary: "Not authenticated!",
+      detail: "You have to log in to see the details!",
+      life: 3000,
+    });
+  } else {
+    selectedRelation.value = event.data._id;
+    relationsstore.relationSelected(event.data._id);
+    goToSite();
+  }
 };
 </script>

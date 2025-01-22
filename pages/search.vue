@@ -132,7 +132,7 @@ onMounted(async () => {
   if (Object.keys(filter.value).length > 0) {
     console.log("estamos en el toast");
     toast.add({
-      severity: "warn",
+      severity: "info",
       summary: "Filter activated",
       detail:
         "There is an active filter. You can reset it by clicking on the 'Reset filter' button",
