@@ -1,4 +1,3 @@
-<
 <template>
   <div class="custom-shape-divider-top-1737322524">
     <svg
