@@ -25,10 +25,18 @@
       </a>
     </template>
   </Menubar>
+  <Toast />
+  <ConfirmDialog></ConfirmDialog>
 </template>
 
 <script setup>
+import { useAuthStore } from "@/stores/auth";
+import { useConfirm } from "primevue/useconfirm";
+
 const authStore = useAuthStore();
+
+const confirm = useConfirm();
+const toast = useToast();
 
 const items = ref([
   {
@@ -102,7 +110,7 @@ onMounted(() => {
     const lastitem = {
       label: "Logout",
       icon: "pi pi-users",
-      command: logout,
+      command: confirmlogout,
     };
 
     items.value.splice(items.value.length - 1, 1, lastitem);
@@ -118,7 +126,7 @@ authStore.$subscribe((mutation, state) => {
     lastitem = {
       label: "Logout",
       icon: "pi pi-users",
-      command: logout,
+      command: confirmlogout,
     };
   } else {
     lastitem = {
@@ -131,8 +139,30 @@ authStore.$subscribe((mutation, state) => {
   items.value.splice(items.value.length - 1, 1, lastitem);
 });
 
-const logout = () => {
-  authStore.logout();
+const confirmlogout = () => {
+  confirm.require({
+    message: "Are you sure you want to proceed?",
+    header: "Confirmation",
+    icon: "pi pi-exclamation-triangle",
+    rejectProps: {
+      label: "Cancel",
+      severity: "secondary",
+      outlined: true,
+    },
+    acceptProps: {
+      label: "Log out",
+    },
+    accept: () => {
+      authStore.logout();
+      toast.add({
+        severity: "info",
+        summary: "Confirmed",
+        detail: "You have been logged out.",
+        life: 3000,
+      });
+    },
+    reject: () => {},
+  });
 };
 </script>
 
