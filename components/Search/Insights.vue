@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 id="insights" class="mt-5 text-center uppercase">Insights</h2>
-    <Tabs value="0">
+    <Tabs value="0" scrollable>
       <TabList>
         <Tab value="0">Birth years in decades</Tab>
         <Tab value="1">Gender</Tab>

@@ -11,7 +11,7 @@
         <p>Esto es una prueba {{ data.persondetails.gender }}</p>
       </Fieldset>
 
-      <Tabs value="0">
+      <Tabs value="0" scrollable>
         <TabList>
           <Tab value="0">Relations</Tab>
           <Tab value="1">Events</Tab>

@@ -4,7 +4,7 @@
 
     <div class="grid">
       <div class="col-12 lg:col-8">
-        <Tabs value="0">
+        <Tabs value="0" scrollable>
           <TabList>
             <Tab
               v-tooltip="'Select filters related to personal aspects.'"

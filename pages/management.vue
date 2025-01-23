@@ -4,7 +4,7 @@
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
       <h1 class="text-center">Management</h1>
-      <Tabs value="0">
+      <Tabs value="0" scrollable>
         <TabList>
           <Tab value="0">Relations</Tab>
           <Tab value="1">Events</Tab>

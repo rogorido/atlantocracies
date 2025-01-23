@@ -33,7 +33,7 @@
     <div v-if="status === 'pending'">Loading data...</div>
     <section id="relations" v-else>
       <h3 class="text-center uppercase">Relations</h3>
-      <Tabs value="0">
+      <Tabs value="0" scrollable>
         <TabList>
           <Tab value="0">Relations</Tab>
         </TabList>

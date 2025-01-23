@@ -18,7 +18,7 @@
     <div v-if="status === 'pending'">Loading data...</div>
     <div v-if="status === 'error'">{{ error }}</div>
     <div v-else>
-      <Tabs value="0">
+      <Tabs value="0" scrollable>
         <TabList>
           <Tab value="0">Related persons</Tab>
           <!-- <Tab value="1">Related places</Tab> -->
