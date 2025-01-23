@@ -37,25 +37,31 @@
 
         <!-- Events -->
         <TabPanel value="1">
-          <h2>Events</h2>
-          <PersonsEventsTable :events="data.persondetails.events" />
-          <!-- <div class="col-6"> -->
-          <!--   <PersonsEventsTimeLine -->
-          <!--     :eventstimeline="data.personeventstimeline" -->
-          <!--   /> -->
-          <!-- </div> -->
+          <div class="center-table">
+            <h2>Events</h2>
+            <PersonsEventsTable :events="data.persondetails.events" />
+            <!-- <div class="col-6"> -->
+            <!--   <PersonsEventsTimeLine -->
+            <!--     :eventstimeline="data.personeventstimeline" -->
+            <!--   /> -->
+            <!-- </div> -->
+          </div>
         </TabPanel>
 
         <!-- Positions -->
         <TabPanel value="2">
-          <h2>Positions</h2>
-          <PersonsPositionsTable :positions="data.persondetails.positions" />
+          <div class="center-table">
+            <h2>Positions</h2>
+            <PersonsPositionsTable :positions="data.persondetails.positions" />
+          </div>
         </TabPanel>
 
         <!-- Titles -->
         <TabPanel value="3">
-          <h2>Titles</h2>
-          <PersonsTitlesTable :titles="data.persondetails.titles" />
+          <div class="center-table">
+            <h2>Titles</h2>
+            <PersonsTitlesTable :titles="data.persondetails.titles" />
+          </div>
         </TabPanel>
 
         <!-- Places -->
@@ -103,3 +109,11 @@ const { data, status, error } = await useLazyFetch(
   `${api}/persons/personsbyid/${useRoute().params.personbyid}`,
 );
 </script>
+
+<style scoped>
+.center-table {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+</style>

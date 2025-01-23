@@ -12,6 +12,7 @@
 </template>
 
 <style>
+/* idea from https://codepen.io/vishaljaiswal/pen/XWGKBmK */
 .hero {
   position: relative;
   /* background: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg"); */
@@ -21,22 +22,23 @@
   align-items: center;
   justify-content: center;
 }
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Black color with 60% opacity */
-  z-index: 1; /* Ensure the overlay is behind the content */
-}
+/*
+     .hero::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.6);
+     z-index: 1; 
+     }
+ */
 
 .hero-content {
   text-align: center;
   color: #fff;
-  z-index: 2; /* Ensure the content is on top of the overlay */
+  /*  z-index: 2;  Ensure the content is on top of the overlay */
 }
 
 .hero-title {
@@ -82,6 +84,17 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 1.7em;
+    letter-spacing: 1px;
+  }
+  .hero-subtitle {
+    font-size: 1.2em;
+    margin-bottom: 10px;
   }
 }
 </style>
