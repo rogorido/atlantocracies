@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="col-12 lg:col-5">
       <div class="flex showdata">
-        <div>Total persons:</div>
+        <div>Total persons</div>
         <div class="numero">
           {{ stats.totalPersons != null ? stats.totalPersons : 0 }}
         </div>
@@ -83,7 +83,7 @@ const props = defineProps({ stats: { type: Object, required: true } });
   font-size: 1.9rem;
   color: #fff;
   background-color: #af2f14;
-  width: 50px;
+  width: 80px;
   border-radius: 50% 20% / 10% 40%;
   text-align: right;
 }

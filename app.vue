@@ -18,5 +18,6 @@ import "@/assets/owncontainers.css";
 html {
   /* font-family: "Roboto Slab", sans-serif; */
   font-family: "Noto Sans", sans-serif;
+  line-height: 1.3;
 }
 </style>

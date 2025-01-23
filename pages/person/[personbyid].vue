@@ -33,41 +33,31 @@
 
         <!-- Events -->
         <TabPanel value="1">
-          <div class="grid">
-            <div class="col-6">
-              <h2>Events</h2>
-              <PersonsEventsTable :events="data.persondetails.events" />
-            </div>
-            <!-- <div class="col-6"> -->
-            <!--   <PersonsEventsTimeLine -->
-            <!--     :eventstimeline="data.personeventstimeline" -->
-            <!--   /> -->
-            <!-- </div> -->
-          </div>
+          <h2>Events</h2>
+          <PersonsEventsTable :events="data.persondetails.events" />
+          <!-- <div class="col-6"> -->
+          <!--   <PersonsEventsTimeLine -->
+          <!--     :eventstimeline="data.personeventstimeline" -->
+          <!--   /> -->
+          <!-- </div> -->
         </TabPanel>
 
         <!-- Positions -->
         <TabPanel value="2">
-          <div class="col-6">
-            <h2>Positions</h2>
-            <PersonsPositionsTable :positions="data.persondetails.positions" />
-          </div>
+          <h2>Positions</h2>
+          <PersonsPositionsTable :positions="data.persondetails.positions" />
         </TabPanel>
 
         <!-- Titles -->
         <TabPanel value="3">
-          <div class="grid">
-            <div class="col-6">
-              <h2>Titles</h2>
-              <PersonsTitlesTable :titles="data.persondetails.titles" />
-            </div>
-          </div>
+          <h2>Titles</h2>
+          <PersonsTitlesTable :titles="data.persondetails.titles" />
         </TabPanel>
 
         <!-- Places -->
         <TabPanel value="4">
           <div class="grid">
-            <div class="col-6">
+            <div class="col-12 lg:col-6">
               <h2>Places</h2>
               <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.

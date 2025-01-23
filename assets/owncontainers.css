@@ -14,12 +14,14 @@
   padding-left: 15px;
   padding-right: 15px;
 }
+
 @media (min-width: 1200px) {
   .p-container {
     max-width: 1140px;
     width: 1140px;
   }
 }
+
 @media screen and (min-width: 992px) and (max-width: 1200px) {
   .p-container {
     max-width: 960px;
