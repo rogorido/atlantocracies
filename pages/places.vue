@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-container-fluid">
     <h1 class="text-center">Places</h1>
     <ClientOnly>
       <PlacesMap
@@ -12,71 +12,55 @@
       <template #fallback> Loading map... </template>
     </ClientOnly>
 
-    <div class="grid">
-      <div class="col-6">
-        <h2 class="text-center">List of places</h2>
-        <DataTable
-          :value="places"
-          paginator
-          stripedRows
-          :rows="10"
-          :rowsPerPageOptions="[5, 10, 20, 50]"
-          selectionMode="single"
-          dataKey="place"
-          :selection="selectedPlace"
-          @rowSelect="onRowSelect"
-          v-model:filters="filters"
-          filterDisplay="row"
-          tableStyle="min-width: 50rem"
-          v-if="loaded"
-        >
-          <Column field="place" header="Place" sortable>
-            <template #filter="{ filterModel, filterCallback }">
-              <InputText
-                v-model="filterModel.value"
-                type="text"
-                @input="filterCallback()"
-                class="p-column-filter"
-                placeholder="Search by name"
-              />
-            </template>
-          </Column>
-          <Column field="totalevents" header="Total events" sortable></Column>
-          <Column
-            field="totalrelations"
-            header="Total relations"
-            sortable
-          ></Column>
-          <Column
-            field="totalpositions"
-            header="Total positions"
-            sortable
-          ></Column>
-          <Column field="totalbirths" header="Total births" sortable></Column>
-          <Column field="totaldeaths" header="Total deaths" sortable></Column>
-          <Column field="totalplaces" header="Total" sortable></Column>
-        </DataTable>
-      </div>
-      <div class="col-6">
-        <h2 class="text-center">Some information</h2>
-        <p>Places are important etc.</p>
+    <h2 class="text-center">Some information</h2>
+    <p>Places are important etc.</p>
 
-        <p>
-          Our datababase contains information about the titles held by the
-          persons. If you click on a row, you will get details about the
-          selected title (which persons held it, where and when was it granted,
-          etc.).
-        </p>
-        <p v-show="!authStore.isAuthenticated">
-          You have to be
-          <Button as="router-link" label="logged in" to="/login" />logged in
-          order to see the details!
-        </p>
-        <p>You can click on a place to see the details.</p>
-        <p>You can search by place with the filter option.</p>
-        <p>You can sort the table by any column.</p>
-      </div>
-    </div>
+    <p>
+      Our datababase contains information about places all around the world. If
+      you click on a row, you will get details about the selected place (how
+      many events, how many titles, etc.).
+    </p>
+    <p v-show="!authStore.isAuthenticated">
+      You have to be
+      <Button as="router-link" label="logged in" to="/login" />logged in order
+      to see the details!
+    </p>
+    <p>You can click on a place to see the details.</p>
+    <p>You can search by place with the filter option.</p>
+    <p>You can sort the table by any column.</p>
+    <h2 class="text-center">List of places</h2>
+    <DataTable
+      :value="places"
+      paginator
+      stripedRows
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      selectionMode="single"
+      dataKey="place"
+      :selection="selectedPlace"
+      @rowSelect="onRowSelect"
+      v-model:filters="filters"
+      filterDisplay="row"
+      v-if="loaded"
+    >
+      <Column field="place" header="Place" sortable>
+        <template #filter="{ filterModel, filterCallback }">
+          <InputText
+            v-model="filterModel.value"
+            type="text"
+            @input="filterCallback()"
+            class="p-column-filter"
+            placeholder="Search by name"
+          />
+        </template>
+      </Column>
+      <Column field="totalevents" header="Total events" sortable></Column>
+      <Column field="totalrelations" header="Total relations" sortable></Column>
+      <Column field="totalpositions" header="Total positions" sortable></Column>
+      <Column field="totalbirths" header="Total births" sortable></Column>
+      <Column field="totaldeaths" header="Total deaths" sortable></Column>
+      <Column field="totalplaces" header="Total" sortable></Column>
+    </DataTable>
     <Toast />
   </div>
 </template>

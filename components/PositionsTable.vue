@@ -10,7 +10,6 @@
     :rowsPerPageOptions="[5, 10, 20, 50]"
     selectionMode="single"
     dataKey="_id"
-    tableStyle="min-width: 50rem"
   >
     <Column field="_id" header="Title" sortable>
       <template #filter="{ filterModel, filterCallback }">
