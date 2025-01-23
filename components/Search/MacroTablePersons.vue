@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h2 class="mt-5 text-center uppercase">Selected Persons</h2>
+    <h2 class="mt-5 text-center uppercase">
+      {{ persons.length }} Selected Persons
+    </h2>
     <DataTable
       :value="persons"
       ref="dt"

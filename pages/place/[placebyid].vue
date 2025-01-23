@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="p-container-fluid">
     <h1 class="text-center">{{ useRoute().params.placebyid }}</h1>
     <div class="grid">
-      <div class="col-6">
+      <div class="col-12 md:col-4">
         <div class="grid">
           <PlacesCardDataPlace :place="ciudad" />
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12 md:col-8">
         <ClientOnly>
           <PlacesMap :places="[ciudad]" :multipoint="false" v-if="loaded" />
 

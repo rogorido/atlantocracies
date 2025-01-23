@@ -12,6 +12,8 @@
       <template #fallback> Loading map... </template>
     </ClientOnly>
 
+    <DividerShape />
+
     <h2 class="text-center">Some information</h2>
     <p>Places are important etc.</p>
 
@@ -61,6 +63,7 @@
       <Column field="totaldeaths" header="Total deaths" sortable></Column>
       <Column field="totalplaces" header="Total" sortable></Column>
     </DataTable>
+    <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
     <Toast />
   </div>
 </template>

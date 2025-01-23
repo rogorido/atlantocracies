@@ -24,7 +24,7 @@
         </template>
       </Column>
 
-      <Column field="count" header="Total" style="min-width: 3rem" sortable />
+      <Column field="count" header="Total" sortable />
     </DataTable>
   </div>
   <Toast />

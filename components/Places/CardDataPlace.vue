@@ -13,7 +13,7 @@
     <Card>
       <template #title>Deaths</template>
       <template #content>
-        <p class="m-0">
+        <p class="numero">
           {{ place.totaldeaths != null ? place.totaldeaths : 0 }}
         </p>
       </template>
@@ -23,7 +23,7 @@
     <Card>
       <template #title>Events</template>
       <template #content>
-        <p class="m-0">
+        <p class="numero">
           {{ place.totalevents != null ? place.totalevents : 0 }}
         </p>
       </template>
@@ -33,7 +33,7 @@
     <Card>
       <template #title>Positions</template>
       <template #content>
-        <p class="m-0">
+        <p class="numero">
           {{ place.totalpositions != null ? place.totalpositions : 0 }}
         </p>
       </template>
@@ -43,7 +43,7 @@
     <Card>
       <template #title>Relations</template>
       <template #content>
-        <p class="m-0">
+        <p class="numero">
           {{ place.totalrelations != null ? place.totalrelations : 0 }}
         </p>
       </template>
