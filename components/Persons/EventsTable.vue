@@ -8,7 +8,6 @@
       :rowsPerPageOptions="[5, 10, 20, 50]"
       selectionMode="single"
       dataKey="_id"
-      tableStyle="min-width: 50rem"
     >
       <template #empty> No events found. </template>
       <Column
@@ -28,13 +27,7 @@ const props = defineProps({
 
 const columns = [
   { field: "typeEv", header: "Type" },
-  { field: "dateEv", header: "Date" },
+  // { field: "dateEv", header: "Date" },
   { field: "eventYear", header: "Year" },
-  // { field: "histBirth", header: "Birth territory" },
-  // { field: "wasMarried", header: "Was married" },
-  //  { field: "hasFather", header: "Has father" },
-  // { field: "hasMother", header: "Has mother" },
-  // { field: "birthyear", header: "Birth year" },
-  //  { field: "tiposEventos", header: "Eventos" },
 ];
 </script>

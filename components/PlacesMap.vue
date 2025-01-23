@@ -160,22 +160,22 @@ onUnmounted(() => {
 });
 
 // TODO: cómo usarlo con lo nuevo?
-const calculateData = () => {
-  if (props.multipoint) {
-    coordinates.value = props.coordenadas;
 
-    // Calcular the bounding box and its center
-    const boundingBox = boundingExtent(coordinates.value);
-    center.value = getCenter(boundingBox);
-
-    loaded.value = true;
-  } else {
-    coordinates.value = props.coordenadas[0];
-    center.value = props.coordenadas[0];
-
-    loaded.value = true;
-  }
-};
+//   if (props.multipoint) {
+//     coordinates.value = props.coordenadas;
+//
+//     // Calcular the bounding box and its center
+//     const boundingBox = boundingExtent(coordinates.value);
+//     center.value = getCenter(boundingBox);
+//
+//     loaded.value = true;
+//   } else {
+//     coordinates.value = props.coordenadas[0];
+//     center.value = props.coordenadas[0];
+//
+//     loaded.value = true;
+//   }
+// };
 
 // calculateData();
 </script>

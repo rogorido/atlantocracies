@@ -15,10 +15,6 @@ import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
 
 cytoscape.use(fcose);
-// import { Network } from "vis-network/esnext";
-// import { DataSet } from "vis-data/esnext";
-// import "vis-network/styles/vis-network.css";
-// import { layouts } from "chart.js";
 
 const props = defineProps({
   personsrelatedcyto: { type: Object, required: true, default: () => {} },

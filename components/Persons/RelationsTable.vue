@@ -8,7 +8,6 @@
       :rowsPerPageOptions="[5, 10, 20, 50]"
       selectionMode="single"
       dataKey="_id"
-      tableStyle="min-width: 50rem"
     >
       <Column
         v-for="col of columns"
