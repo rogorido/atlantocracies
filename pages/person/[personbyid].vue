@@ -6,7 +6,11 @@
       <h1 class="text-center">
         {{ data.persondetails ? data.persondetails.name : "" }}
       </h1>
-      <p>Esto es una prueba {{ data.persondetails.gender }}</p>
+      <Fieldset legend="Personal data" :toggleable="true">
+        <p>Born in {{ data.persondetails.birthYear }}</p>
+        <p>Esto es una prueba {{ data.persondetails.gender }}</p>
+      </Fieldset>
+
       <Tabs value="0">
         <TabList>
           <Tab value="0">Relations</Tab>
