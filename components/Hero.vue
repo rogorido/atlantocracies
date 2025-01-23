@@ -1,74 +1,87 @@
 <template>
-  <div class="contenedor">
-    <div class="wrap">
-      <div class="box">
-        <h1>ATLANTOCRACIES</h1>
-        <p>
-          Lorem, ipsum dolor, sit amet consectetur adipisicing elit. Dolorem
-          dolore ea aut fugit officiis nesciunt nulla, voluptate perferendis
-          maiores!.
-        </p>
-        <div class="botones">
-          <NuxtLink to="/about" class="btn2">More information</NuxtLink>
-          <NuxtLink href="/search" class="btn2">Explore our database</NuxtLink>
-        </div>
+  <header class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Atlantocracies</h1>
+      <p class="hero-subtitle">A brief description of your content</p>
+      <div class="hero-btns">
+        <a href="#" class="hero-button">Get Started</a>
+        <a href="#" class="hero-button">Get Started</a>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <style>
-.contenedor {
-  display: flex;
-  max-width: 100%;
-  height: 30vh;
+.hero {
+  position: relative;
+  /* background: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg"); */
   background-image: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left;
-}
-.contenedor .wrap {
-  max-width: 1000px;
-  margin: 0 auto;
-  height: 100%;
+  height: 30vh;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: left;
-}
-.contenedor .wrap .box {
-  flex-basis: 50%;
-  color: black;
-  text-align: left;
-  align-self: center;
-}
-.contenedor .wrap .box span {
-  font-size: 18px;
-  letter-spacing: 2px;
-  font-weight: 300;
-}
-.contenedor .wrap .box h1 {
-  font-size: 50px;
-  line-height: 0.9;
-  padding-bottom: 10px;
-  color: #af2f14;
-  letter-spacing: 3px;
-}
-.contenedor .wrap .box p {
-  font-size: 18px;
-  line-height: 1.2;
-}
-.contenedor .wrap .box .botones {
-  display: flex;
-  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
-.contenedor .wrap .box .botones .btn2 {
-  background-color: #fff;
-  border: solid 2px;
-  border-radius: 20px;
-  padding: 10px 30px 10px 30px;
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Black color with 60% opacity */
+  z-index: 1; /* Ensure the overlay is behind the content */
+}
+
+.hero-content {
   text-align: center;
+  color: #fff;
+  z-index: 2; /* Ensure the content is on top of the overlay */
+}
+
+.hero-title {
+  font-size: 3em;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.hero-subtitle {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease-in-out 0.5s;
+}
+
+.hero-btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2em;
   text-decoration: none;
-  color: #000;
+  color: #fff;
+  background-color: #3498db;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.hero-button:hover {
+  background-color: #2980b9;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
