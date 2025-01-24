@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="custom-shape-divider-top-1737494022">
+    <div class="custom-shape-divider-wave-top">
       <svg
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
@@ -16,22 +16,22 @@
   </div>
 </template>
 
-<style>
-.custom-shape-divider-top-1737494022 {
+<style scoped>
+.custom-shape-divider-wave-top {
   width: 100%;
   overflow: hidden;
   line-height: 0;
   transform: rotate(180deg);
 }
 
-.custom-shape-divider-top-1737494022 svg {
+.custom-shape-divider-wave-top svg {
   position: relative;
   display: block;
   width: calc(100% + 1.3px);
   height: 85px;
 }
 
-.custom-shape-divider-top-1737494022 .shape-fill {
+.custom-shape-divider-wave-top .shape-fill {
   fill: #e9dd52;
 }
 </style>

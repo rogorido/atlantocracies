@@ -349,3 +349,14 @@ template {
 [hidden] {
   display: none;
 }
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+  max-width: 65ch;
+}

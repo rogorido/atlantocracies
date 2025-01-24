@@ -1,8 +1,8 @@
 <template>
   <div class="p-container-fluid">
-    <h1 class="text-center">Analyzing groups</h1>
+    <h1 class="text-center">Details</h1>
 
-    <div class="flex gap-3 mt-4">
+    <div class="flex justify-content-center gap-3 mt-4 mb-4">
       <NuxtLink to="#insights">
         <Button label="View insights" rounded />
       </NuxtLink>
@@ -19,7 +19,11 @@
         <Button label="View related places" rounded />
       </NuxtLink>
     </div>
+  </div>
 
+  <DividerShape />
+
+  <div class="p-container-fluid">
     <!-- Macro tabla de personas. -->
     <SearchMacroTablePersons />
 
