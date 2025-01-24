@@ -35,8 +35,9 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       // Roboto: true,
-      Noto: true,
+      "Noto+Sans": [400, 500],
     },
+    subsets: ["latin-ext", "latin"],
   },
 
   primevue: { options: { theme: { preset: Aura } } },

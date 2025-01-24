@@ -133,13 +133,12 @@ onMounted(async () => {
   updateData();
 
   if (Object.keys(filter.value).length > 0) {
-    console.log("estamos en el toast");
     toast.add({
       severity: "info",
       summary: "Filter activated",
       detail:
         "There is an active filter. You can reset it by clicking on the 'Reset filter' button",
-      life: 3000,
+      life: 4000,
     });
   }
 
@@ -200,27 +199,13 @@ function downloadFilter() {
 }
 </script>
 
-<style>
-.p-tablist-tab-list {
-  justify-content: center;
-}
-
-.numero {
-  font-size: 2.4rem;
-}
-
-.p-card {
-  border: 3px dashed var(--primary-color);
-}
-
-.p-card-content > p {
-  font-size: 2.4rem;
-  color: #af2f14;
-  text-align: center;
+<style scoped>
+.p-card-content p {
+  color: red;
+  font-weight: 500;
 }
 
 .p-card-title {
-  text-align: center;
-  font-size: 1.7rem;
+  font-size: 2.8rem !important;
 }
 </style>
