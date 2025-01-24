@@ -36,7 +36,7 @@
       </div>
 
       <div class="col-12 lg:col-4">
-        <Card>
+        <Card class="text-center">
           <template #title>Persons</template>
           <template #content>
             <p>
@@ -203,9 +203,10 @@ function downloadFilter() {
 .p-card-content p {
   color: red;
   font-weight: 500;
+  font-size: 2.8rem;
 }
 
-.p-card-title {
-  font-size: 2.8rem !important;
+:deep(.p-card-title) {
+  font-size: 2.1rem;
 }
 </style>

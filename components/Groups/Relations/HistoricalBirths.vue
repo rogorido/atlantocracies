@@ -2,7 +2,7 @@
   <div>
     <h2 class="text-center">Birth places and marriages</h2>
     <div class="grid">
-      <div class="col-6">
+      <div class="col-12 lg:col-6">
         <h3 class="text-center">
           Historical birth places of the related persons married
         </h3>
@@ -15,7 +15,6 @@
           :rows="10"
           :rowsPerPageOptions="[5, 10, 20, 50]"
           dataKey="idItem"
-          tableStyle="max-width: 30rem"
         >
           <template #empty> No relations found. </template>
 
@@ -37,8 +36,10 @@
           <Column field="percentage" header="%" sortable> </Column>
         </DataTable>
       </div>
-      <div class="col-6">
-        <h3>Marriages and their territorial distribution</h3>
+      <div class="col-12 lg:col-6">
+        <h3 class="text-center">
+          Marriages and their territorial distribution
+        </h3>
         <TreeTable
           :value="histBirthMatrimoniosGroupBy"
           :paginator="true"
@@ -48,15 +49,6 @@
         >
           <template #empty> No data found. </template>
 
-          <!-- <template #header> -->
-          <!--   <div style="text-align: right"> -->
-          <!--     <Button -->
-          <!--       icon="pi pi-external-link" -->
-          <!--       label="Export" -->
-          <!--       @click="exportTreeCSV($event)" -->
-          <!--     /> -->
-          <!--   </div> -->
-          <!-- </template> -->
           <Column
             field="histBirth"
             header="Historical birth place"

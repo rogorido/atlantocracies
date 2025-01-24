@@ -15,11 +15,16 @@
         </ClientOnly>
       </div>
     </div>
+  </div>
+
+  <DividerShape />
+
+  <div class="p-container-fluid">
     <div v-if="status === 'pending'">Loading data...</div>
     <div v-if="status === 'error'">{{ error }}</div>
     <div v-else>
       <Tabs value="0" scrollable>
-        <TabList>
+        <TabList :dt="cojones">
           <Tab value="0">Related persons</Tab>
           <!-- <Tab value="1">Related places</Tab> -->
           <Tab value="1">Related events</Tab>
@@ -67,6 +72,7 @@ const store = usePlacesStore();
 const ciudad = ref();
 const persons = ref([]);
 
+const cojones = ref({ "justify-content": "center" });
 // we get a array with only one obje
 ciudad.value = store.nuevo;
 console.log(

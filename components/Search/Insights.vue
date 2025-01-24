@@ -13,8 +13,8 @@
 
       <TabPanel value="0">
         <div class="grid">
-          <div class="col-6">
-            <h2>Birth years</h2>
+          <div class="col-12 lg:col-8">
+            <h2 class="text-center">Birth years</h2>
             <Chart
               class="graph"
               v-if="loaded"
@@ -22,7 +22,7 @@
               :data="insightsData.decadesBirthsChartData"
             />
           </div>
-          <div class="col-5">
+          <div class="col-12 lg:col-4">
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
               reiciendis exercitationem! Illo sunt, natus adipisci quo rem
@@ -40,15 +40,14 @@
       </TabPanel>
       <TabPanel value="1">
         <div class="grid">
-          <div class="col-6">
-            <h2>Table</h2>
+          <div class="col-12 lg:col-6">
+            <h2 class="text-center">Gender Table</h2>
             <DataTable
               :value="insightsData.gendersData"
               stripedRows
               :rows="10"
               selectionMode="single"
               dataKey="_id"
-              tableStyle="min-width: 50rem"
               v-if="loaded"
             >
               <template #header>
@@ -65,8 +64,8 @@
               <Column key="percent" field="percent" header="%"></Column>
             </DataTable>
           </div>
-          <div class="col-6">
-            <h2>Gender</h2>
+          <div class="col-12 lg:col-6">
+            <h2 class="text-center">Gender graph</h2>
             <GendersChart
               class="graph"
               v-if="loaded"
@@ -78,8 +77,8 @@
       </TabPanel>
       <TabPanel value="2">
         <div class="grid">
-          <div class="col-6">
-            <h2>Birth places (historical)</h2>
+          <div class="col-12 lg:col-6">
+            <h2 class="text-center">Birth places (historical)</h2>
 
             <Chart
               v-if="loaded"
@@ -89,8 +88,8 @@
               :options="options"
             />
           </div>
-          <div class="col-6">
-            <h2>Table</h2>
+          <div class="col-12 lg:col-6">
+            <h2 class="text-center">Table</h2>
             <DataTable
               :value="insightsData.histBirthsData"
               paginator
@@ -99,7 +98,6 @@
               :rowsPerPageOptions="[5, 10, 20, 50]"
               selectionMode="single"
               dataKey="_id"
-              tableStyle="min-width: 50rem"
             >
               <template #header>
                 <div style="text-align: right">
@@ -119,17 +117,14 @@
       </TabPanel>
       <TabPanel value="3">
         <div class="grid">
-          <div class="col-6">
-            <h2>Has positions</h2>
-
-            <h2>Table</h2>
+          <div class="col-12 lg:col-6">
+            <h2 class="text-center">Positions Table</h2>
             <DataTable
               :value="insightsData.hasPositionsData"
               stripedRows
               :rows="10"
               selectionMode="single"
               dataKey="_id"
-              tableStyle="min-width: 50rem"
               v-if="loaded"
             >
               <Column
@@ -157,8 +152,10 @@
               :options="options"
             />
           </div>
-          <div class="col-6">
-            <h2>Positions and geographical distribution</h2>
+          <div class="col-12 lg:col-6">
+            <h2 class="text-center">
+              Positions and their geographical distribution
+            </h2>
             <p v-if="insightsData.positionsTableTree.length > 0">
               There are {{ insightsData.positionsTableTree.length }} different
               positions.
@@ -189,7 +186,7 @@
       <TabPanel value="4">
         <div class="grid">
           <div class="col-6">
-            <h2>Has titles</h2>
+            <h2 class="text-center">Has titles</h2>
 
             <Chart
               v-if="loaded"
@@ -199,7 +196,7 @@
             />
           </div>
           <div class="col-6">
-            <h2>Table</h2>
+            <h2 class="text-center">Titles Table</h2>
             <DataTable
               :value="insightsData.hasTitlesData"
               stripedRows
@@ -222,15 +219,14 @@
       </TabPanel>
       <TabPanel value="5">
         <div class="grid">
-          <div class="col-6">
-            <h2>Table</h2>
+          <div class="col-12">
+            <h2 class="text-center">Sources used</h2>
             <DataTable
               :value="insightsData.sourcesData"
               stripedRows
               :rows="10"
               selectionMode="single"
               dataKey="_id"
-              tableStyle="min-width: 50rem"
               v-if="loaded"
             >
               <Column key="source" field="source" header="Source"></Column>
@@ -238,15 +234,6 @@
               <Column key="percent" field="percent" header="%"></Column>
             </DataTable>
           </div>
-          <!-- <div class="col-6"> -->
-          <!--   <h2>Sources</h2> -->
-          <!--   <GendersChart -->
-          <!--     class="graph" -->
-          <!--     v-if="loaded" -->
-          <!--     :chartData="insightsData.sourcesChartData" -->
-          <!--     :options="options" -->
-          <!--   /> -->
-          <!-- </div> -->
         </div>
       </TabPanel>
     </Tabs>
@@ -268,7 +255,8 @@ const { insightsData } = storeToRefs(store);
 // TODO: probablemente no se necesita esto...
 const loaded = ref(false);
 
-const options = { responsive: true, maintainAspectRatio: false };
+/* const options = { responsive: true, maintainAspectRatio: false }; */
+const options = { responsive: true };
 
 if (insightsData) {
   /*   console.log("insightsData", insightsData.value.positionsTableTree); */

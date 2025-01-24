@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <div class="col-8">
+    <div class="col-12 lg:col-8">
       <p>
         The selected persons had relationships with many other peersons,forming
         a network. In the database there are {{ personsRelated.length }} persons
@@ -16,7 +16,7 @@
         entretienen relaciones. Y visualizar las relaciones con un grafo.
       </p>
     </div>
-    <div class="col-4">
+    <div class="col-12 lg:col-4">
       <GroupsRelationsSummaryTable :personsRelated="personsRelated" />
     </div>
   </div>
@@ -44,7 +44,6 @@
       :rows="10"
       :rowsPerPageOptions="[5, 10, 20, 50]"
       dataKey="idItem"
-      tableStyle="max-width: 80rem"
     >
       <template #empty> No relations found. </template>
       <Column field="nameMainPerson" header="Main Person" sortable></Column>
@@ -73,8 +72,7 @@
     </DataTable>
 
     <DividerShape />
-    <!-- <hr class="simplehr" /> -->
-    <!-- <hr class="simplehr" /> -->
+
     <!-- Historical birthplaces  -->
     <div id="marriages">
       <GroupsRelationsHistoricalBirths :personsRelated="personsRelated" />

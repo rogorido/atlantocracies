@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-container-fluid">
     <h1 class="text-center">Analyzing groups</h1>
 
     <div class="flex gap-3 mt-4">
@@ -33,19 +33,12 @@
     <div v-if="status === 'pending'">Loading data...</div>
     <section id="relations" v-else>
       <h3 class="text-center uppercase">Relations</h3>
-      <Tabs value="0" scrollable>
-        <TabList>
-          <Tab value="0">Relations</Tab>
-        </TabList>
 
-        <TabPanel value="0">
-          <LazyGroupsRelationsMain
-            :personsRelatedCyto="data.personsRelationsCyto"
-            :personsRelated="data.personsRelationsTable"
-            :placesRelated="data.placesRelated"
-          />
-        </TabPanel>
-      </Tabs>
+      <LazyGroupsRelationsMain
+        :personsRelatedCyto="data.personsRelationsCyto"
+        :personsRelated="data.personsRelationsTable"
+        :placesRelated="data.placesRelated"
+      />
     </section>
     <ScrollTop target="window" :threshold="100" icon="pi pi-arrow-up" />
   </div>

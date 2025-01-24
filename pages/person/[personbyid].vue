@@ -6,17 +6,26 @@
       <h1 class="text-center">
         {{ data.persondetails ? data.persondetails.name : "" }}
       </h1>
-      <Fieldset legend="Personal data" :toggleable="true">
-        <p>Born in {{ data.persondetails.birthYear }}</p>
-        <p>Esto es una prueba {{ data.persondetails.gender }}</p>
-      </Fieldset>
-
+      <div class="grid">
+        <div class="col-12 lg:col-6">
+          <Fieldset legend="Personal data" :toggleable="true">
+            <p>Born in {{ data.persondetails.birthYear }}</p>
+            <p>Esto es una prueba {{ data.persondetails.gender }}</p>
+          </Fieldset>
+        </div>
+        <div class="col-12 lg:col-6">
+          <Fieldset legend="Personal data" :toggleable="true">
+            <p>Born in {{ data.persondetails.birthYear }}</p>
+            <p>Esto es una prueba {{ data.persondetails.gender }}</p>
+          </Fieldset>
+        </div>
+      </div>
       <Tabs value="0" scrollable>
         <TabList>
           <Tab value="0">Relations</Tab>
           <Tab value="1">Events</Tab>
           <Tab value="2">Positions</Tab>
-          <Tab value="3">Titles</Tab>
+          <Tab vanlue="3">Titles</Tab>
           <Tab value="4">Places</Tab>
         </TabList>
 
@@ -92,15 +101,6 @@
 </template>
 
 <script setup>
-// import { ref, computed } from "vue";
-// import { usePersonsStore } from "../../stores/personsStore";
-
-//import { createSlug } from "../../utils/createSlug.ts";
-//console.log(createSlug(useRoute().params.placebyid));
-
-// const loaded = ref(false);
-// const store = usePersonsStore();
-
 const config = useRuntimeConfig();
 const api = config.public.apiBaseUrl;
 
