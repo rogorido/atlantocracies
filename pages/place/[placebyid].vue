@@ -3,9 +3,7 @@
     <h1 class="text-center">{{ useRoute().params.placebyid }}</h1>
     <div class="grid">
       <div class="col-12 md:col-4">
-        <div class="grid">
-          <PlacesCardDataPlace :place="ciudad" />
-        </div>
+        <PlacesCardDataPlace :place="ciudad" />
       </div>
       <div class="col-12 md:col-8">
         <ClientOnly>
