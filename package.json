@@ -2,7 +2,7 @@
   "name": "AtlantoUI",
   "private": true,
   "author": "Igor Sosa Mayor <joseleopoldo1792@gmail.com>",
-  "version": "0.10.15",
+  "version": "0.10.16",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -23,7 +23,7 @@
     "cytoscape-fcose": "^2.2.0",
     "ol": "^10.3.1",
     "ol-contextmenu": "^5.5.0",
-    "ol-ext": "^4.0.24",
+    "ol-ext": "^4.0.25",
     "pinia": "^2.3.1",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
