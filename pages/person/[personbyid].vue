@@ -9,17 +9,111 @@
       <div class="grid">
         <div class="col-12 lg:col-6">
           <Fieldset legend="Personal data" :toggleable="true">
-            <p>Born in {{ data.persondetails.birthYear }}</p>
-            <p>Esto es una prueba {{ data.persondetails.gender }}</p>
+            <table>
+              <tr>
+                <td>Treatment</td>
+                <td>{{ data.persondetails.treatment }}</td>
+              </tr>
+              <tr>
+                <td>Birth date</td>
+                <td>{{ data.persondetails.datebirth }}</td>
+              </tr>
+              <tr>
+                <td>Death date</td>
+                <td>{{ data.persondetails.datedeath }}</td>
+              </tr>
+              <tr>
+                <td>Place birth</td>
+                <td>
+                  {{ data.persondetails.placebirth }}
+                </td>
+              </tr>
+              <tr>
+                <td>Country birth</td>
+                <td>
+                  {{ data.persondetails.countryBirth }}
+                </td>
+              </tr>
+              <tr>
+                <td>Continent birth</td>
+                <td>
+                  {{ data.persondetails.continentBirth }}
+                </td>
+              </tr>
+              <tr>
+                <td>Historical Birth country</td>
+                <td>
+                  {{ data.persondetails.histBirth }}
+                </td>
+              </tr>
+              <tr>
+                <td>Has father in the database</td>
+                <td>
+                  {{ data.persondetails.hasFather }}
+                </td>
+              </tr>
+              <tr>
+                <td>Has mother in the database</td>
+                <td>
+                  {{
+                    data.persondetails.hasMother
+                      ? data.persondetails.hasMother
+                      : "No data"
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>Wrote his/her last will</td>
+                <td>
+                  {{
+                    data.persondetails.hizoTestamento
+                      ? data.persondetails.hizoTestamento
+                      : "No data"
+                  }}
+                </td>
+              </tr>
+            </table>
           </Fieldset>
         </div>
         <div class="col-12 lg:col-6">
-          <Fieldset legend="Personal data" :toggleable="true">
-            <p>Born in {{ data.persondetails.birthYear }}</p>
-            <p>Esto es una prueba {{ data.persondetails.gender }}</p>
+          <Fieldset legend="Profesional data" :toggleable="true">
+            <table>
+              <tr>
+                <td>Number of Events</td>
+                <td>{{ data.persondetails.numberOfEvents }}</td>
+              </tr>
+
+              <tr>
+                <td>Number of Relations</td>
+                <td>{{ data.persondetails.numberOfRelations }}</td>
+              </tr>
+
+              <tr>
+                <td>Number of Positions</td>
+                <td>{{ data.persondetails.numberOfPositions }}</td>
+              </tr>
+
+              <tr>
+                <td>Number of Titles</td>
+                <td>{{ data.persondetails.numberOfTitles }}</td>
+              </tr>
+            </table>
           </Fieldset>
         </div>
       </div>
+      <Fieldset
+        legend="Other data"
+        class="gray"
+        :toggleable="true"
+        :collapsed="true"
+      >
+        <p>ID of the person: {{ data.persondetails.personId }}</p>
+        <p>Internal ID of the person: {{ data.persondetails._id }}</p>
+        <p>
+          Data found in the source: {{ data.persondetails.source }}, p.
+          {{ data.persondetails.pageFr }}.
+        </p>
+      </Fieldset>
       <Tabs value="0" scrollable>
         <TabList>
           <Tab value="0">Relations</Tab>
@@ -115,5 +209,29 @@ const { data, status, error } = await useLazyFetch(
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.gray {
+  color: gray;
+}
+
+table {
+  max-width: 100%;
+  width: 100%;
+}
+
+tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+th {
+  background-color: #555;
+  color: #fff;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5em 1em;
 }
 </style>
