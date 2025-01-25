@@ -50,13 +50,13 @@
   margin-bottom: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  animation: fadeInUp 1s ease-in-out;
+  /*   animation: fadeInUp 1s ease-in-out; */
 }
 
 .hero-subtitle {
   font-size: 1.5em;
   margin-bottom: 30px;
-  animation: fadeInUp 1s ease-in-out 0.5s;
+  /*   animation: fadeInUp 1s ease-in-out 0.5s; */
 }
 
 .hero-btns {
