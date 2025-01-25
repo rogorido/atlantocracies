@@ -4,8 +4,12 @@
       <h1 class="hero-title">Atlantocracies</h1>
       <p class="hero-subtitle">A brief description of your content</p>
       <div class="hero-btns">
-        <a href="#" class="hero-button">Get Started</a>
-        <a href="#" class="hero-button">Get Started</a>
+        <NuxtLink to="/about">
+          <Button size="large" label="About" />
+        </NuxtLink>
+        <NuxtLink to="/search">
+          <Button size="large" label="Search" />
+        </NuxtLink>
       </div>
     </div>
   </header>
@@ -42,8 +46,8 @@
 }
 
 .hero-title {
-  font-size: 3em;
-  margin-bottom: 20px;
+  font-size: 3.4em;
+  margin-bottom: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
   animation: fadeInUp 1s ease-in-out;

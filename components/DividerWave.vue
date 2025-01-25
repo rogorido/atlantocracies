@@ -34,4 +34,10 @@
 .custom-shape-divider-wave-top .shape-fill {
   fill: #e9dd52;
 }
+
+@media (max-width: 768px) {
+  .custom-shape-divider-wave-top svg {
+    height: 40px;
+  }
+}
 </style>
