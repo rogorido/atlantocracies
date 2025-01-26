@@ -30,8 +30,8 @@
     </p>
     <p v-show="!authStore.isAuthenticated">
       You have to be
-      <Button as="router-link" label="logged in" to="/login" />logged in order
-      to see the details!
+      <Button as="router-link" label="logged in" to="/login" /> in order to see
+      the details!
     </p>
     <p>You can click on a place to see the details.</p>
     <p>You can search by place with the filter option.</p>

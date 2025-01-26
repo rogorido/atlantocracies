@@ -22,8 +22,8 @@
         </p>
         <p v-show="!authStore.isAuthenticated">
           You have to be
-          <Button as="router-link" label="logged in" to="/login" />logged in
-          order to see the details!
+          <Button as="router-link" label="logged in" to="/login" /> in order to
+          see the details!
         </p>
       </div>
       <div class="col-12 lg:col-6">
