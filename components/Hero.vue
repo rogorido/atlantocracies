@@ -17,11 +17,14 @@
 
 <style>
 /* idea from https://codepen.io/vishaljaiswal/pen/XWGKBmK */
+/* Importntate: quito el height y eso significa q este hero tiene el tamano
+   /  del componente que contiene (hero-content) que a su vez lo tiene de los paddings, etc. de
+   / sus componentes */
 .hero {
-  position: relative;
+  /*   position: relative; */
   /* background: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg"); */
   background-image: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg");
-  height: 30vh;
+  /*   height: 30vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,6 +45,8 @@
 .hero-content {
   text-align: center;
   color: #fff;
+  padding: 10px;
+  /* height: calc(30vh + 2em); */
   /*  z-index: 2;  Ensure the content is on top of the overlay */
 }
 
