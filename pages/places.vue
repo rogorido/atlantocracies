@@ -1,6 +1,12 @@
 <template>
   <div class="p-container-fluid">
     <h1 class="text-center">Places</h1>
+    <div class="flex showdata">
+      <div>Total diferent places</div>
+      <div class="numero">
+        {{ places.length }}
+      </div>
+    </div>
     <ClientOnly>
       <PlacesMap
         :places="places"
@@ -132,3 +138,24 @@ const filters = ref({
   place: { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
 </script>
+
+<style scoped>
+.numero {
+  font-size: 1.9rem;
+  color: #fff;
+  background-color: #af2f14;
+  width: 80px;
+  border-radius: 50% 20% / 10% 40%;
+  text-align: right;
+}
+
+.showdata {
+  border: 3px dashed var(--primary-color);
+  padding: 10px;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  align-items: center;
+  margin-bottom: 10px;
+  max-width: 800px;
+}
+</style>
