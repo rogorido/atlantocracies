@@ -19,7 +19,7 @@
 /* idea from https://codepen.io/vishaljaiswal/pen/XWGKBmK */
 /* Importntate: quito el height y eso significa q este hero tiene el tamano
    /  del componente que contiene (hero-content) que a su vez lo tiene de los paddings, etc. de
-   / sus componentes */
+   / sus componentes. See in webdesign.org for details! */
 .hero {
   /*   position: relative; */
   /* background: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg"); */
