@@ -1,75 +1,12 @@
-# Nuxt 3 Minimal Starter
+This code is created for the [Research Project
+Atlantocracies](https://atlantocracies.com/) at the [Universidad Pablo
+de Olavide](https://www.upo.es) (Seville, Spain). It is a website aiming
+at consulting the big MongoDB used by the project. See the page under
+[https://atlantocracies.digitalhumanities.digital/](https://atlantocracies.digitalhumanities.digital/).
+The page uses an Application Programming Interface (API) programmed in
+Javascript/nodejs and can be consulted in the [following
+repository](https://github.com/rogorido/apiatlantocracies).
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+The code is released under the [GNU GENERAL PUBLIC LICENSE Version
+3](https://www.gnu.org/licenses/gpl-3.0.html).
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
