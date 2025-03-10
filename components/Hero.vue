@@ -24,6 +24,7 @@
   /*   position: relative; */
   /* background: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg"); */
   background-image: url("@/assets/art-institute-of-chicago-YdNZ9iHXUbo-unsplash.jpg");
+  /*   background-image: url("@/assets/Aristocracia-1024x674-1.jpg"); */
   /*   height: 30vh; */
   display: flex;
   align-items: center;

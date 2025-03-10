@@ -53,6 +53,7 @@ onMounted(() => {
   });
 
   const features = props.places.map((item) => {
+    // This code is repeated in change:resolution!!
     const size = calculateSize(
       item.totalplaces,
       map.value.getView().getZoom(),
