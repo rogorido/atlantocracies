@@ -27,10 +27,11 @@ export function calculateSize(
     with Math.max we return a mininum value of 5 if the result of the
     calculation is < 5. The min pixels are therefore 5.
 
-    With Math.pow() we create a scale factor.
+    With Math.pow() we create a scale factor. With Math.min we assure that
+    the value is max=100.
 
     Be aware that the normalizedValue is 0-1. 
   */
 
-  return Math.max(5, normalizedValue * Math.pow(2.1, zoom));
+  return Math.max(5, Math.min(normalizedValue * Math.pow(2.1, zoom), 100));
 }
