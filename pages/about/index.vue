@@ -19,7 +19,6 @@
           </p>
         </div>
       </div>
-
       <div class="grid oferta" @click="goToSite('/about/software')">
         <div class="col-12 md:col-6 imageshown">
           <img
@@ -53,7 +52,8 @@ const goToSite = (site) => {
 
 <style lang="scss" scoped>
 img {
-  height: 300px;
+  min-height: 300px;
+  width: 95%;
 }
 
 @media (min-width: 701px) {
