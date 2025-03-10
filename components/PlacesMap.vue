@@ -60,6 +60,7 @@ onMounted(() => {
       maxTotalplaces,
       scaleFactor,
     );
+
     const feature = new Feature({
       geometry: new Point(fromLonLat(item.coords)),
       place: item.place,
@@ -130,7 +131,8 @@ onMounted(() => {
   // Update point sizes on zoom change
   map.value.getView().on("change:resolution", () => {
     const zoom = map.value.getView().getZoom();
-    console.log("el zoom es", zoom);
+    /*     console.log("el zoom es", zoom); */
+
     vectorSource.getFeatures().forEach((feature) => {
       const totalplaces = feature.get("totalplaces");
       const size = calculateSize(
@@ -140,6 +142,7 @@ onMounted(() => {
         maxTotalplaces,
         scaleFactor,
       );
+
       feature.setStyle(
         new Style({
           image: new CircleStyle({
@@ -158,26 +161,6 @@ onUnmounted(() => {
     map.value.setTarget(null);
   }
 });
-
-// TODO: cómo usarlo con lo nuevo?
-
-//   if (props.multipoint) {
-//     coordinates.value = props.coordenadas;
-//
-//     // Calcular the bounding box and its center
-//     const boundingBox = boundingExtent(coordinates.value);
-//     center.value = getCenter(boundingBox);
-//
-//     loaded.value = true;
-//   } else {
-//     coordinates.value = props.coordenadas[0];
-//     center.value = props.coordenadas[0];
-//
-//     loaded.value = true;
-//   }
-// };
-
-// calculateData();
 </script>
 
 <style>
