@@ -93,6 +93,14 @@ img {
   width: 95%;
 }
 
+ul {
+  list-style: none;
+}
+
+ul li {
+  padding-bottom: 15px;
+}
+
 @media (min-width: 701px) {
   .oferta:nth-of-type(2n) {
     .imageshown {

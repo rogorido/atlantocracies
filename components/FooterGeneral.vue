@@ -1,8 +1,15 @@
 <template>
   <footer>
     <div class="flex">
-      <div>AtlantoUI version: {{ uiversion }}</div>
-      <div>API version: {{ stats.version }}</div>
+      <div>
+        <a href="https://github.com/rogorido/atlantocracies"
+          >AtlantoUI version</a
+        >: {{ uiversion }}
+      </div>
+      <div>
+        <a href="https://github.com/rogorido/apiatlantocracies">API version</a>:
+        {{ stats.version }}
+      </div>
     </div>
   </footer>
 </template>
@@ -33,5 +40,9 @@ footer {
   max-width: 1200px;
   align-items: center;
   margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
