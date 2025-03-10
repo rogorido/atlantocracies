@@ -13,7 +13,11 @@
         </div>
         <div class="col-12 md:col-6 descriptionshown">
           <h2 class="text-center">Our software</h2>
-          <p>The code used for this page has two aspects:</p>
+          <p>
+            The code used for this page has been written by
+            <a href="https://georeligion.org">Igor Sosa Mayor</a> and has two
+            aspects:
+          </p>
           <ul>
             <li>
               Application Programming Interface (API) which communicates with
@@ -71,7 +75,7 @@
             <li>
               We use the library
               <a href="https://cytoscape.org/">Cytoscape</a> for visualizing
-              networks and the
+              networks with the
               <a href="https://github.com/iVis-at-Bilkent/cytoscape.js-fcose"
                 >fcose algorithm</a
               >.
@@ -98,7 +102,9 @@ ul {
 }
 
 ul li {
-  padding-bottom: 15px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border-left: 2px solid red;
 }
 
 @media (min-width: 701px) {
