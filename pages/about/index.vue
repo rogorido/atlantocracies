@@ -36,6 +36,21 @@
           </p>
         </div>
       </div>
+      <div class="grid oferta" @click="goToSite('/about/contact')">
+        <div class="col-12 md:col-6 imageshown">
+          <img
+            src="@/assets/svg/pattern_05.svg"
+            alt="houses"
+            style="border-radius: 10% 30% 50% 70%"
+          />
+        </div>
+        <div class="col-12 md:col-6 descriptionshown">
+          <h3>Contact</h3>
+          <p>
+            Visit our <NuxtLink to="/about/contact">contact page</NuxtLink>.
+          </p>
+        </div>
+      </div>
     </section>
   </div>
 </template>
