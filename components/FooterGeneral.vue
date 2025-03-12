@@ -127,4 +127,19 @@ a {
 img {
   max-width: 100%;
 }
+
+@media (max-width: 768px) {
+  .ownflex {
+    flex-direction: column;
+  }
+
+  .institutions {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  img {
+    max-width: 30%;
+  }
+}
 </style>
